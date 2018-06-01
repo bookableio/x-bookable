@@ -1,0 +1,104 @@
+<div class="x-bookable">
+  <div class="alert alert-danger text-center" role="alert" ng-if="loaded && !accommodation">
+    업체 정보를 불러올 수 없습니다.
+  </div>
+
+  <div class="alert alert-danger text-center" role="alert" ng-if="loaded && accommodation && !rooms.length">
+    선택된 객실이 없습니다.
+  </div>
+
+  <div class="x-bookable-form">
+    <div ng-if="validated.errors.length">
+      <div class="alert alert-danger text-center" role="alert" ng-repeat="error in validated.errors">
+        {{error.message}}
+      </div>
+    </div>
+    <form ng-submit="complete()">
+      <div class="row">
+        <div class="col-md-{{vertical ? 12 : 6}}">
+          <div class="mb25">
+            <h4>결제방법</h4>
+
+            <div class="row mt20">
+              <div class="col-xs-{{(12 / accommodation.paymentmethods.length) || 12}}" ng-repeat="paymentmethod in accommodation.paymentmethods">
+                <div class="mediabox" ng-click="selectpaymentmethod(paymentmethod)" ng-class="{active:paymentmethod==selectedpaymentmethod}">
+                  <div class="mediabox-title text-center">
+                    <div class="text-muted">결제방법</div>
+                    {{paymentmethod.name}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="border bg-lighter p15" ng-if="selectedpaymentmethod.type == 'banking' || selectedpaymentmethod.message">
+              <div ng-if="selectedpaymentmethod.type == 'banking'" class="text-center">
+                <b>{{selectedpaymentmethod.options.account}} {{selectedpaymentmethod.options.bank}} {{selectedpaymentmethod.options.holder}}</b><br>
+                <small class="text-normal block mt10" ng-bind-html="selectedpaymentmethod.message | unsafe"></small>
+              </div>
+              <div ng-if="selectedpaymentmethod.type != 'banking'" ng-bind-html="selectedpaymentmethod.message | unsafe"></div>
+            </div>
+          </div>
+
+          <div class="dashed"></div>
+
+          <div class="mb25">
+            <h4>결제예정금액</h4>
+
+            <div class="mt25" ng-if="!validated">
+              예약을 확인할 수 없습니다.
+            </div>
+            <div class="mt25" ng-if="validated">
+              <div class="fs16 mt5"><b>{{validated.price | currency:accommodation.currency}}</b></div>
+            </div>
+          </div>
+
+          <div class="dashed"></div>
+
+          <div class="mb25">
+            <h4>이용약관 및 환불규정 동의</h4>
+
+            <div class="mt20">
+              <div class="checkbox-agreement">
+                <input type="checkbox" id="termsofuse-{{uid}}" ng-model="form.termsofuse">
+                <label for="termsofuse-{{uid}}">이용약관 및 환불규정에 동의합니다.</label>
+                <a href ng-click="viewterms()">[내용]</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashed hidden-md hidden-lg" ng-if="!vertical"></div>
+          <div class="dashed" ng-if="vertical"></div>
+        </div>
+        <div class="col-md-{{vertical ? 12 : 6}}">
+          <h4>예약자 정보</h4>
+
+          <div class="form-group">
+            <label>예약자명<em>*</em> <small class="text-normal">(입금자명과 동일하게 입력해주세요)</small></label>
+            <input type="text" ng-model="form.name" class="form-control" placeholder="예약자명" required>
+          </div>
+
+          <div class="form-group">
+            <label>휴대전화<em>*</em> <small class="text-normal">(예약 상황을 통지해드립니다)</small></label>
+            <input type="text" ng-model="form.mobile" class="form-control" placeholder="휴대전화번호" required>
+          </div>
+
+          <div class="form-group">
+            <label>이메일 <small class="text-normal">(예약 내역을 받아보실 수 있습니다)</small></label>
+            <input type="email" ng-model="form.email" class="form-control" placeholder="이메일">
+          </div>
+
+          <div class="form-group">
+            <label>요청사항</label>
+            <textarea class="form-control" rows="4" style="height:100px;" ng-model="form.request" placeholder="추가로 전달하실 사항이 있다면 적어주세요."></textarea>
+          </div>
+
+          <div class="dashed"></div>
+
+          <div>
+            <button type="submit" class="btn btn-xl btn-primary btn-block" ng-disabled="!accommodation || !validated || !selectedpaymentmethod || !form.termsofuse || !form.name || !form.mobile">예약완료하기</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,137 @@
+.x-accommodation.x-calendar-roomtype {
+  .x-calendar-roomtype-label {
+    display: inline-block;
+    border-radius: 2px;
+    padding: 0 5px;
+    min-width: 17px;
+    height: 17px;
+    font-size: 8px;
+    line-height: 15px;
+    vertical-align: middle;
+    margin-right: 3px;
+    margin-top: -1px;
+    text-align: center;
+  }
+
+  .x-calendar-roomtype-header {
+    .x-calendar-roomtype-title {
+      font-size: 1.5em;
+      line-height: 34px;
+      margin: 0;
+      vertical-align: middle;
+    }
+  }
+
+  .x-calendar-roomtype-body {
+    table {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+
+      th {
+        margin: 0;
+        padding: 3px;
+        font-size: 12px;
+        font-weight: 400;
+        text-align: center;
+        vertical-align: middle;
+        background-color: @contents-bg-light;
+      }
+
+      td.x-calendar-roomtype-cell {
+        padding: 0;
+        height: 100px;
+        transition: background-color 0.2s;
+
+        .x-calendar-roomtype-cell-header {
+          font-size: 12px;
+
+          .x-calendar-roomtype-cell-label {
+            .x-calendar-roomtype-label;
+            border: 1px solid @brand-info;
+            margin: 10px 5px;
+          }
+
+          .x-calendar-roomtype-cell-date {
+            float: right;
+            margin: 10px 5px;
+          }
+        }
+
+        &.x-calendar-roomtype-cell-today {
+          background-color: @contents-bg-light;
+          border: 2px solid fade(@brand-info, 80%);
+        }
+
+        .x-calendar-roomtype-cell-closed {
+          padding: 5px;
+          text-align: center;
+          font-size: 0.9em;
+          color: @muted;
+        }
+      }
+
+      td.x-calendar-roomtype-cell-pastdate, td.x-calendar-roomtype-cell-prevmonth, td.x-calendar-roomtype-cell-nextmonth {
+        background-color: @contents-bg-light;
+
+        span.x-calendar-roomtype-cell-day {
+          color: @muted;
+        }
+      }
+
+      td.x-calendar-roomtype-cell-pastdate {
+        background-color: @contents-bg-lighter;
+      }
+    }
+  }
+
+  .x-calendar-roomtype-roominfo {
+    cursor: pointer;
+    margin: 0;
+    overflow: hidden;
+    padding: 5px;
+
+    &:last-child {
+      margin-bottom: 20px;
+    }
+
+    &:hover {
+      color: @brand-primary;
+    }
+
+    .x-calendar-roomtype-roominfo-label, .x-calendar-roomtype-roominfo-price {
+      font-size: 12px;
+      line-height: 17px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .x-calendar-roomtype-roominfo-label {
+    }
+
+    .x-calendar-roomtype-roominfo-price {
+      font-size: 11px;
+      margin-top: 5px;
+      text-align: right;
+    }
+  }
+
+  .x-calendar-roomtype-roominfo-status {
+    &:before {
+      .x-calendar-roomtype-label;
+    }
+
+    &.x-calendar-roomtype-roominfo-status-bookable:before {
+      content: "가능";
+      border: 1px solid @brand-success;
+      color: @brand-success;
+    }
+
+    &.x-calendar-roomtype-roominfo-status-closed:before {
+      content: "불가";
+      border: 1px solid @border-color;
+      color: @text-muted;
+    }
+  }
+}

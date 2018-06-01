@@ -1,0 +1,27 @@
+{
+  "presets": [
+    [
+      "env", {
+        "module": false,
+        "targets": {
+          "browsers": [
+            "last 2 versions",
+            "Safari >= 7",
+            "Explorer >= 9",
+            "iOS >= 9",
+            "Android >= 4"
+          ]
+        },
+        "debug": false
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "transform-runtime", {
+        "polyfill": true,
+        "regenerator": true
+      }
+    ]
+  ]
+}

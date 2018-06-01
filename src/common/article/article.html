@@ -1,0 +1,33 @@
+<div class="x-bookable">
+  <div class="x-article">
+    <div class="empty" ng-if="loaded && !article">
+      <div class="empty-icon"><i class="icon-alert-triangle"></i></div>
+      <div class="empty-text">게시물을 찾을 수 없습니다.</div>
+    </div>
+
+    <div ng-if="loaded && article">
+      <div class="cover text-white ratio-16by9" ng-if="article.coverimage">
+        <div class="cover-bg article-cover" ng-background="{{article.coverimage | cdn}}"></div>
+        <div class="cover-shadow"></div>
+        <div class="cover-contents">
+          <div class="coversign cover-middle">
+            <div class="headline">
+              <div class="headline-category text-primary">{{article.category}}</div>
+              <div class="headline-title">{{article.title}}</div>
+              <div class="headline-desc">{{article.created | date:'yyyy .MM .dd'}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-header" ng-if="!article.coverimage">
+        {{article.title}}
+        <div class="pull-right">
+          {{article.created | date:'yyyy .MM .dd'}}
+        </div>
+      </div>
+
+      <div class="xw1200 center-block mv25" ng-bind-html="article.html | unsafe"></div>
+    </div>
+  </div>
+</div>

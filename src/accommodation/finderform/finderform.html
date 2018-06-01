@@ -1,0 +1,42 @@
+<div class="x-bookable">
+  <div class="x-accommodation x-finderform">
+    <div class="border bg-lighter p15">
+      <div class="row gap5">
+        <div class="col-sm-3 col-xs-12">
+          <div class="form-group">
+            <label>투숙일</label>
+            
+            <div class="input-group">
+              <span class="input-group-addon"><i class="icon-calendar"></i></span>
+              <input type="text" ng-flatpickr disable-past-days class="form-control" data-date-format="Y-m-d" placeholder="투숙일" ng-model="formdata.checkin" ng-disabled="!ready">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <div class="form-group">
+            <label>숙박기간</label>
+            
+            <select class="form-control" ng-model="formdata.days" ng-disabled="!ready">
+              <option ng-repeat="n in [] | range:1:15" ng-value="{{n}}">{{n}}박</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <div class="form-group">
+            <label>투숙인원</label>
+            
+            <select class="form-control" ng-model="formdata.guests" ng-disabled="!ready">
+              <option ng-repeat="n in [] | range:1:maximum" ng-value="{{n}}">{{n}}명</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <a href class="btn btn-primary btn-block" ng-click="submit()" ng-disabled="!ready || !formdata.checkin">객실검색</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

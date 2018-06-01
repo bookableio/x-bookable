@@ -1,0 +1,127 @@
+<div class="x-bookable">
+  <div ng-if="accommodation.info.external.use">
+    <iframe class="xw900 center-block border" ng-src="{{accommodation.info.external.inquiry | unsafeurl}}" width="{{accommodation.info.external.width || '100%'}}" height="{{accommodation.info.external.height || 'auto'}}" frameborder="0"></iframe>
+  </div>
+
+  <div class="x-accommodation x-inquiry" ng-if="!accommodation.info.external.use">
+    <div class="border bg-lighter p15 mb25">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>휴대전화번호</label>
+
+            <input type="text" class="form-control" placeholder="예약시 입력한 휴대전화번호" ng-model="form.mobile">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>예약번호</label>
+
+            <input type="text" class="form-control" placeholder="예약시 발급된 예약번호" ng-model="form.cn">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <a href class="btn btn-primary btn-block" ng-click="inquiry()">조회하기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info text-center" role="alert" ng-if="!loaded">
+      예약시 입력한 휴대전화번호와 발급받은 예약번호를 입력해주세요.<br ng-if="accommodation.tel">
+      <small ng-if="accommodation.tel">(예약번호를 잊은 경우 {{accommodation.tel}} 로 연락하십시요)</small>
+    </div>
+
+    <div class="alert alert-danger text-center" role="alert" ng-if="loaded && !reservation">
+      입력하신 휴대전화번호와 인증번호에 해당되는 예약을 찾을 수 없습니다.
+    </div>
+
+    <div class="border mb25" ng-if="reservation">
+      <div class="p25 text-center fs14 bg-lighter">
+        "{{reservation.created | moment:'YYYY-MM-DD (ddd)'}} {{reservation.name}}님이 예약하신 내역입니다."
+      </div>
+
+      <hr class="dashed mt0">
+
+      <form class="form-horizontal p15">
+        <div class="form-group">
+          <label class="col-sm-3 control-label">예약자명</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{reservation.name}}</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">휴대전화번호</label>
+          <div class="col-sm-4">
+            <p class="form-control-static">{{reservation.mobile}}</p>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="reservation.email">
+          <label class="col-sm-3 control-label">이메일</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{reservation.email}}</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">예약상태</label>
+          <div class="col-sm-9">
+            <p class="form-control-static" ng-bind-html="status(reservation.status) | unsafe"></p>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="reservation.request">
+          <label class="col-sm-3 control-label">고객요청사항</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{reservation.request}}</p>
+          </div>
+        </div>
+
+        <hr class="dashed">
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">객실</label>
+
+          <div class="col-sm-9 pt5">
+            <table class="table table-striped table-bordered m0">
+              <thead>
+                <tr>
+                  <th class="text-center" width="25%">날짜</th>
+                  <th class="text-center">객실명</th>
+                  <th class="text-center" width="25%">요금</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-if="!reservation.rooms.length">
+                  <td class="text-muted text-center" colspan="7">객실을 추가해주세요.</td>
+                </tr>
+                <tr ng-repeat="room in reservation.rooms">
+                  <td class="text-center v-middle">{{room.date | moment:'MM.DD (ddd)'}}</td>
+                  <td class="text-center v-middle">{{room.name}}</td>
+                  <td class="text-center v-middle">
+                    {{room.price | currency:accommodation.currency}}<br>
+                    (성인 {{room.adults}}명<span ng-if="room.children">, 아동 {{room.children}}명</span>)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-offset-3 col-sm-9 pt5 text-right">
+            <p class="form-control-static p5">
+              <span class="bold">총 요금 : </span>
+              <span class="text-primary bold">{{reservation.price | currency:accommodation.currency}}</span>
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="text-center" ng-show="reservation.cancellable">
+      <a href route class="btn btn-xl btn-danger" ng-click="cancel()">취소요청</a>
+    </div>
+  </div>
+</div>

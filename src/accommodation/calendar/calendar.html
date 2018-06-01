@@ -1,0 +1,55 @@
+<div class="x-bookable">
+  <div class="x-accommodation x-calendar" ng-class="{
+    'x-calendar-disabled': disabled
+  }">
+    <div class="x-calendar-header row nogap">
+      <div class="col-xs-2">
+        <a href class="btn" ng-click="prevmonth()"><i class="icon-chevron-left"></i></a>
+      </div>
+      <div class="col-xs-8 text-center">
+        <h2 class="x-calendar-title">{{year}}년 {{month}}월</h2>
+      </div>
+      <div class="col-xs-2 text-right">
+        <a href class="btn" ng-click="nextmonth()"><i class="icon-chevron-right"></i></a>
+      </div>
+    </div>
+
+    <div class="x-calendar-body mt20">
+      <table>
+        <thead>
+          <tr>
+            <th>일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="week in weeks">
+            <td ng-repeat="day in week" ng-class="{
+              'x-calendar-prevmonth' : day.prevmonth,
+              'x-calendar-nextmonth' : day.nextmonth,
+              'x-calendar-pastdate' : day.pastdate,
+              'x-calendar-today': day.today,
+              'x-calendar-satday': day.dayofweek == 6,
+              'x-calendar-sunday': day.dayofweek == 0,
+              'x-calendar-mutedday': !day.rates.bookable,
+              'x-calendar-selected': isselected(day.date)
+            }" ng-click="select(day)">
+              <div class="x-calendar-daywrap">
+                <div class="x-calendar-daybody">
+                  <span class="x-calendar-day">
+                    {{day.day}}
+                  </span>
+                </div>
+              </div>
+            </td>
+           </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

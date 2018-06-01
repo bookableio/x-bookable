@@ -1,0 +1,10 @@
+<div class="section">
+  <h1 class="section-title">파인더 입력기</h1>
+  <div class="section-body">
+    <bookable-accommodation-finder-form submit-to="#finder"></bookable-accommodation-finder-form>
+  </div>
+  <h1 class="section-title">파인더</h1>
+  <div class="section-body">
+    <bookable-accommodation-finder id="finder" checkin="{{$query('checkin')}}" checkout="{{$query('checkout')}}" roomtypeid="{{$query('roomtype')}}" guests="{{$query('guests')}}" clear-cart save-to="$cart" initial-message="투숙일과 숙박기간을 입력하시면 예약 가능한 객실이 표시됩니다."></bookable-accommodation-finder>
+  </div>
+</div>

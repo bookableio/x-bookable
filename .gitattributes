@@ -1,0 +1,6 @@
+asset/**/* linguist-vendored=false
+build/**/* linguist-vendored=false
+config/**/* linguist-vendored=false
+dist/**/* linguist-vendored=false
+webapp/**/* linguist-vendored=false
+src/**/* linguist-vendored

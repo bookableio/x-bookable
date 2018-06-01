@@ -1,0 +1,87 @@
+<div class="x-bookable">
+  <div class="alert alert-warning text-center" role="alert" ng-if="accommodation && !roomtype">
+    <span>객실을 찾을 수 없습니다.</span>
+  </div>
+
+  <div class="x-accommodation x-roomtype" ng-if="roomtype">
+    <div class="pv10">
+      <h4 class="mt0">객실안내</h4>
+
+      <div>
+        <table class="table table-bordered">
+          <thead>
+            <th class="text-center" width="30%">객실명</th>
+            <th class="text-center" width="15%">기본</th>
+            <th class="text-center" width="15%">최대</th>
+            <th class="text-center">객실구조</th>
+          </thead>
+          <tbody>
+            <td class="text-center">{{roomtype.name}}</td>
+            <td class="text-center">{{roomtype.capacity}}명</td>
+            <td class="text-center">{{roomtype.maximum}}명</td>
+            <td class="text-center">{{roomtype.structure || '-'}}</td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="mt20 pv10" ng-if="accommodation.ratestpls.length">
+      <h4 class="mt0">요금안내</h4>
+
+      <div class="hidden-xs">
+        <table class="table table-bordered">
+          <thead>
+            <th class="text-center" ng-repeat="tpl in accommodation.ratestpls">{{tpl.name}}</th>
+          </thead>
+          <tbody>
+            <td class="text-center" ng-repeat="tpl in accommodation.ratestpls">{{(tpl.rates[roomtype.id].price || roomtype.price) | currency:'KRW':'-'}}</td>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="visible-xs">
+        <table class="table table-bordered">
+          <tbody>
+            <tr ng-repeat="tpl in accommodation.ratestpls">
+              <th class="text-center" width="50%">{{tpl.name}}</th>
+              <td class="text-center" width="50%">{{(tpl.rates[roomtype.id].price || roomtype.price) | currency:'KRW':'-'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="fs12">* 날짜에 따라 상기 표시된 요금과 다를 수 있습니다. 예약시 요금을 확인해 주세요.</p>
+    </div>
+
+    <div class="mt20 pv10" ng-if="roomtype.html">
+      <h4 class="mt0">객실소개</h4>
+      <p ng-bind-html="roomtype.html | unsafe"></p>
+    </div>
+
+    <div class="mt20 pv10">
+      <h4 class="mt0">이용시 유의사항</h4>
+
+      <div ng-bind-html="accommodation.terms.notice | unsafe"></div>
+    </div>
+
+    <div class="mt20 pv10">
+      <h4 class="mt0">입금안내</h4>
+
+      <address class="fs13">
+        <strong>입금계좌</strong><br>
+        <span>{{accommodation.info.account}}</span><br><br>
+
+        <strong>예약전화</strong><br>
+        <span>{{accommodation.tel}}</span><br><br>
+      </address>
+
+      <div ng-bind-html="accommodation.terms.payment | unsafe"></div>
+    </div>
+
+    <div class="mt20 pv10">
+      <h4 class="mt0">환불규정</h4>
+      <div ng-bind-html="accommodation.terms.refund | unsafe"></div>
+    </div>
+  </div>
+</div>
