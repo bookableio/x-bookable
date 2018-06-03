@@ -20,8 +20,7 @@ module.exports = merge(base, {
     examples: path.resolve(examples, 'src/examples.js')
   },
   output: {
-    path: path.join(dist, 'js'),
-    publicPath: '/js',
+    path: dist,
     filename: '[name].js'
   },
   devServer: {

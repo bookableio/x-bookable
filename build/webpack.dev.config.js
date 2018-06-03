@@ -21,7 +21,7 @@ module.exports = merge.strategy({
   },
   output: {
     path: dist,
-    publicPath: '/',
+    publicPath: '',
     filename: '[name].js'
   },
   devServer: {
