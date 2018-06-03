@@ -3,7 +3,7 @@ import bookable from 'bookable';
 import {} from 'ng-apply';
 import {} from 'ng-formatter';
 import {} from 'ng-background';
-import {} from 'ng-bootstrap-pagination';
+import ngbootstrappagination from 'ng-bootstrap-pagination';
 import {} from 'ng-slick';
 import {} from 'ng-incrementer';
 import {} from 'ng-anticomposition';
@@ -27,6 +27,13 @@ import common_info from './common/info/info';
 import directives from './directives';
 
 bookable.info().exec();
+
+ngbootstrappagination.defaults({
+  firstText: '<i class="icon-chevron-left"></i>',
+  prevText: '<i class="icon-chevron-left"></i>',
+  nextText: '<i class="icon-chevron-right"></i>',
+  lastText: '<i class="icon-chevron-right"></i>'
+});
 
 const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground', 'ngBootstrapPagination', 'ngSlick', 'ngIncrementer', 'ngAntiComposition', 'ngFlatpickr'])
   .filter('unsafe', ['$sce', $sce => $sce.trustAsHtml])
