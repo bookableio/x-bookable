@@ -10,6 +10,9 @@ const src = path.resolve(__dirname, '../src');
 const examples = path.resolve(__dirname, '../examples');
 const dist = path.resolve(__dirname, '../docs');
 
+// empty output dir
+fs.emptyDirSync(dist);
+
 module.exports = merge.strategy({
   entry: 'replace'
 })(base, {
