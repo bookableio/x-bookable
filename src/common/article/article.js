@@ -15,10 +15,10 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
       };
 
       const refresh = () => {
-        const datasetid = evalattr(attrs.datasetid);
+        const groupid = evalattr(attrs.groupid);
         const articleid = evalattr(attrs.articleid);
 
-        if( !datasetid || !articleid ) {
+        if( !groupid || !articleid ) {
           scope.loaded = true;
           return;
         }
@@ -30,7 +30,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
           if( err ) return error(err);
           if( !accommodation ) return error(new Error('서비스를 찾을 수 없습니다.'));
 
-          bookable.get('/app/bbs/' + accommodation.serviceid + '/' + datasetid + '/data/' + articleid).localcache(1000).exec((err, article) => {
+          bookable.get(`/app/bbs/${accommodation.serviceid}/${groupid}/data/${articleid}`).localcache(1000).exec((err, article) => {
             if( err ) return error(err);
 
             scope.article = article;
@@ -39,8 +39,6 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
           });
         });
       };
-
-      attrs.$observe('datasetid', () => refresh());
 
       attrs.$observe('buttonLabel', () => {
         scope.buttonLabel = evalattr(attrs.buttonLabel);
@@ -52,7 +50,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
         safeApply(scope);
       });
 
-      attrs.$observe('datasetid', () => refresh());
+      attrs.$observe('groupid', () => refresh());
       attrs.$observe('articleid', () => refresh());
 
       scope.buttonLabel = attrs.buttonLabel;

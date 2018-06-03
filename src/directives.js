@@ -15,6 +15,7 @@ import bookableAccommodationFinder from './accommodation/finder/finder';
 import bookableAccommodationFinderForm from './accommodation/finderform/finderform';
 import bookableAccommodationForm from './accommodation/form/form';
 import bookableAccommodationInquiry from './accommodation/inquiry/inquiry';
+import bookableAccommodationRates from './accommodation/rates/rates';
 import bookableAccommodationRoomtype from './accommodation/roomtype/roomtype';
 import bookableAccommodationRoomtypes from './accommodation/roomtypes/roomtypes';
 import bookableAccommodationRoomtypeName from './accommodation/roomtype-name/roomtype-name';
@@ -37,6 +38,7 @@ export default {
   bookableAccommodationFinderForm,
   bookableAccommodationForm,
   bookableAccommodationInquiry,
+  bookableAccommodationRates,
   bookableAccommodationRoomtype,
   bookableAccommodationRoomtypes,
   bookableAccommodationRoomtypeName

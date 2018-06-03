@@ -22,6 +22,7 @@ import service_slideshow from './service/slideshow/slideshow';
 import service_staged from './service/staged/staged';
 import service_scrollto from './service/scrollto/scrollto';
 import common_fclick from './common/fclick/fclick';
+import common_info from './common/info/info';
 
 import directives from './directives';
 
@@ -47,7 +48,8 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
 
     bookable.info().exec((err, business) => safeApply(scope, () => scope.business = business));
   }])
-  .directive('ngFclick', common_fclick);
+  .directive('ngFclick', common_fclick)
+  .directive('bInfo', common_info);
 
 Object.keys(directives).forEach(key => app.directive(key, directives[key]));
 

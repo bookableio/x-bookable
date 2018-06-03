@@ -82,9 +82,13 @@ wb
           ]
         }, {
           icon: '<i class="icon-file"></i>',
-          text: '객실정보',
+          text: '객실 &amp; 정보',
           items: [
             {
+              icon: '<i class="icon-file"></i>',
+              text: '요금표',
+              link: '#accommodation/rates'
+            }, {
               icon: '<i class="icon-file"></i>',
               text: '객실목록',
               link: '#accommodation/roomtypes'

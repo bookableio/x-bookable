@@ -1,0 +1,43 @@
+<div class="x-bookable">
+  <div class="x-bookable-rates">
+    <div class="x-bookable-warning alert alert-info text-center" role="alert" ng-if="!loaded && accommodation">
+      업체 정보를 로딩중입니다.
+    </div>
+
+    <div class="x-bookable-warning alert alert-danger text-center" role="alert" ng-if="loaded && !accommodation">
+      업체 정보를 불러올 수 없습니다.
+    </div>
+
+    <div class="x-bookable-rates-body" ng-if="loaded && accommodation">
+      <table class="x-bookable-rates-table table table-bordered">
+        <thead>
+          <tr>
+            <th width="12%">객실</th>
+            <th width="20%">구조</th>
+            <th width="8%">면적</th>
+            <th width="5%">인원</th>
+            <th width="5%">최대</th>
+            <th ng-repeat="tpl in accommodation.ratestpls">{{tpl.name}}</th>
+            <th width="5%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-if="!accommodation.roomtypes.length">
+            <td class="text-center" colspan="100">표시할 객실이 없습니다.</td>
+          </tr>
+          <tr ng-repeat="roomtype in accommodation.roomtypes">
+            <td class="x-bookable-rates-roomtype-name"><a href ng-click="select(roomtype)">{{roomtype.name}}</a></td>
+            <td class="x-bookable-rates-roomtype-structure">{{roomtype.info.structure || '-'}}</td>
+            <td class="x-bookable-rates-roomtype-size">{{roomtype.info.size || '-'}}</td>
+            <td class="x-bookable-rates-roomtype-capacity">{{roomtype.capacity}}명</td>
+            <td class="x-bookable-rates-roomtype-maximum">{{roomtype.maximum}}명</td>
+            <td class="x-bookable-rates-roomtype-price" ng-repeat="tpl in accommodation.ratestpls">{{(tpl.rates[roomtype.id].price || roomtype.price) | currency:accommodation.currency}}</td>
+            <td class="x-bookable-rates-roomtype-more">
+              <a href ng-click="select(roomtype)"><i class="icon-search"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,19 +1,21 @@
 <div class="x-bookable">
   <div class="x-bookable-article-list">
     <div ng-switch on="listingtype">
-      <div ng-switch-when="faq">
+      <div class="x-bookable-article-list-faq" ng-switch-when="faq">
         <table class="table">
           <tbody>
             <tr ng-repeat-start="article in list.rows" class="pointer" ng-click="select(article)">
-              <td class="v-middle">
+              <td class="x-bookable-article-list-title">
                 <a class="dotted">{{article.title}}</a>
               </td>
-              <td class="text-center v-middle fs16" width="50">
-                <i class="icon-chevron-down"></i>
+              <td class="x-bookable-article-list-arrow" width="50" ng-class="{
+                'x-bookable-article-list-arrow-down': selected.id === article.id
+              }">
+                <i class="icon-chevron-right"></i>
               </td>
             </tr>
             <tr ng-repeat-end ng-class="selected.id === article.id ? '' : 'hidden'">
-              <td colspan="2" class="p15" ng-bind-html="selected.desc | unsafe"></td>
+              <td class="x-bookable-article-list-desc" colspan="2" ng-bind-html="selected.desc | unsafe"></td>
             </tr>
             <tr ng-if="!list.rows.length">
               <td colspan="2" class="text-center">등록된 게시물이 없습니다.</td>
@@ -22,19 +24,25 @@
         </table>
       </div>
 
-      <div ng-switch-when="list">
+      <div class="x-bookable-article-list-list" ng-switch-when="list">
         <table class="table">
           <thead>
-            <th class="text-normal">제목</th>
-            <th class="text-normal text-center" width="100">등록일</th>
+            <th width="80">번호</th>
+            <th class="x-bookable-article-list-title">제목</th>
+            <th width="150">등록일</th>
+            <th width="80">조회수</th>
           </thead>
           <tbody>
             <tr ng-repeat="article in list.rows" class="pointer">
-              <td>
+              <td>{{articleno($index)}}</td>
+              <td class="x-bookable-article-list-title">
                 <a href ng-click="select(article)">{{article.title}}</a>
               </td>
-              <td class="text-center v-middle">
-                {{article.created | date:'yyyy.MM.dd'}}
+              <td>
+                {{article.created | date:'yyyy년 MM월 dd일'}}
+              </td>
+              <td>
+                {{article.hit || 0 | currency}}
               </td>
             </tr>
             <tr ng-if="!list.rows.length">
@@ -44,14 +52,13 @@
         </table>
       </div>
 
-      <div ng-switch-when="thumbnail">
-        <div class="row">
+      <div class="x-bookable-article-list-thumbnail" ng-switch-when="thumbnail">
+        <div class="row" ng-show="list.rows.length">
           <div class="col-xs-{{colxs || colsm || colmd || col || 4}} col-sm-{{colsm || colmd || col || 4}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 4}}" ng-repeat="article in list.rows" ng-style="{
             'clear': $index % 4 === 0 && 'both'
           }">
             <div class="media media-vertical pointer mb15" ng-click="select(article)">
               <div class="mb10">
-                <!-- <img style="width:100%;" ng-src="{{article.thumbnail | cdn}}"> -->
                 <div style="width:100%;height:250px;" ng-background="{{article.thumbnail | cdn}}"></div>
               </div>
               <div class="media-body media-middle ph5">
@@ -63,20 +70,20 @@
           </div>
         </div>
 
-        <div class="empty" ng-if="!list.rows.length">
-          <div class="empty-icon"><i class="icon-alert-triangle"></i></div>
+        <div class="empty" ng-show="!list.rows.length">
+          <div class="empty-icon"><i class="alert-triangle"></i></div>
           <div class="empty-text">등록된 게시물이 없습니다.</div>
         </div>
       </div>
 
-      <div ng-switch-when="tiny">
+      <div class="x-bookable-article-list-tiny" ng-switch-when="tiny">
         <ul class="list-unstyled">
           <li ng-repeat="article in list.rows"><a href class="dotted" ng-click="select(article)">{{article.title}}</a></li>
         </ul>
       </div>
 
-      <div ng-switch-default>
-        <div class="row">
+      <div class="x-bookable-article-list-default" ng-switch-default>
+        <div class="row" ng-show="list.rows.length">
           <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 12}} col-md-{{colmd || col || 12}} col-lg-{{collg || col || 12}}" ng-repeat="article in list.rows">
             <div class="media pv25 mh10 pointer" ng-click="select(article)">
               <div class="media-left media-middle">
@@ -98,14 +105,14 @@
           </div>
         </div>
 
-        <div class="empty" ng-if="!list.rows.length">
+        <div class="empty" ng-show="!list.rows.length">
           <div class="empty-icon"><i class="alert-triangle"></i></div>
           <div class="empty-text">등록된 게시물이 없습니다.</div>
         </div>
       </div>
     </div>
 
-    <div class="text-center pt25" ng-if="usePaging">
+    <div class="text-center pt25" ng-show="usePaging">
       <pagination ng-model="paging"></pagination>
     </div>
   </div>

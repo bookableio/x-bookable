@@ -12,7 +12,7 @@ const doc = document;
 const tags = Object.keys(directives).map(tokebobcase);
 
 const execdetect = (force) => {
-  const targets = [].slice.call(doc.querySelectorAll(tags.join(':not(.ng-scope),')));
+  const targets = [].slice.call(doc.querySelectorAll(tags.join(':not(.ng-scope),') + ',[b-info]'));
   if( !force && !targets.length ) return;
 
   let rootnode = doc.querySelector('[ng-bookable]');
