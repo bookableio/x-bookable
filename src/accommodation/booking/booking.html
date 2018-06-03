@@ -9,10 +9,12 @@
 
   <div ng-if="loaded && accommodation">
     <div id="xbkb-calendar">
-      <bookable-accommodation-calendar-roomtype showrates="{{!!showrates}}" ng-select="select($date, $roomtype, $rates)" label-closed="{{labelClosed}}"></bookable-accommodation-calendar-roomtype>
+      <bookable-accommodation-calendar-roomtype class="hidden-xs" showrates="{{!!showrates}}" ng-select="select($date, $rates, $roomtype)" label-closed="{{labelClosed}}"></bookable-accommodation-calendar-roomtype>
+
+      <bookable-accommodation-calendar class="hidden-sm hidden-md hidden-lg" ng-select="select($date, $rates)"></bookable-accommodation-calendar>
     </div>
 
-    <div id="xbkb-finder" ng-show="checkin">
+    <div id="xbkb-finder" style="margin-top: 60px;" ng-show="checkin">
       <div class="mb15">
         <div class="border bg-lighter p15">
           <div class="row gap5">
@@ -21,6 +23,7 @@
                 <label>투숙일</label>
 
                 <div class="input-group">
+                  <span class="input-group-addon"><i class="icon-calendar"></i></span>
                   <input type="text" ng-flatpickr disable-past-days class="form-control" data-date-format="Y-m-d" placeholder="투숙일" ng-model="form.checkin">
                 </div>
               </div>

@@ -39,12 +39,12 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
 
       const form = scope.form = {};
 
-      const select = (date, roomtype, rates) => {
-        if( !date || !roomtype || !rates ) return;
+      const select = (date, rates, roomtype) => {
+        if( !date || !rates ) return;
         if( !rates.bookable ) return;
 
         scope.checkin = date;
-        scope.roomtypeid = roomtype.id;
+        scope.roomtypeid = roomtype && roomtype.id;
 
         form.checkin = moment(date).format('YYYY-MM-DD');
         form.days = 1;
