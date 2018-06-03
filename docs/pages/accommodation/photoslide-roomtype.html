@@ -1,0 +1,10 @@
+<div class="section">
+  <h1 class="section-title">사진슬라이드 - 객실사진</h1>
+  <div class="section-body">
+    <bookable-accommodation-roomtypes listing-style="image" cols="1" onselect="location.href='#accommodation/photoslide-roomtype?roomtypeid=' + event.detail.roomtype.id" button-label="선택하기"></bookable-accommodation-roomtypes>
+
+    <br>
+
+    <bookable-photo-slide slidesetid="roomtypes" slideid="$param:roomtypeid" size="16by9"></bookable-photo-slide>
+  </div>
+</div>
