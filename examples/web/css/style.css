@@ -10,6 +10,12 @@ body {
   line-height: 1.42857143;
   color: #5c5c5c;
   background-color: #fff;
+  transition: opacity .15s ease-in-out;
+  opacity: 0;
+}
+
+body.bookable-loaded {
+  opacity: 1;
 }
 
 /* header */
