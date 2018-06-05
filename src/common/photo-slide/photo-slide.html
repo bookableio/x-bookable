@@ -1,7 +1,7 @@
 <div class="x-bookable" ng-class="{
   'slick-hfit': size == 'fit'
 }">
-  <ng-slick style="overflow:hidden;" autoplay="{{autoplay}}" autoplay-speed="{{autoplayspeed || 6000}}" speed="{{speed || 1000}}" fade="{{fade}}" zooming="{{!!zoomin}}" arrows="{{arrows}}" dots="{{dots}}" ng-slick-init="slickinit($slick)" ng-slick-before-change="slickbeforechange($slick, $currentSlide, $nextSlide)">
+  <div ng-slick style="overflow:hidden;" autoplay="{{autoplay}}" autoplay-speed="{{autoplayspeed || 6000}}" speed="{{speed || 1000}}" fade="{{fade}}" zooming="{{!!zoomin}}" arrows="{{arrows}}" dots="{{dots}}" ng-slick-init="slickinit($slick)" ng-slick-before-change="slickbeforechange($slick, $currentSlide, $nextSlide)">
     <div ng-repeat="photo in slide">
       <div class="x-bookable-photoslide-item" ng-class="{
         'ratio-16by9': ratio == '16by9',
@@ -10,5 +10,5 @@
         'ratio-1by1': ratio == '1by1'
       }" data-background="{{photo.url | cdn}}" ng-fclick="openslideshow($index)"></div>
     </div>
-  </ng-slick>
+  </div>
 </div>

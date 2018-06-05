@@ -102,13 +102,17 @@
     </div>
 
     <div class="mt25" ng-if="!isbooknow">
-      <div class="row nogap">
+      <div class="row nogap" ng-if="useCart">
         <div class="col-xs-6">
-          <a href class="btn btn-danger btn-lg block" style="padding: 13px 15px;" ng-disabled="!selected.length || !summary.price" ng-click="savetocart()">장바구니</a>
+          <a href class="btn btn-danger btn-lg block" style="padding: 13px 15px;" ng-disabled="isavailable()" ng-click="savetocart()">장바구니</a>
         </div>
         <div class="col-xs-6">
-          <a href class="btn btn-danger btn-lg btn-fill block" style="padding: 13px 15px;" ng-disabled="!selected.length || !summary.price" ng-click="booknow()">바로예약</a>
+          <a href class="btn btn-danger btn-lg btn-fill block" style="padding: 13px 15px;" ng-disabled="isavailable()" ng-click="booknow()">바로예약</a>
         </div>
+      </div>
+
+      <div class="row nogap" ng-if="!useCart">
+        <a href class="btn btn-danger btn-lg btn-fill block" style="padding: 13px 15px;" ng-disabled="isavailable()" ng-click="booknow()">예약하기</a>
       </div>
     </div>
 

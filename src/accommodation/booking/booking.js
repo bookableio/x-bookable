@@ -98,12 +98,11 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
 
       const complete = (reservation) => {
         clear();
-
-        attrs.ngComplete && scope.$parent.$eval(attrs.ngComplete, {$reservation: reservation});
         event.fire(element, 'complete', {reservation});
       };
 
       event.regist(element, attrs, 'select');
+      event.regist(element, attrs, 'complete');
 
       attrs.$observe('showrates', () => {
         scope.showrates = 'showrates' in attrs && evalattr(attrs.showrates) !== 'false';

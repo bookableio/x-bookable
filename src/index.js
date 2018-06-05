@@ -1,12 +1,13 @@
+import {} from './util/classlist';
 import angular from 'angular';
 import series from 'async-each-series';
 import connect from 'bookable';
 import meta from './util/meta';
 import threshold from './util/threshold';
 import {} from './app';
-import {} from './less/index.less';
 import directives from './directives';
 import tokebobcase from './tokebobcase';
+import {} from './less/index.less';
 
 const doc = document;
 const tags = Object.keys(directives).map(tokebobcase);
@@ -32,7 +33,7 @@ const execdetect = (force) => {
 
   angular.element(rootnode).injector().invoke(['$compile', '$rootScope', '$timeout', function(compile, rootscope, timeout) {
     series(targets, (target, done) => {
-      if( ~target.className.indexOf('ng-scope') || !doc.contains(target) ) return done();
+      if( ~target.className.indexOf('ng-scope') || !doc.body.contains(target) ) return done();
 
       compile(target)(rootscope);
       done();

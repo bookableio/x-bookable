@@ -211,6 +211,12 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
         safeApply(scope);
       };
 
+      const isavailable = () => {
+        const summary = scope.summary;
+        const selected = scope.selected;
+        return selected && summary && (!selected.length || !summary.price || !+summary.adults);
+      };
+
       scope.initialmessage = attrs.initialMessage;
       scope.roomtypeid = evalattr(attrs.roomtypeid);
 
@@ -223,6 +229,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
       scope.clear = clear;
       scope.complete = complete;
       scope.setextraoptions = setextraoptions;
+      scope.isavailable = isavailable;
 
       scope.$watch(() => evalattr(attrs.roomtypeid), (value) => {
         if( !value || scope.roomtypeid === value ) return;
