@@ -39,6 +39,7 @@ module.exports = {
             {
               loader: 'css-loader',
               options: {
+                minimize: true,
                 sourceMap: true
               }
             }
@@ -62,7 +63,7 @@ module.exports = {
                 plugins: [
                   new CleanCSSPlugin({
                     advanced: true,
-                    compatibility: '*'
+                    compatibility: 'ie9'
                   })
                 ]
               }

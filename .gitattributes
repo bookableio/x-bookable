@@ -1,6 +1,7 @@
-asset/**/* linguist-vendored=false
 build/**/* linguist-vendored=false
-config/**/* linguist-vendored=false
 dist/**/* linguist-vendored=false
-webapp/**/* linguist-vendored=false
+lib/**/* linguist-vendored=false
+docs/**/* linguist-vendored=false
+dev/**/* linguist-vendored=false
+examples/**/* linguist-vendored=false
 src/**/* linguist-vendored
