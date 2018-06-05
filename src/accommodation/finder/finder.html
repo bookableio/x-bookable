@@ -13,14 +13,14 @@
     </div>
 
     <div class="bt" ng-if="bookable.rates">
-      <div class="media pv25 ph10 m0 bb" ng-repeat="roomrates in bookable.rates" ng-class="{
+      <div class="media pv25 m0 bb" ng-repeat="roomrates in bookable.rates" ng-class="{
           'bg-lighter': isselected(roomrates.id)
         }">
-        <div class="media-left media-middle" style="width:50px;vertical-align:middle;">
+        <div class="media-left media-middle hidden" style="width:50px;vertical-align:middle;">
           <input type="checkbox" ng-checked="isselected(roomrates.id)" ng-click="toggleselect(roomrates.id)">
         </div>
         <div class="media-left media-middle">
-          <a href ng-click="toggleselect(roomrates.id)">
+          <a href ng-click="openslideshow(roomrates.id)">
             <img class="w90 img-circle" ng-src="{{roomrates.id | roompic:accommodation.roomtypes}}">
           </a>
         </div>

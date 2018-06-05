@@ -46,12 +46,12 @@
       </div>
     </div>
 
-    <div class="section section-padded">
-      <div class="cells">
-        <div class="cell cell-60">
+    <div class="section section-padded x-bookable">
+      <div class="row">
+        <div class="col-sm-12 col-md-8">
           <bookable-accommodation-roomtype roomtypeid="$param:id"></bookable-accommodation-roomtype>
         </div>
-        <div class="cell cell-40">
+        <div class="col-sm-12 col-md-4">
           <bookable-accommodation-bookaroom class="padded-l" roomtypeid="$param:id" oncomplete="location.href='inquiry.html?cn=' + event.detail.reservation.cn + '&mobile=' + event.detail.reservation.mobile"></bookable-accommodation-bookaroom>
         </div>
       </div>

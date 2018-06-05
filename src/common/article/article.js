@@ -32,6 +32,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
 
           bookable.get(`/app/bbs/${accommodation.serviceid}/${groupid}/data/${articleid}`).localcache(1000).exec((err, article) => {
             if( err ) return error(err);
+            if( !article ) return error(new Error('게시물을 찾을 수 없습니다. : ' + groupid + '/' + articleid));
 
             scope.article = article;
             scope.loaded = true;

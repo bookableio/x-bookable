@@ -54,11 +54,11 @@
       <bookable-article-list groupid="tourguide" listing-style="media" col="6" colsm="12" paging="false" pagesize="6" onselect="location.href = '/tourguide-view.html?id=' + event.detail.article.id"></bookable-article-list>
     </div>
 
-    <div class="section section-padded">
+    <div class="section section-padded x-bookable">
       <h2 class="section-title">예약안내</h2>
 
-      <div class="cells">
-        <div class="cell cell-50">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
           <dl class="address">
             <dt>입금계좌<dt>
             <dd b-info="business.info.account"></dd>
@@ -66,7 +66,7 @@
             <dd b-info="business.tel"></dd>
           </dl>
         </div>
-        <div class="cell cell-50">
+        <div class="col-xs-12 col-sm-6">
           <bookable-article-list groupid="notice" listingtype="tiny" paging="false" pagesize="6" onselect="location.href = '/customer-view.html?gid=' + event.detail.article.groupid + '&id=' + event.detail.article.id"></bookable-article-list>
         </div>
       </div>

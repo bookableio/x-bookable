@@ -1,7 +1,7 @@
 import moment from 'moment';
 import bookable from 'bookable';
 
-export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function(safeApply, $timeout, event, evalattr, staged) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', 'slideshow', function(safeApply, $timeout, event, evalattr, staged, slideshow) {
   return {
     template: require('./finder.html'),
     replace: true,
@@ -161,6 +161,11 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
         return !!~scope.selected.indexOf(roomtypeid);
       };
 
+      const openslideshow = (roomtypeid, index) => {
+        const roomtype = scope.accommodation.roomtypes.find(roomtype => roomtypeid === roomtype.id);
+        roomtype && slideshow(roomtype.photo, index);
+      };
+
       const find = (options) => {
         if( !options ) return console.error('missing options');
         if( !options.accommodation ) return console.error('missing options.accommodation');
@@ -190,6 +195,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
       scope.find = find;
       scope.applychanges = applychanges;
       scope.updateoptions = updateoptions;
+      scope.openslideshow = openslideshow;
 
       event.regist(element, attrs, 'selectionchange');
 

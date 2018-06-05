@@ -34,6 +34,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
 
           bookable.get(`/app/bbs/${accommodation.serviceid}/${groupid}`).localcache(3000).exec((err, dataset) => {
             if( err ) return error(err);
+            if( !dataset ) return error(new Error('게시판을 찾을 수 없습니다. : ' + groupid));
 
             bookable.get(`/app/bbs/${accommodation.serviceid}/${groupid}/data`, {
               offset: +offset || 0,

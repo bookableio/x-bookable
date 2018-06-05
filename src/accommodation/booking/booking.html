@@ -1,14 +1,14 @@
 <div class="x-bookable">
   <div class="alert alert-info text-center" role="alert" ng-if="!loaded && accommodation">
-    업체 정보를 로딩중입니다.
+    예약 정보를 불러오는 중입니다.
   </div>
 
   <div class="alert alert-danger text-center" role="alert" ng-if="loaded && !accommodation">
-    업체 정보를 불러올 수 없습니다.
+    예약 정보를 불러올 수 없습니다.
   </div>
 
   <div ng-if="loaded && accommodation">
-    <div id="xbkb-calendar">
+    <div id="xbkb-calendar" ng-show="!checkin">
       <bookable-accommodation-calendar-roomtype class="hidden-xs" showrates="{{!!showrates}}" ng-select="select($date, $rates, $roomtype)" label-closed="{{labelClosed}}"></bookable-accommodation-calendar-roomtype>
 
       <bookable-accommodation-calendar class="hidden-sm hidden-md hidden-lg" ng-select="select($date, $rates)"></bookable-accommodation-calendar>
@@ -16,6 +16,16 @@
 
     <div id="xbkb-finder" style="margin-top: 60px;" ng-show="checkin">
       <div class="mb15">
+        <div class="row">
+          <div class="col-xs-6">
+          </div>
+          <div class="col-xs-6 text-right">
+              <a href class="btn btn-default" style="padding: 6px 35px;" ng-click="clear()">달력으로</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mv15">
         <div class="border bg-lighter p15">
           <div class="row gap5">
             <div class="col-sm-3 col-xs-12">
@@ -68,9 +78,8 @@
 
       <div class="text-center hidden-sm hidden-xs">
         <div class="btn-group">
-          <a href class="btn btn-default btn-lg" style="padding: 13px 25px;" ng-click="clear()">달력으로</a>
-          <a href class="btn btn-danger btn-lg" style="padding: 13px 25px;" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="">장바구니</a>
-          <a href class="btn btn-danger btn-lg btn-fill" style="padding: 13px 25px;" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
+          <a href class="btn btn-danger btn-lg" style="padding: 13px 35px;" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="">장바구니</a>
+          <a href class="btn btn-danger btn-lg btn-fill" style="padding: 13px 35px;" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
         </div>
       </div>
 
@@ -83,7 +92,7 @@
 
       <div style="height:80px;"></div>
 
-      <div ng-show="isbooknow && rooms.length">
+      <div id="xbkb-form" ng-show="isbooknow && rooms.length">
         <bookable-accommodation-form ng-rooms="rooms" ng-extra-options="extraoptions" ng-complete="complete($reservation)"></bookable-accommodation-form>
       </div>
     </div>

@@ -50,9 +50,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
         form.days = 1;
         form.guests = 1;
 
-        safeApply(scope, () => {
-          scrollto(element[0].querySelector('#xbkb-finder'), 250);
-        });
+        safeApply(scope);
 
         event.fire(element, 'select', {
           date,
@@ -76,9 +74,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
         delete scope.isbooknow;
         delete scope.checkin;
 
-        safeApply(scope, () => {
-          scrollto(element[0].querySelector('#xbkb-calendar'), 250);
-        });
+        safeApply(scope);
       };
 
       const setrooms = (rooms) => {
@@ -93,7 +89,9 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
 
       const booknow = () => {
         scope.isbooknow = true;
-        safeApply(scope);
+        safeApply(scope, () => {
+          scrollto(element[0].querySelector('#xbkb-form'), 250);
+        });
       };
 
       const complete = (reservation) => {

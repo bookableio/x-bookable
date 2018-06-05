@@ -5,7 +5,7 @@
           'bg-lighter': isselected(extra.id)
         }">
         <div class="media-left media-middle hidden-xs" ng-if="!mini">
-          <img class="w90" ng-src="{{extra.thumbnail | cdn}}">
+          <div class="w90 ratio-1by1 img-circle" ng-background="{{extra.thumbnail | cdn}}"></div>
         </div>
 
         <div class="media-body media-middle" ng-if="!mini">
@@ -14,7 +14,7 @@
           </h4>
           <div class="media-desc fs13 hidden-xs">
             <span ng-bind-html="extra.desc | tobr | unsafe"></span><br>
-            <small>최소 수량 {{extra.minimum || '-'}} / 최대 {{extra.maximum || '-'}}</small>
+            <small>최소 수량 {{extra.minimum || '-'}}{{extra.unit}} / 최대 {{extra.maximum || '-'}}{{extra.unit}}</small>
           </div>
         </div>
 
