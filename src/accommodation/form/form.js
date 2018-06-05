@@ -17,7 +17,7 @@ export default ['safeApply', 'event', '$timeout', function(safeApply, event, $ti
     restrict: 'E',
     link: (scope, element, attrs) => {
       const error = (error) => {
-        xmodal.error(error);
+        console.error(error);
         scope.error = error;
         safeApply(scope);
       };

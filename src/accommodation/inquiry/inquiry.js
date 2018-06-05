@@ -14,7 +14,7 @@ export default ['safeApply', 'event', 'staged', '$timeout', 'evalattr', function
     restrict: 'E',
     link(scope, element, attrs, ngModel) {
       function error(error) {
-        xmodal.error(error);
+        console.error(error);
         scope.error = error;
         safeApply(scope);
       }

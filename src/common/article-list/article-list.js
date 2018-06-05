@@ -32,13 +32,13 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
           if( err ) return error(err);
           if( !accommodation ) return error(new Error('서비스를 찾을 수 없습니다.'));
 
-          bookable.get(`/app/bbs/${accommodation.serviceid}/${groupid}`).localcache(1000).exec((err, dataset) => {
+          bookable.get(`/app/bbs/${accommodation.serviceid}/${groupid}`).localcache(3000).exec((err, dataset) => {
             if( err ) return error(err);
 
             bookable.get(`/app/bbs/${accommodation.serviceid}/${groupid}/data`, {
               offset: +offset || 0,
               limit
-            }).localcache(1000).exec((err, list) => {
+            }).localcache(3000).exec((err, list) => {
               if( err ) return error(err);
 
               scope.accommodation = accommodation;

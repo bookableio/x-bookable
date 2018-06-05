@@ -1,4 +1,5 @@
 import angular from 'angular';
+import $ from 'jquery';
 import bookable from 'bookable';
 import {} from 'ng-apply';
 import {} from 'ng-formatter';
@@ -29,10 +30,10 @@ import directives from './directives';
 bookable.info().exec();
 
 ngbootstrappagination.defaults({
-  firstText: '<i class="icon-chevron-left"></i>',
+  firstText: '처음',
   prevText: '<i class="icon-chevron-left"></i>',
   nextText: '<i class="icon-chevron-right"></i>',
-  lastText: '<i class="icon-chevron-right"></i>'
+  lastText: '마지막'
 });
 
 const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground', 'ngBootstrapPagination', 'ngSlick', 'ngIncrementer', 'ngAntiComposition', 'ngFlatpickr'])
@@ -53,7 +54,16 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
     scope.$hash = () => location.hash.substring(1);
     scope.$basename = basename;
 
-    bookable.info().exec((err, business) => safeApply(scope, () => scope.business = business));
+    const body = $(document.body);
+    bookable.info().exec((err, business) => {
+      if( err ) console.info('[bookable] ' + err.message);
+
+      err && body.addClass('bookable-load-error');
+      body.addClass('bookable-loaded');
+
+      scope.business = business;
+      safeApply(scope);
+    });
   }])
   .directive('ngFclick', common_fclick)
   .directive('bInfo', common_info);

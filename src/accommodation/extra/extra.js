@@ -1,4 +1,3 @@
-import xmodal from 'x-modal';
 import bookable from 'bookable';
 
 export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function(safeApply, $timeout, event, evalattr, staged) {
@@ -9,7 +8,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
     scope: {},
     link(scope, element, attrs) {
       const error = (error) => {
-        xmodal.error(error);
+        console.error(error);
         scope.error = error;
         safeApply(scope);
       };

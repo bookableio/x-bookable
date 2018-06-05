@@ -28,6 +28,13 @@
           </tr>
         </thead>
         <tbody>
+          <tr ng-if="!weeks.length">
+            <td colspan="7" class="p15">
+              <div class="alert alert-info text-center m0 fs12" role="alert">
+                객실 예약 정보를 불러오는 중입니다.
+              </div>
+            </td>
+          </tr>
           <tr ng-repeat="week in weeks">
             <td ng-repeat="day in week" ng-class="{
               'x-calendar-prevmonth' : day.prevmonth,

@@ -9,8 +9,8 @@ export default {
     bookable.info({
       id
     }).exec((err, accommodation) => {
-      if( err ) return xmodal.error(err);
-      if( !accommodation ) return xmodal.error(new Error('서비스를 찾을 수 없습니다.'));
+      if( err ) return console.error(err);
+      if( !accommodation ) return console.error(new Error('서비스를 찾을 수 없습니다.'));
 
       const terms = accommodation.terms || {};
       const termstext = terms.terms
