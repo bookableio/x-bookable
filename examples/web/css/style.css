@@ -1,0 +1,315 @@
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+html, body {
+  margin: 0;
+}
+
+body {
+  font-family: 'NanumSquare', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #5c5c5c;
+  background-color: #fff;
+}
+
+/* header */
+.header {
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+/* gnb */
+.gnb {
+  display: table;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.gnb a, .gnb a:hover, .gnb a:focus, .gnb a:active, .gnb a:visited, .gnb a:focus:active {
+  color: #5c5c5c;
+  text-decoration: none;
+}
+
+.gnb > * {
+  display: table-cell;
+  height: 100px;
+  vertical-align: middle;
+}
+
+.gnb > .gnb-header .gnb-logo {
+  font-size: 1.15em;
+  letter-spacing: 0.05em;
+  color: #5c5c5c;
+}
+
+.gnb > .gnb-nav {
+  text-align: right;
+}
+
+.gnb > .gnb-nav ul {
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gnb > .gnb-nav ul:before {
+  content: ' ';
+  display: table;
+}
+
+.gnb > .gnb-nav ul > li {
+  float: left;
+  position: relative;
+  display: block;
+  white-space: nowrap;
+}
+
+.gnb > .gnb-nav ul > li > a {
+  padding: 5px 15px;
+  color: #6a6a6a;
+}
+
+.gnb > .gnb-nav ul > li:last-child > a {
+  padding-right: 0;
+}
+
+.gnb > .gnb-nav ul > li > a:hover {
+  color: #acacac;
+}
+
+
+/* contents */
+.contents {
+  margin-bottom: 180px;
+}
+
+.bordered-contents {
+  border: 1px dotted #efefef;
+  padding: 30px;
+}
+
+/* footer */
+.footer {
+  padding: 50px 20px 10px;
+  background-color: #2a2a2a;
+  color: #9a9a9a;
+}
+
+.footer dl.address {
+  max-width: 950px;
+  margin: 0 auto;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.footer dl.address dd, .footer dl.address dt {
+  display: inline-block;
+  margin: 4px 0 8px;
+}
+
+.footer dl.address dd {
+  color: #ccc;
+}
+
+.footer dl.address dd {
+  margin-right: 5px;
+}
+
+.footer .copyright {
+  padding: 30px 0;
+  text-align: center;
+}
+
+.footer .copyright .copyright-name {
+  font-size: 0.95em;
+  letter-spacing: 0.1em;
+  color: #ccc;
+}
+
+
+/* page */
+.customer-nav {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* article-view */
+.article-view .header {
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+}
+
+.article-view .gnb > .gnb-nav ul > li > a, .article-view .gnb > .gnb-header .gnb-logo {
+  color: #efefef;
+  font-weight: lighter;
+}
+
+.article-view .x-bookable .x-bookable-article .x-bookable-article-contents {
+  max-width: 1000px;
+  padding: 20px;
+}
+
+/* tab */
+.tab {
+  display: inline-block;
+}
+
+.tab > a {
+  display: block;
+  float: left;
+  padding: 10px 30px;
+  border: 1px solid #ddd;
+  margin-left: -1px;
+  text-decoration: none;
+  color: #5c5c5c;
+  font-size: 0.95em;
+}
+
+.tab > a:hover {
+  border: 1px solid #dadada;
+  background-color: #fafafa;
+}
+
+.tab > a:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.tab > a:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* section */
+.section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0;
+  margin-bottom: 60px;
+}
+
+.section.section-padded {
+  box-sizing: content-box;
+  max-width: 1000px;
+  padding: 0 20px;
+}
+
+.section .section-title {
+  font-size: 1.8em;
+  font-weight: lighter;
+  letter-spacing: 3px;
+  margin: 60px 0;
+  text-align: center;
+}
+
+.section h3.section-title {
+  font-size: 1.3em;
+  letter-spacing: 1px;
+  margin: 0 0 20px;
+  text-align: left;
+}
+
+
+/* util */
+.padded {
+  padding: 0 20px;
+}
+
+.padded-l {
+  padding-left: 20px;
+}
+
+.padded-r {
+  padding-right: 20px;
+}
+
+.padded-t {
+  padding-top: 20px;
+}
+
+.padded-b {
+  padding-bottom: 20px;
+}
+
+.mt {
+  margin-top: 10px;
+}
+
+.m0 {
+  margin: 0;
+}
+
+.spacing {
+  margin: 60px 0;
+}
+
+hr.spacing {
+  display: block;
+  border: 0;
+}
+
+.cells {
+  display: table;
+  width: 100%;
+}
+.cell {
+  display: table-cell;
+}
+.cell-10 {
+  width: 10%;
+}
+.cell-20 {
+  width: 20%;
+}
+.cell-30 {
+  width: 30%;
+}
+.cell-40 {
+  width: 40%;
+}
+.cell-50 {
+  width: 50%;
+}
+.cell-60 {
+  width: 60%;
+}
+.cell-70 {
+  width: 70%;
+}
+.cell-80 {
+  width: 80%;
+}
+.cell-90 {
+  width: 90%;
+}
+.cell-100 {
+  width: 100%;
+}
+
+dl.address {
+  display: block;
+}
+
+dl.address dt {
+  font-weight: bold;
+}
+
+dl.address dd {
+  margin: 5px 0 10px;
+}
+
+.fs-sm {
+  font-size: 0.9em;
+}
+.fs-xs {
+  font-size: 0.85em;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}

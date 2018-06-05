@@ -1,0 +1,96 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>숙박예약홈페이지</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="bookable.endpoint" content="http://api.homz.co.kr">
+  <meta name="bookable.cdn" content="http://cdn.homz.co.kr">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+  <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+  <nav class="header">
+    <div class="gnb">
+      <div class="gnb-header">
+        <a class="gnb-logo" href="/" b-info="business.name"></a>
+      </div>
+
+      <div class="gnb-nav">
+        <ul>
+          <li><a href="/rooms.html">객실안내</a></li>
+          <li><a href="/info.html">예약안내</a></li>
+          <li><a href="/booking.html">예약하기</a></li>
+          <li><a href="/inquiry.html">예약확인</a></li>
+          <li><a href="/tourguide.html">여행가이드</a></li>
+          <li><a href="/map.html">찾아오는 길</a></li>
+          <li><a href="/customer.html">고객센터</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="contents">
+    <!-- 본문 -->
+    <div class="section">
+      <bookable-photo-slide slidesetid="photo" open-slideshow="false"></bookable-accommodation-photo-slide>
+    </div>
+
+    <div class="section section-padded">
+      <h2 class="section-title">객실안내</h2>
+
+      <bookable-accommodation-roomtypes listing-style="media" col="6" colsm="12" onselect="location.href = '/room.html?id=' + event.detail.roomtype.id"></bookable-accommodation-roomtypes>
+    </div>
+
+    <div class="section section-padded">
+      <h2 class="section-title">여행가이드</h2>
+
+      <bookable-article-list groupid="tourguide" listing-style="media" col="6" colsm="12" paging="false" pagesize="6" onselect="location.href = '/tourguide-view.html?id=' + event.detail.article.id"></bookable-article-list>
+    </div>
+
+    <div class="section section-padded">
+      <h2 class="section-title">예약안내</h2>
+
+      <div class="cells">
+        <div class="cell cell-50">
+          <dl class="address">
+            <dt>입금계좌<dt>
+            <dd b-info="business.info.account"></dd>
+            <dt>전화번호<dt>
+            <dd b-info="business.tel"></dd>
+          </dl>
+        </div>
+        <div class="cell cell-50">
+          <bookable-article-list groupid="notice" listingtype="tiny" paging="false" pagesize="6" onselect="location.href = '/customer-view.html?gid=' + event.detail.article.groupid + '&id=' + event.detail.article.id"></bookable-article-list>
+        </div>
+      </div>
+    </div>
+    <!-- // 본문 -->
+  </div>
+
+  <div class="footer">
+    <div class="footer-body">
+      <dl class="address">
+        <dt>주소</dt> <dd b-info="business.address"></dd>
+        <dt>입금계좌</dt> <dd b-info="business.info.account"></dd>
+        <dt>예약전화</dt> <dd b-info="business.tel"></dd>
+        <dt>사업자등록번호</dt> <dd b-info="business.info.businessid"></dd>
+        <dt>통신판매업신고번호</dt> <dd b-info="business.info.sellerid"></dd>
+        <dt>상호</dt> <dd b-info="business.info.registered"></dd>
+        <dt>대표자</dt> <dd b-info="business.chief"></dd>
+        <dt>개인정보관리자</dt> <dd b-info="business.info.security"></dd>
+        <dt>이메일</dt> <dd b-info="business.email"></dd>
+      </dl>
+      <div class="copyright">
+        &copy;2018 <span class="copyright-name" b-info="business.name"></span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
