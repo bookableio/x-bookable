@@ -5,6 +5,7 @@ const CleanCSSPlugin = require('less-plugin-clean-css');
 const pkg = require('../package.json');
 
 const src = path.resolve(__dirname, '../src');
+const postcssoptions = require('./postcss.config.js');
 
 module.exports = {
   entry: {
@@ -34,14 +35,15 @@ module.exports = {
       }, {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
           use: [
             {
               loader: 'css-loader',
               options: {
-                minimize: true,
-                sourceMap: true
+                importLoaders: 1
               }
+            }, {
+              loader: 'postcss-loader',
+              options: postcssoptions
             }
           ]
         })
@@ -49,32 +51,24 @@ module.exports = {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true,
-                sourceMap: true,
-              }
-            },  {
-              loader: 'less-loader',
-              options: {
-                sourceMap: true,
-                plugins: [
-                  new CleanCSSPlugin({
-                    advanced: true,
-                    compatibility: 'ie9'
-                  })
-                ]
-              }
-            }, {
-              loader: 'autoprefixer-loader'
+          use: [{
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
             }
-          ]
-        })
+          }, {
+            loader: 'postcss-loader',
+            options: postcssoptions
+          }, {
+            loader: 'less-loader',
+            options: {
+              noIeCompat: false
+            }
+          }
+        ]})
       }, {
-        test: /\.(jpg|png|woff|woff2|gif|eot|ttf|svg)\??.*$/,
-        loader: 'url-loader?limit=16384'
+        test: /\.(jpg|png|gif|svg|webp|woff|woff2|eot|ttf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader'
       }, {
         test: /\.(html|tpl)$/,
         loader: 'html-loader'
@@ -87,7 +81,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-      allChunks: true,
+      allChunks: false,
       filename: '[name].css'
     }),
     new webpack.DefinePlugin({
@@ -100,3 +94,38 @@ module.exports = {
     new webpack.optimize.ModuleConcatenationPlugin()
   ]
 };
+/*{
+  test: /\.css$/,
+  use: ExtractTextPlugin.extract({
+    use: [
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 1
+        }
+      }, {
+        loader: 'postcss-loader',
+        options: postcssoptions
+      }
+    ]
+  })
+}, {
+  test: /\.less$/,
+  use: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: [{
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1
+      }
+    }, {
+      loader: 'postcss-loader',
+      options: postcssoptions
+    }, {
+      loader: 'less-loader',
+      options: {
+        noIeCompat: false
+      }
+    }
+  ]})
+}, */
