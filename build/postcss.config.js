@@ -3,6 +3,7 @@ module.exports = {
   plugins: (loader) => [
     require('postcss-import')(),
     require('postcss-cssnext')({
+      warnForDuplicates: false,
       browsers: [
         'IE >= 9',
         'last 2 versions',

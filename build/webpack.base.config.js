@@ -94,38 +94,3 @@ module.exports = {
     new webpack.optimize.ModuleConcatenationPlugin()
   ]
 };
-/*{
-  test: /\.css$/,
-  use: ExtractTextPlugin.extract({
-    use: [
-      {
-        loader: 'css-loader',
-        options: {
-          importLoaders: 1
-        }
-      }, {
-        loader: 'postcss-loader',
-        options: postcssoptions
-      }
-    ]
-  })
-}, {
-  test: /\.less$/,
-  use: ExtractTextPlugin.extract({
-    fallback: 'style-loader',
-    use: [{
-      loader: 'css-loader',
-      options: {
-        importLoaders: 1
-      }
-    }, {
-      loader: 'postcss-loader',
-      options: postcssoptions
-    }, {
-      loader: 'less-loader',
-      options: {
-        noIeCompat: false
-      }
-    }
-  ]})
-}, */
