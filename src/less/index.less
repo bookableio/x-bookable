@@ -1,15 +1,97 @@
 .x-bookable {
   @import "~bootstrap-theme-attrs/less/variables";
   @import "variables";
-  @import "~bootstrap-theme-attrs/less/theme";
-  @import "icon";
-  @import "accommodation/index";
-  @import "common/index";
-  @import "misc/index";
+
+  // Core variables and mixins
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/mixins";
+
+  // Reset and dependencies
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/normalize";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/print";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/glyphicons";
+
+  // Core CSS
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/scaffolding";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/type";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/code";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/grid";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/tables";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/forms";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/buttons";
+  // Components
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/component-animations";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/dropdowns";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/button-groups";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/input-groups";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/navs";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/navbar";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/breadcrumbs";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/pagination";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/pager";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/labels";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/badges";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/jumbotron";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/thumbnails";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/alerts";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/progress-bars";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/media";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/list-group";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/panels";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/responsive-embed";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/wells";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/close";
+
+  // Utility classes
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/utilities";
+  @import "~bootstrap-theme-attrs/less/bootstrap/less/responsive-utilities";
+
+  @import "~bootstrap-theme-attrs/less/overrides/navs";
+  @import "~bootstrap-theme-attrs/less/overrides/buttons";
+  @import "~bootstrap-theme-attrs/less/overrides/button-groups";
+  @import "~bootstrap-theme-attrs/less/overrides/media";
+  @import "~bootstrap-theme-attrs/less/overrides/dropdowns";
+  @import "~bootstrap-theme-attrs/less/overrides/panels";
+  @import "~bootstrap-theme-attrs/less/overrides/tables";
+  @import "~bootstrap-theme-attrs/less/overrides/list-group";
+  @import "~bootstrap-theme-attrs/less/overrides/forms";
+  @import "~bootstrap-theme-attrs/less/overrides/labels";
+  @import "~bootstrap-theme-attrs/less/overrides/grid";
+  @import "~bootstrap-theme-attrs/less/overrides/badge";
+  @import "~bootstrap-theme-attrs/less/overrides/typography";
+  @import "~bootstrap-theme-attrs/less/overrides/input-groups";
+  //@import "~bootstrap-theme-attrs/less/overrides/thumbnail";
+
+  //@import "~bootstrap-theme-attrs/less/components/chip";
+  //@import "~bootstrap-theme-attrs/less/components/box";
+  @import "~bootstrap-theme-attrs/less/components/checkbox";
+  @import "~bootstrap-theme-attrs/less/components/switch";
+  //@import "~bootstrap-theme-attrs/less/components/picture";
+  @import "~bootstrap-theme-attrs/less/components/tagbox";
+  @import "~bootstrap-theme-attrs/less/components/cover";
+  @import "~bootstrap-theme-attrs/less/components/headline";
+  //@import "~bootstrap-theme-attrs/less/components/footer";
+  //@import "~bootstrap-theme-attrs/less/components/gnb";
+  //@import "~bootstrap-theme-attrs/less/components/section";
+  @import "~bootstrap-theme-attrs/less/components/empty";
+  @import "~bootstrap-theme-attrs/less/components/mediabox";
+  @import "~bootstrap-theme-attrs/less/components/cols";
+  //@import "~bootstrap-theme-attrs/less/components/mouse";
+  //@import "~bootstrap-theme-attrs/less/components/sidebar";
+  //@import "~bootstrap-theme-attrs/less/components/statusbar";
+  //@import "~bootstrap-theme-attrs/less/components/topbtn";
+  @import "~bootstrap-theme-attrs/less/components/page";
+  //@import "~bootstrap-theme-attrs/less/components/bordered-list";
+  //@import "~bootstrap-theme-attrs/less/components/topbar";
+
+  //@import "~bootstrap-theme-attrs/less/workbench/index";
+  //@import "~bootstrap-theme-attrs/less/flexbox";
+  @import "~bootstrap-theme-attrs/less/util";
+  //@import "~bootstrap-theme-attrs/less/tooltip";
+  //@import "~bootstrap-theme-attrs/less/base";
 
   .btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
-      display: table;
-      content: " ";
+    display: table;
+    content: " ";
   }
 
   .btn-group-vertical>.btn-group:after, .btn-toolbar:after, .clearfix:after, .container-fluid:after, .container:after, .dl-horizontal dd:after, .form-horizontal .form-group:after, .modal-footer:after, .modal-header:after, .nav:after, .navbar-collapse:after, .navbar-header:after, .navbar:after, .pager:after, .panel-body:after, .row:after {
@@ -27,11 +109,19 @@
     box-sizing: border-box;
   }
 
-  &.slick-hfit {
-    height: 100%;
+  @import "icon";
+  @import "accommodation/index";
+  @import "common/index";
+  @import "misc/index";
+}
 
-    .slick-slider, .slick-list, .slick-track {
-      height: 100%;
-    }
+
+/*
+&.slick-hfit {
+  height: 100%;
+
+  .slick-slider, .slick-list, .slick-track {
+    height: 100%;
   }
 }
+*/
