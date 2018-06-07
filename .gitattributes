@@ -1,3 +1,4 @@
+resources/**/* linguist-vendored=false
 build/**/* linguist-vendored=false
 dist/**/* linguist-vendored=false
 lib/**/* linguist-vendored=false

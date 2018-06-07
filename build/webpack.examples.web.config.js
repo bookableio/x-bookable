@@ -35,12 +35,7 @@ const plugins = pagenames.map(pagename => {
   })
 });
 
-module.exports = merge.strategy({
-  entry: 'replace'
-})(base, {
-  entry: {
-    web: [lib]
-  },
+module.exports = merge(base, {
   output: {
     path: dist,
     publicPath: '',
@@ -51,7 +46,7 @@ module.exports = merge.strategy({
       dist,
       src
     ],
-    //historyApiFallback: true
+    historyApiFallback: false
   },
   devtool: 'source-map',
   plugins: [

@@ -5,11 +5,27 @@ const CleanCSSPlugin = require('less-plugin-clean-css');
 const pkg = require('../package.json');
 
 const src = path.resolve(__dirname, '../src');
-const postcssoptions = require('./postcss.config.js');
+const postcssoptions = {
+  ident: 'postcss',
+  plugins: (loader) => [
+    require('postcss-import')(),
+    require('postcss-cssnext')({
+      warnForDuplicates: false,
+      browsers: [
+        "last 2 versions",
+        "Safari >= 7",
+        "Explorer >= 9",
+        "iOS >= 9",
+        "Android >= 4"
+      ]
+    }),
+    require('cssnano')()
+  ]
+};
 
 module.exports = {
   entry: {
-    xbookable: src
+    xbookable: path.resolve(src, 'standalone')
   },
   node: {
     __dirname: true,
@@ -81,7 +97,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-      allChunks: false,
+      allChunks: true,
       filename: '[name].css'
     }),
     new webpack.DefinePlugin({
