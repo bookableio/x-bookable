@@ -2,7 +2,7 @@ import xworkbench from 'x-workbench';
 import URL from 'url';
 import $ from 'jquery';
 import {} from './style.less';
-import {} from '../../../src';
+import {} from '../../../src/standalone';
 
 const wb = new xworkbench('dashboard');
 
