@@ -1,5 +1,3 @@
-import bookable from 'bookable';
-
 export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', function(safeApply, $timeout, slideshow, staged, evalattr) {
   return {
     require: '?ngModel',
@@ -24,9 +22,9 @@ export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', func
 
         if( !slidesetid || !staged(element) ) return;
 
-        bookable.info({
-          id: evalattr(attrs.aid),
-          serviceid: evalattr(attrs.serviceid)
+        scope.$root.ensurebusiness({
+          id: attrs.aid,
+          serviceid: attrs.serviceid
         }).exec((err, business) => {
           if( err ) return error(err);
           if( !business ) return error(new Error('서비스를 찾을 수 없습니다.'));
@@ -57,7 +55,10 @@ export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', func
       scope.refresh = refresh;
       scope.openslideshow = openslideshow;
 
+      scope.$root.$watch('business', refresh);
+      attrs.$observe('aid', refresh);
       attrs.$observe('serviceid', refresh);
+
       attrs.$observe('slideid', refresh);
       attrs.$observe('roomtypeid', refresh);
       attrs.$observe('ratio', () => {

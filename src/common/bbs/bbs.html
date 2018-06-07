@@ -1,21 +1,21 @@
 <div class="x-bookable">
-  <div class="x-bookable-article-list">
+  <div class="x-bookable-bbs">
     <div ng-switch on="listingtype">
-      <div class="x-bookable-article-list-faq" ng-switch-when="faq">
+      <div class="x-bookable-bbs-faq" ng-switch-when="faq">
         <table class="table">
           <tbody>
             <tr ng-repeat-start="article in list.rows" class="pointer" ng-click="select(article)">
-              <td class="x-bookable-article-list-title">
+              <td class="x-bookable-bbs-title">
                 <a class="dotted">{{article.title}}</a>
               </td>
-              <td class="x-bookable-article-list-arrow" width="50" ng-class="{
-                'x-bookable-article-list-arrow-down': selected.id === article.id
+              <td class="x-bookable-bbs-arrow" width="50" ng-class="{
+                'x-bookable-bbs-arrow-down': selected.id === article.id
               }">
                 <i class="icon-chevron-right"></i>
               </td>
             </tr>
             <tr ng-repeat-end ng-class="selected.id === article.id ? '' : 'hidden'">
-              <td class="x-bookable-article-list-desc" colspan="2" ng-bind-html="selected.desc | unsafe"></td>
+              <td class="x-bookable-bbs-desc" colspan="2" ng-bind-html="selected.desc | unsafe"></td>
             </tr>
             <tr ng-if="!list.rows.length">
               <td colspan="100" class="text-center">등록된 게시물이 없습니다.</td>
@@ -24,18 +24,18 @@
         </table>
       </div>
 
-      <div class="x-bookable-article-list-list" ng-switch-when="list">
+      <div class="x-bookable-bbs-list" ng-switch-when="list">
         <table class="table">
           <thead>
             <th width="80">번호</th>
-            <th class="x-bookable-article-list-title">제목</th>
+            <th class="x-bookable-bbs-title">제목</th>
             <th width="150">등록일</th>
             <th width="80">조회수</th>
           </thead>
           <tbody>
             <tr ng-repeat="article in list.rows" class="pointer">
               <td>{{articleno($index)}}</td>
-              <td class="x-bookable-article-list-title">
+              <td class="x-bookable-bbs-title">
                 <a href ng-click="select(article)">{{article.title}}</a>
               </td>
               <td>
@@ -52,7 +52,7 @@
         </table>
       </div>
 
-      <div class="x-bookable-article-list-thumbnail" ng-switch-when="thumbnail">
+      <div class="x-bookable-bbs-thumbnail" ng-switch-when="thumbnail">
         <div class="row" ng-show="list.rows.length">
           <div class="col-xs-{{colxs || colsm || colmd || col || 4}} col-sm-{{colsm || colmd || col || 4}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 4}}" ng-repeat="article in list.rows" ng-style="{
             'clear': $index % 4 === 0 && 'both'
@@ -76,13 +76,13 @@
         </div>
       </div>
 
-      <div class="x-bookable-article-list-tiny" ng-switch-when="tiny">
+      <div class="x-bookable-bbs-tiny" ng-switch-when="tiny">
         <ul class="list-unstyled">
           <li ng-repeat="article in list.rows"><a href class="dotted" ng-click="select(article)">{{article.title}}</a></li>
         </ul>
       </div>
 
-      <div class="x-bookable-article-list-default" ng-switch-default>
+      <div class="x-bookable-bbs-default" ng-switch-default>
         <div class="row" ng-show="list.rows.length">
           <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 12}} col-md-{{colmd || col || 12}} col-lg-{{collg || col || 12}}" ng-repeat="article in list.rows">
             <div class="media pv25 mh10 pointer" ng-click="select(article)">

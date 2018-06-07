@@ -1,4 +1,4 @@
-import bookable from 'bookable';
+import $ from 'jquery';
 
 export default ['safeApply', '$timeout', 'event', 'staged', 'evalattr', function(safeApply, $timeout, event, staged, evalattr) {
   return {
@@ -15,17 +15,22 @@ export default ['safeApply', '$timeout', 'event', 'staged', 'evalattr', function
 
       const refresh = () => {
         const roomtypeid = evalattr(attrs.roomtypeid);
-        if( !roomtypeid || !staged(element) ) return;
+        if( !roomtypeid ) return;
 
-        bookable.info({
-          id: evalattr(attrs.aid),
-          serviceid: evalattr(attrs.serviceid)
-        }).exec((err, accommodation) => {
+        scope.$root.ensurebusiness({
+          id: attrs.aid,
+          serviceid: attrs.serviceid
+        }).exec((err, business) => {
           if( err ) return error(err);
-          if( !accommodation ) return error(new Error('서비스를 찾을 수 없습니다.'));
+          if( !business ) return error(new Error('서비스를 찾을 수 없습니다.'));
 
-          scope.accommodation = accommodation;
-          scope.roomtype = (accommodation.roomtypes || []).find(roomtype => roomtype.id === roomtypeid);
+          scope.accommodation = business;
+          scope.roomtype = (business.roomtypes || []).find(roomtype => roomtype.id === roomtypeid);
+
+          $('[bookable-roomtype-info]').each((index, node) => {
+            const value = node.getAttribute('bookable-roomtype-info');
+            if( value ) node.innerHTML = scope.$eval(value) || '';
+          });
 
           safeApply(scope);
         });
@@ -33,8 +38,11 @@ export default ['safeApply', '$timeout', 'event', 'staged', 'evalattr', function
 
       scope.refresh = refresh;
 
-      attrs.$observe('serviceid', () => refresh);
-      attrs.$observe('roomtypeid', () => refresh);
+      scope.$root.$watch('business', refresh);
+      attrs.$observe('aid', refresh);
+      attrs.$observe('serviceid', refresh);
+
+      attrs.$observe('roomtypeid', refresh);
 
       $timeout(refresh, 0);
     }

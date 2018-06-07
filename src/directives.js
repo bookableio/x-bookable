@@ -1,5 +1,5 @@
 import bookableArticle from './common/article/article';
-import bookableArticleList from './common/article-list/article-list';
+import bookableBbs from './common/bbs/bbs';
 import bookableGoogleMaps from './common/googlemaps/googlemaps';
 import bookableMapDesc from './common/map-desc/map-desc';
 import bookableThumbnails from './common/thumbnails/thumbnails';
@@ -18,11 +18,11 @@ import bookableAccommodationInquiry from './accommodation/inquiry/inquiry';
 import bookableAccommodationRates from './accommodation/rates/rates';
 import bookableAccommodationRoomtype from './accommodation/roomtype/roomtype';
 import bookableAccommodationRoomtypes from './accommodation/roomtypes/roomtypes';
-import bookableAccommodationRoomtypeName from './accommodation/roomtype-name/roomtype-name';
 
 export default {
   bookableArticle,
-  bookableArticleList,
+  bookableArticleList : bookableBbs,
+  bookableBbs,
   bookableGoogleMaps,
   bookableMapDesc,
   bookableThumbnails,
@@ -40,6 +40,5 @@ export default {
   bookableAccommodationInquiry,
   bookableAccommodationRates,
   bookableAccommodationRoomtype,
-  bookableAccommodationRoomtypes,
-  bookableAccommodationRoomtypeName
+  bookableAccommodationRoomtypes
 };

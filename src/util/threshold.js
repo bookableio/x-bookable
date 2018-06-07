@@ -1,8 +1,8 @@
-export default (threshold = 100, fn) => {
+export default (fn, threshold) => {
   let timer;
 
   return function() {
     clearTimeout(timer);
-    timer = setTimeout(fn, threshold);
+    timer = setTimeout(fn, +threshold || 1);
   };
 };

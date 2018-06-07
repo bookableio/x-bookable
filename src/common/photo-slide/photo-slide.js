@@ -1,7 +1,6 @@
-import bookable from 'bookable';
 import $ from 'jquery';
 
-export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', function(safeApply, $timeout, slideshow, staged, evalattr) {
+export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', 'threshold', function(safeApply, $timeout, slideshow, staged, evalattr, threshold) {
   return {
     require: '?ngModel',
     template: require('./photo-slide.html'),
@@ -17,17 +16,15 @@ export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', func
         safeApply(scope);
       };
 
-      const refresh = () => {
-        if( scope.loaded ) return;
-
+      const refresh = threshold(() => {
         const slidesetid = evalattr(attrs.slidesetid);
         const slideid = evalattr(attrs.slideid);
 
-        if( !slidesetid || !staged(element) ) return;
+        if( !slidesetid ) return;
 
-        bookable.info({
-          id: evalattr(attrs.aid),
-          serviceid: evalattr(attrs.serviceid)
+        scope.$root.ensurebusiness({
+          id: attrs.aid,
+          serviceid: attrs.serviceid
         }).exec((err, business) => {
           if( err ) return error(err);
           if( !business ) return error(new Error('서비스를 찾을 수 없습니다.'));
@@ -42,15 +39,12 @@ export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', func
             });
           }
 
-          const slickel = element[0].querySelector('ng-slick');
-          slickel && slickel.refresh();
-
           scope.business = business;
           scope.loaded = true;
 
           safeApply(scope);
         });
-      };
+      }, 1);
 
       const openslideshow = (index) => {
         if( attrs.openSlideshow !== 'false' && scope.slide ) {
@@ -88,6 +82,8 @@ export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', func
 
       $timeout(refresh, 0);
 
+      scope.$root.$watch('business', refresh);
+      attrs.$observe('aid', refresh);
       attrs.$observe('serviceid', refresh);
       attrs.$observe('slidesetid', refresh);
       attrs.$observe('slideid', refresh);

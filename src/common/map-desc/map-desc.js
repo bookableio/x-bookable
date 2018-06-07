@@ -1,6 +1,4 @@
-import bookable from 'bookable';
-
-export default ['safeApply', '$timeout', 'evalattr', function(safeApply, $timeout, evalattr) {
+export default ['safeApply', '$timeout', function(safeApply, $timeout) {
   return {
     template: require('./map-desc.html'),
     replace: true,
@@ -15,12 +13,12 @@ export default ['safeApply', '$timeout', 'evalattr', function(safeApply, $timeou
       };
 
       const refresh = () => {
-        bookable.info({
-          id: evalattr(attrs.aid),
-          serviceid: evalattr(attrs.serviceid)
+        scope.$root.ensurebusiness({
+          id: attrs.aid,
+          serviceid: attrs.serviceid
         }).exec((err, business) => {
           if( err ) return error(err);
-          if( !business ) return error(new Error('존재하지 않는 서비스'));
+          if( !business ) return error(new Error('서비스를 찾을 수 없습니다.'));
 
           scope.business = business;
 
@@ -29,6 +27,10 @@ export default ['safeApply', '$timeout', 'evalattr', function(safeApply, $timeou
       };
 
       scope.refresh = refresh;
+
+      scope.$root.$watch('business', refresh);
+      attrs.$observe('aid', refresh);
+      attrs.$observe('serviceid', refresh);
 
       $timeout(refresh, 0);
     }

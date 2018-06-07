@@ -1,12 +1,8 @@
-import bookable from 'bookable';
-
 export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply, $timeout, event, evalattr) {
   return {
-    require: '?ngModel',
     template: require('./roomtypes.html'),
     replace: true,
     scope: {
-      ngModel: '='
     },
     restrict: 'E',
     link(scope, element, attrs) {
@@ -16,18 +12,16 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
         safeApply(scope);
       };
 
-      function refresh(done) {
-        bookable.info({
+      function refresh() {
+        scope.$root.ensurebusiness({
           id: attrs.aid,
-          serviceid: attrs.serviceid,
-          host: location.hostname
-        }).exec((err, accommodation) => {
+          serviceid: attrs.serviceid
+        }).exec((err, business) => {
           if( err ) return error(err);
-          if( !accommodation ) return error(new Error('서비스를 찾을 수 없습니다.'));
+          if( !business ) return error(new Error('서비스를 찾을 수 없습니다.'));
 
-          scope.accommodation = accommodation;
+          scope.accommodation = business;
           safeApply(scope);
-          done && done();
         });
       }
 
@@ -36,9 +30,9 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
         event.fire(element, 'select', {roomtype});
       }
 
-      attrs.$observe('serviceid', () => {
-        attrs.serviceid && refresh();
-      });
+      scope.$root.$watch('business', refresh);
+      attrs.$observe('aid', refresh);
+      attrs.$observe('serviceid', refresh);
 
       attrs.$observe('buttonLabel', () => {
         scope.buttonLabel = attrs.buttonLabel;

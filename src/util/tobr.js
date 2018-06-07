@@ -1,1 +1,1 @@
-export default (value) => typeof value === 'string' ? value.split('\n').join('<br>') : value;
+export default (value) => value && value.split('\n').join('<br>');

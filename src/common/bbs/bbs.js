@@ -1,9 +1,10 @@
+import $ from 'jquery';
 import bookable from 'bookable';
 
 export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function(safeApply, $timeout, event, evalattr, staged) {
   return {
     require: '?ngModel',
-    template: require('./article-list.html'),
+    template: require('./bbs.html'),
     replace: true,
     scope: {
       ngModel: '='
@@ -43,7 +44,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
               if( err ) return error(err);
 
               scope.accommodation = accommodation;
-              scope.dataset = dataset;
+              scope.dataset = scope.bbs = dataset;
               scope.list = list;
               scope.listingtype = evalattr(attrs.listingtype) || dataset.listingtype;
               scope.paging = {
@@ -54,6 +55,11 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
                   refresh((index * limit) - limit);
                 }
               };
+
+              $('[bookable-bbs-info]').each((index, node) => {
+                const value = node.getAttribute('bookable-bbs-info');
+                if( value ) node.innerHTML = scope.$eval(value) || '';
+              });
 
               safeApply(scope);
             });

@@ -1,5 +1,3 @@
-import bookable from 'bookable';
-
 export default ['safeApply', '$timeout', function(safeApply, $timeout) {
   return {
     require: '?ngModel',
@@ -23,16 +21,15 @@ export default ['safeApply', '$timeout', function(safeApply, $timeout) {
           return;
         }
 
-        bookable.info({
+        scope.$root.ensurebusiness({
           id: attrs.aid,
-          serviceid: attrs.serviceid,
-          host: location.hostname
-        }).exec((err, accommodation) => {
+          serviceid: attrs.serviceid
+        }).exec((err, business) => {
           if( err ) return error(err);
-          if( !accommodation ) return error(new Error('서비스를 찾을 수 없습니다.'));
+          if( !business ) return error(new Error('서비스를 찾을 수 없습니다.'));
 
-          scope.accommodation = accommodation;
-          scope.text = accommodation && accommodation.terms && accommodation.terms[attrs.termsid];
+          scope.business = business;
+          scope.text = business && business.terms && business.terms[attrs.termsid];
 
           safeApply(scope);
         });
@@ -40,8 +37,9 @@ export default ['safeApply', '$timeout', function(safeApply, $timeout) {
 
       scope.refresh = refresh;
 
+      scope.$root.$watch('business', refresh);
+      attrs.$observe('aid', refresh);
       attrs.$observe('serviceid', refresh);
-      attrs.$observe('termsid', refresh);
 
       $timeout(refresh, 0);
     }

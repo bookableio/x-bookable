@@ -1,4 +1,3 @@
-import bookable from 'bookable';
 import GoogleMapsLoader from 'google-maps';
 
 export default ['safeApply', 'staged', 'event', '$timeout', 'evalattr', function(safeApply, staged, event, $timeout, evalattr) {
@@ -18,12 +17,12 @@ export default ['safeApply', 'staged', 'event', '$timeout', 'evalattr', function
       const refresh = () => {
         if( !staged(element) ) return;
 
-        bookable.info({
-          serviceid: evalattr(attrs.serviceid),
-          host: location.hostname
+        scope.$root.ensurebusiness({
+          id: attrs.aid,
+          serviceid: attrs.serviceid
         }).exec((err, business) => {
           if( err ) return error(err);
-          if( !business ) return error(new Error('존재하지 않는 서비스'));
+          if( !business ) return error(new Error('서비스를 찾을 수 없습니다.'));
 
           const info = business.info || {};
           GoogleMapsLoader.KEY = evalattr(attrs.apikey) || info.googlemapskey;
@@ -66,6 +65,10 @@ export default ['safeApply', 'staged', 'event', '$timeout', 'evalattr', function
       };
 
       scope.refresh = refresh;
+
+      scope.$root.$watch('business', refresh);
+      attrs.$observe('aid', refresh);
+      attrs.$observe('serviceid', refresh);
 
       attrs.$observe('ratio', () => {
         scope.ratio = evalattr(attrs.ratio);
