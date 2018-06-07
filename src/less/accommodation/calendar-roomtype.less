@@ -14,13 +14,17 @@
   }
 
   .x-calendar-roomtype-header {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 
     .x-calendar-roomtype-title {
       font-size: 1.5em;
       line-height: 34px;
       margin: 0;
       vertical-align: middle;
+
+      @media(max-width: @screen-xs) {
+        font-size: 1.2em;
+      }
     }
   }
 
@@ -32,7 +36,7 @@
 
       th {
         margin: 0;
-        padding: 3px;
+        padding: 8px;
         font-size: 12px;
         font-weight: 400;
         text-align: center;

@@ -1,6 +1,8 @@
 <div class="x-bookable">
   <div class="x-bookable-bbs">
-    <div ng-switch on="listingtype">
+    <div ng-if="!list.rows.length" ng-transclude></div>
+
+    <div ng-switch on="listingtype" ng-if="list.rows.length">
       <div class="x-bookable-bbs-faq" ng-switch-when="faq">
         <table class="table">
           <tbody>
@@ -69,11 +71,6 @@
             </div>
           </div>
         </div>
-
-        <div class="empty" ng-show="!list.rows.length">
-          <div class="empty-icon"><i class="icon-alert-triangle"></i></div>
-          <div class="empty-text">등록된 게시물이 없습니다.</div>
-        </div>
       </div>
 
       <div class="x-bookable-bbs-tiny" ng-switch-when="tiny">
@@ -103,11 +100,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="empty" ng-show="!list.rows.length">
-          <div class="empty-icon"><i class="icon-alert-triangle"></i></div>
-          <div class="empty-text">등록된 게시물이 없습니다.</div>
         </div>
       </div>
     </div>

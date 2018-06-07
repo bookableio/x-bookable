@@ -13,8 +13,13 @@ const target = path.resolve(__dirname, '../dist');
 fs.emptyDirSync(target);
 
 module.exports = merge.strategy({
+  entry: 'replace',
   externals: 'replace'
 })(base, {
+  entry: {
+    'xbookable': path.resolve(src, 'standalone'),
+    'xbookable.ng': src
+  },
   output: {
     path: target,
     filename: '[name].js',

@@ -10,6 +10,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
       ngModel: '='
     },
     restrict: 'E',
+    transclude: true,
     link(scope, element, attrs) {
       const error = (error) => {
         console.error(error);

@@ -64,7 +64,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', 'slidesh
             rooms.push({
               id: roomrates.id,
               date: iter.format('YYYYMMDD'),
-              adults: +roomrates.adults || 1,
+              adults: +roomrates.adults || +roomrates.capacity || 1,
               children: +roomrates.children || 0,
               qty: roomrates.qty
             });
@@ -115,7 +115,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', 'slidesh
             scope.bookable = bookable;
 
             bookable.rates.forEach((roomrates) => {
-              roomrates.adults = 1;
+              roomrates.adults = +roomrates.capacity || 1;
               roomrates.children = 0;
               roomrates.qty = 1;
             });

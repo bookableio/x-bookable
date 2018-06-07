@@ -26,6 +26,8 @@ import service_staged from './service/staged/staged';
 import service_scrollto from './service/scrollto/scrollto';
 import common_fclick from './common/fclick/fclick';
 import common_info from './common/info/info';
+import common_if from './common/info/if';
+import common_bbs_if from './common/info/bbs-if';
 
 import directives from './directives';
 
@@ -97,7 +99,11 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
     scope.$basename = basename;
   }])
   .directive('ngFclick', common_fclick)
-  .directive('bInfo', common_info);
+  .directive('bookableIf', common_if)
+  .directive('bIf', common_if)
+  .directive('bookableInfo', common_info)
+  .directive('bInfo', common_info)
+  .directive('bookableBbsIf', common_bbs_if);
 
 Object.keys(directives).forEach(key => app.directive(key, directives[key]));
 

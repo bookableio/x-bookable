@@ -1,5 +1,7 @@
 import bookable from 'bookable';
 import moment from 'moment';
+import xmodal from 'x-modal';
+import cart from '../cart';
 
 export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', function(safeApply, $timeout, event, evalattr, scrollto) {
   return {
@@ -99,6 +101,33 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
         event.fire(element, 'complete', {reservation});
       };
 
+      const savetocart = () => {
+        if( !scope.selected.length )
+          return xmodal.error('예약할 날짜를 선택해주세요.');
+        if( scope.summary.adults <= 0 )
+          return xmodal.error('인원수를 입력해주세요.');
+
+        const rooms = scope.rooms;
+
+        xmodal.confirm('장바구니에 추가하시겠습니까?', (b) => {
+          if( !b ) return;
+
+          cart.merge(rooms);
+          cart.save();
+
+          safeApply(scope);
+          event.fire(element, 'cart', {rooms});
+
+          const carthref = attrs.cartHref;
+          if( !carthref ) return xmodal.success('장바구니에 추가되었습니다.');
+
+          xmodal.confirm('장바구니를 확인하시겠습니까?', (b) => {
+            if( b ) location.href = carthref;
+            clear();
+          });
+        });
+      };
+
       event.regist(element, attrs, 'select');
       event.regist(element, attrs, 'complete');
 
@@ -137,6 +166,11 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
         scope.labelClosed = attrs.labelClosed;
       });
 
+      attrs.$observe('useCart', () => {
+        scope.useCart = 'useCart' in attrs && evalattr(attrs.useCart) !== 'false';
+        safeApply(scope);
+      });
+
 
       scope.refresh = refresh;
       scope.select = select;
@@ -146,6 +180,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
       scope.setextraoptions = setextraoptions;
       scope.booknow = booknow;
       scope.complete = complete;
+      scope.savetocart = savetocart;
 
       $timeout(refresh, 0);
     }

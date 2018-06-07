@@ -237,6 +237,11 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
         refresh();
       }, true);
 
+      attrs.$observe('useCart', () => {
+        scope.useCart = 'useCart' in attrs && evalattr(attrs.useCart) !== 'false';
+        safeApply(scope);
+      });
+
       event.regist(element, attrs, 'cart');
       event.regist(element, attrs, 'complete');
 

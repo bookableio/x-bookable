@@ -12,9 +12,9 @@
           <h4 class="media-heading">
             {{extra.name}}<small class="hidden-xs" ng-if="!mini">{{extra.name_en}}</small>
           </h4>
-          <div class="media-desc fs13 hidden-xs">
-            <span ng-bind-html="extra.desc | tobr | unsafe"></span><br>
-            최소 수량 {{extra.minimum || '-'}}{{extra.unit}} / 최대 {{extra.maximum || '-'}}{{extra.unit}}
+          <div class="media-desc fs13">
+            <div ng-bind-html="extra.desc | tobr | unsafe"></div>
+            <small>최소 {{extra.minimum || '-'}}{{extra.unit}} / 최대 {{extra.maximum || '-'}}{{extra.unit}}</small>
           </div>
         </div>
 
@@ -22,7 +22,7 @@
           {{extra.name}}
         </div>
 
-        <div class="media-right media-middle text-right" style="min-width:200px;">
+        <div class="media-right media-middle text-right" style="min-width:150px;">
           <ng-incrementer min="0" max="{{extra.maximum}}" suffix="{{extra.unit}}" ng-model="extra.qty" ng-change="updateoptions()"></ng-incrementer>
         </div>
       </div>

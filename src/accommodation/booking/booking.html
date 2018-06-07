@@ -16,12 +16,15 @@
 
     <div id="xbkb-finder" style="margin-top: 60px;" ng-show="checkin">
       <div class="x-bookable-booking-header row nogap">
-        <div class="col-sm-4">
+        <div class="col-xs-6 col-sm-4 hidden-xs">
         </div>
-        <div class="col-sm-4 text-center">
-          <h2 class="x-bookable-booking-header-title">{{form.checkin | moment:'YYYY년 MM월 DD일'}}</h2>
+        <div class="col-xs-6 col-sm-4 hidden-xs text-center">
+          <h2 class="x-bookable-booking-header-title">{{form.checkin | moment:'YYYY년 M월 D일'}}</h2>
         </div>
-        <div class="col-sm-4 text-right">
+        <div class="col-xs-6 col-sm-4 visible-xs">
+          <h2 class="x-bookable-booking-header-title">{{form.checkin | moment:'YYYY년 M월 D일'}}</h2>
+        </div>
+        <div class="col-xs-6 col-sm-4 text-right">
           <div class="btn-group" role="group">
             <a href class="btn btn-header btn-default" ng-click="clear()">달력으로</a>
           </div>
@@ -41,7 +44,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-3 col-xs-12">
+            <div class="col-sm-3 col-xs-6">
               <div class="form-group">
                 <label>숙박기간</label>
 
@@ -50,7 +53,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-3 col-xs-12">
+            <div class="col-sm-3 col-xs-6">
               <div class="form-group">
                 <label>투숙인원</label>
 
@@ -60,9 +63,12 @@
               </div>
             </div>
             <div class="col-sm-3 col-xs-12">
-              <div class="form-group">
+              <div class="form-group hidden-xs">
                 <label>&nbsp;</label>
                 <a href class="btn btn-primary btn-block" ng-click="find()" ng-disabled="!form.checkin">객실검색</a>
+              </div>
+              <div class="form-group visible-xs">
+                <a href class="btn btn-primary btn-block btn-xl" ng-click="find()" ng-disabled="!form.checkin">객실검색</a>
               </div>
             </div>
           </div>
@@ -81,14 +87,14 @@
 
       <div class="text-center hidden-sm hidden-xs">
         <div class="btn-group">
-          <a href class="btn btn-danger btn-lg" style="padding: 13px 35px;" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="">장바구니</a>
+          <a href class="btn btn-danger btn-lg" style="padding: 13px 35px;" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="useCart">장바구니</a>
           <a href class="btn btn-danger btn-lg btn-fill" style="padding: 13px 35px;" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
         </div>
       </div>
 
       <div class="hidden-md hidden-lg">
         <div class="btn-group btn-group-justified">
-          <a href class="btn btn-danger btn-lg" ng-disabled="!rooms.length" ng-click="savetocart()">장바구니</a>
+          <a href class="btn btn-danger btn-lg" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="useCart">장바구니</a>
           <a href class="btn btn-danger btn-lg btn-fill" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
         </div>
       </div>
