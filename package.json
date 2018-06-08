@@ -41,6 +41,7 @@
     "ng-slick": "^0.1.18",
     "photoswipe": "^4.1.2",
     "querystring-browser": "^1.0.4",
+    "universal-analytics": "^0.4.17",
     "x-modal": "^0.1.13"
   },
   "devDependencies": {
