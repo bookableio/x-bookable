@@ -68,7 +68,7 @@ export default ['safeApply', 'event', '$timeout', function(safeApply, event, $ti
 
         if( !accommodation ) return error(new Error('서비스가 로드되지 않았습니다.'));
         if( !reservation ) return error(new Error('연결된 예약이 없습니다.'));
-        if( !paymentmethod ) return error(new Error('결제 방법을 선택해주세요.'));
+        //if( !paymentmethod ) return error(new Error('결제 방법을 선택해주세요.'));
         if( !form ) return error(new Error('프로그램 오류입니다. 다시 시도해주세요.'));
         if( !reservation.rooms.length ) return error(new Error('예약할 객실이 없습니다.'));
         if( !form.termsofuse ) return xmodal.alert('이용약관에 동의하셔야 합니다.');
@@ -89,7 +89,7 @@ export default ['safeApply', 'event', '$timeout', function(safeApply, event, $ti
           if( err ) return error(err);
           if( reservation.errors ) return error(new Error('예약에 오류가 있습니다.'));
 
-          paymentfn({
+          paymentfn(paymentmethod && {
             type: paymentmethod.type,
             name : '객실예약',
             price : reservation.price,
@@ -107,9 +107,7 @@ export default ['safeApply', 'event', '$timeout', function(safeApply, event, $ti
           }, (err, result) => {
             if( err ) return error(err);
 
-            console.log('result', result);
-
-            reservation.payment = {
+            if( paymentmethod ) reservation.payment = {
               paymentmethodid: paymentmethod.id,
               amount: reservation.price,
               options: result
@@ -120,8 +118,10 @@ export default ['safeApply', 'event', '$timeout', function(safeApply, event, $ti
 
               xmodal.success('예약이 신청되었습니다.', '예약이 확정되면 문자메시지와 이메일로 통보해 드리겠습니다.');
 
-              attrs.ngComplete && scope.$parent.$eval(attrs.ngComplete, {$reservation: reservation});
-              event.fire(element, 'complete', {reservation});
+              setTimeout(() => {
+                attrs.ngComplete && scope.$parent.$eval(attrs.ngComplete, {$reservation: reservation});
+                event.fire(element, 'complete', {reservation});
+              }, 250);
             });
           });
         });

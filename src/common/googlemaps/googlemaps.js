@@ -25,7 +25,7 @@ export default ['safeApply', 'staged', 'event', '$timeout', 'evalattr', function
           if( !business ) return error(new Error('서비스를 찾을 수 없습니다.'));
 
           const info = business.info || {};
-          GoogleMapsLoader.KEY = evalattr(attrs.apikey) || info.googlemapskey;
+          GoogleMapsLoader.KEY = info.googlemapskey || evalattr(attrs.apikey);
           GoogleMapsLoader.LIBRARIES = ['geometry', 'places'];
 
           GoogleMapsLoader.load((google) => {

@@ -7,10 +7,8 @@ export default ['$timeout', function($timeout) {
         const value = attrs.bookableInfo || attrs.bInfo;
         scope.business && value && element.html(scope.$eval(value) || '');
       };
-      scope.$root.$watch('business', () => {
-        //console.log('watch', scope.business, attrs.bInfo);
-        $timeout(refresh, 0);
-      });
+
+      scope.$root.$watch('business', () => refresh);
       $timeout(refresh, 0);
     }
   };

@@ -6,13 +6,12 @@ export default ['$timeout', function($timeout) {
       element.css('display', 'none');
 
       const refresh = () => {
-        const value = attrs.bookableIf || attrs.bIf;
+        const key = attrs.bookableIf || attrs.bIf;
+        const value = scope.business && key && scope.$eval(key);
         element.css('display', value ? null : 'none');
       };
-      scope.$root.$watch('business', () => {
-        //console.log('watch', scope.business, attrs.bInfo);
-        $timeout(refresh, 0);
-      });
+
+      scope.$root.$watch('business', () => refresh);
       $timeout(refresh, 0);
     }
   };

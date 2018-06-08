@@ -17,9 +17,8 @@ export default ['$timeout', function($timeout) {
           !err && list.total && element.css('display', null);
         });
       };
-      scope.$root.$watch('business', () => {
-        $timeout(refresh, 0);
-      });
+
+      scope.$root.$watch('business', () => refresh);
       $timeout(refresh, 0);
     }
   };

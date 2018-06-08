@@ -16,7 +16,7 @@ function loadscript(done) {
 }
 
 export default (info, done) => {
-  if( ~['banking', 'direct'].indexOf(info.type) ) {
+  if( !info || ~['banking', 'direct'].indexOf(info.type) ) {
     return xmodal.confirm('예약하시겠습니까?', (b) => {
       if( b ) return done();
     });
