@@ -4,11 +4,13 @@ export default ['$timeout', function($timeout) {
     priority: 100,
     link(scope, element, attrs) {
       const refresh = () => {
-        const value = attrs.bookableInfo || attrs.bInfo;
-        scope.business && value && element.html(scope.$eval(value) || '');
+        const key = attrs.bookableInfo || attrs.bInfo;
+        scope.business && key && element.html(scope.$eval(key) || '');
       };
 
-      scope.$root.$watch('business', () => refresh);
+      scope.$root.$watch('business', () => {
+        $timeout(refresh, 0);
+      });
       $timeout(refresh, 0);
     }
   };

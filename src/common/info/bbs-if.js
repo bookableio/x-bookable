@@ -14,11 +14,13 @@ export default ['$timeout', function($timeout) {
           offset: 0,
           limit: 1
         }).localcache(3000).exec((err, list) => {
-          !err && list.total && element.css('display', null);
+          !err && list.total > 0 && element.css('display', null);
         });
       };
 
-      scope.$root.$watch('business', () => refresh);
+      scope.$root.$watch('business', () => {
+        $timeout(refresh, 0);
+      });
       $timeout(refresh, 0);
     }
   };

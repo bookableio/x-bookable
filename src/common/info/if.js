@@ -11,7 +11,9 @@ export default ['$timeout', function($timeout) {
         element.css('display', value ? null : 'none');
       };
 
-      scope.$root.$watch('business', () => refresh);
+      scope.$root.$watch('business', () => {
+        $timeout(refresh, 0);
+      });
       $timeout(refresh, 0);
     }
   };

@@ -99,10 +99,11 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
     scope.$basename = basename;
   }])
   .directive('ngFclick', common_fclick)
-  .directive('bookableIf', common_if)
   .directive('bIf', common_if)
-  .directive('bookableInfo', common_info)
+  .directive('bookableIf', common_if)
   .directive('bInfo', common_info)
+  .directive('bookableInfo', common_info)
+  .directive('bBbsIf', common_bbs_if)
   .directive('bookableBbsIf', common_bbs_if);
 
 Object.keys(directives).forEach(key => app.directive(key, directives[key]));

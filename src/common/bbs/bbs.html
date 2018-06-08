@@ -17,7 +17,7 @@
               </td>
             </tr>
             <tr ng-repeat-end ng-class="selected.id === article.id ? '' : 'hidden'">
-              <td class="x-bookable-bbs-desc" colspan="2" ng-bind-html="selected.desc | unsafe"></td>
+              <td class="x-bookable-bbs-desc" colspan="2" ng-bind-html="article.html || article.desc | tobr | unsafe"></td>
             </tr>
             <tr ng-if="!list.rows.length">
               <td colspan="100" class="text-center">등록된 게시물이 없습니다.</td>
