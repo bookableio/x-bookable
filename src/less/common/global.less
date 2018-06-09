@@ -46,7 +46,6 @@
 
   .thumbnail-title {
     display: block;
-    font-size: 1.1em;
     font-weight: bold;
     text-align: center;
     margin: 8px 0;
@@ -84,4 +83,78 @@
 a, a:hover, a:focus {
   outline: none;
   text-decoration: none;
+}
+
+.empty {
+  padding: 80px 0 !important;
+}
+
+
+.crossbox {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+
+  & > * {
+    display: table-cell;
+    width: 50%;
+    vertical-align: middle;
+  }
+
+  .crossbox-image {
+    position: relative;
+    padding-top: 35%;
+  }
+
+  .crossbox-body {
+    padding: 20px;
+  }
+
+  @media(min-width: @screen-md) {
+    .crossbox-body {
+      padding: 25px;
+      padding-left: 0;
+    }
+
+    .crossbox-image + .crossbox-body {
+      padding-right: 0;
+      padding-left: 25px;
+    }
+  }
+
+  .crossbox-category {
+    font-size: 0.95em;
+    font-weight: lighter;
+    margin: 5px 0;
+  }
+
+  .crossbox-title {
+    font-size: 25px;
+    letter-spacing: 0em;
+    margin-top: 8px;
+    margin-bottom: 30px;
+    font-weight: 100;
+    letter-spacing: 0.01em;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .crossbox-text {
+    line-height: 1.5em;
+    text-align: justify;
+  }
+
+  @media(max-width: @screen-md) {
+    display: block;
+    margin-bottom: 100px;
+
+    & > * {
+      display: block;
+      width: 100%;
+    }
+
+    .crossbox-image {
+      padding-top: 75%;
+    }
+  }
 }

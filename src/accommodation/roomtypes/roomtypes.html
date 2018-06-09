@@ -1,6 +1,6 @@
 <div class="x-bookable">
   <div class="x-bookable-roomtypes" ng-switch on="listingtype">
-    <div class="row" ng-switch-when="rates">
+    <div class="x-bookable-roomtypes-rates row" ng-switch-when="rates">
       <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 12}} col-md-{{colmd || col || 12}} col-lg-{{collg || col || 12}}" ng-repeat="roomtype in accommodation.roomtypes">
         <div class="media" ng-class="{
           'media-border': border
@@ -16,7 +16,7 @@
                   <div ng-bind-html="roomtype.structure | unsafe"></div>
                 </div>
                 기본 {{roomtype.capacity || '-'}}인 / 최대 {{roomtype.maximum || '-'}}인,
-                1박 {{roomtype.price | currency:accommodation.currency}} ~
+                1박 {{roomtype.price | currency:accommodation.currency}} 부터
               </div>
             </a>
           </div>
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="row" ng-switch-when="thumbnail">
+    <div class="x-bookable-roomtypes-thumbnail row" ng-switch-when="thumbnail">
       <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 6}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 4}}" ng-repeat="roomtype in accommodation.roomtypes">
         <div class="thumbnail">
           <div class="thumbnail-image pointer" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}" ng-click="select(roomtype)"></div>
@@ -47,7 +47,42 @@
       </div>
     </div>
 
-    <div class="row nogap" ng-switch-when="picture">
+    <div class="x-bookable-roomtypes-crossbox" ng-switch-when="crossbox">
+      <div class="crossbox visible-xs visible-sm" ng-repeat="roomtype in accommodation.roomtypes">
+        <div class="crossbox-image" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}"></div>
+        <div class="crossbox-body">
+          <small class="crossbox-category">{{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인</small>
+          <h3 class="crossbox-title">{{roomtype.name}}</h3>
+          <div class="crossbox-text">
+            <div ng-bind-html="roomtype.desc | tobr | unsafe"></div>
+            <small class="block mv10">
+              <span>1박 {{roomtype.price | currency:accommodation.currency}} 부터</span>
+              <span ng-if="roomtype.info.size"> / {{roomtype.info.size}}</span>
+              <span ng-if="roomtype.info.structure"> / {{roomtype.info.structure}}</span>
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="crossbox hidden-xs hidden-sm" ng-repeat="roomtype in accommodation.roomtypes">
+        <div class="crossbox-image" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}"  ng-if="$index % 2 == 0"></div>
+        <div class="crossbox-body">
+          <small class="crossbox-category">{{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인</small>
+          <h3 class="crossbox-title">{{roomtype.name}}</h3>
+          <div class="crossbox-text">
+            <div ng-bind-html="roomtype.desc | tobr | unsafe"></div>
+            <small class="block mv10">
+              <span>1박 {{roomtype.price | currency:accommodation.currency}} 부터</span>
+              <span ng-if="roomtype.info.size"> / {{roomtype.info.size}}</span>
+              <span ng-if="roomtype.info.structure"> / {{roomtype.info.structure}}</span>
+            </small>
+          </div>
+        </div>
+        <div class="crossbox-image" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}"  ng-if="$index % 2 != 0"></div>
+      </div>
+    </div>
+
+    <div class="x-bookable-roomtypes-picture row nogap" ng-switch-when="picture">
       <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 6}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 4}}" ng-repeat="roomtype in accommodation.roomtypes">
         <div class="picture picture-flat picture-anim pointer" ng-click="select(roomtype)">
           <div class="image ratio-3by2" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}"></div>
@@ -65,7 +100,7 @@
       </div>
     </div>
 
-    <div class="row" ng-switch-default>
+    <div class="x-bookable-roomtypes-media row" ng-switch-default>
       <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 12}} col-md-{{colmd || col || 6}} col-lg-{{collg || col || 6}}" ng-repeat="roomtype in accommodation.roomtypes">
         <div class="media" ng-class="{
           'media-border': border

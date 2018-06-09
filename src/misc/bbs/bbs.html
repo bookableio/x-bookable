@@ -1,6 +1,6 @@
 <div class="x-bookable">
   <div class="x-bookable-bbs">
-    <div ng-if="!list.rows.length" ng-transclude></div>
+    <div ng-show="!list.rows.length" ng-transclude></div>
 
     <div ng-switch on="listingtype" ng-if="list.rows.length">
       <div class="x-bookable-bbs-faq" ng-switch-when="faq">
@@ -64,6 +64,27 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="x-bookable-bbs-crossbox" ng-switch-when="crossbox">
+        <div class="crossbox visible-xs visible-sm" ng-repeat="article in list.rows">
+          <div class="crossbox-image" ng-background="{{article.coverimage | cdn}}"></div>
+          <div class="crossbox-body">
+            <small class="crossbox-category" ng-if="article.category">{{article.category}}</small>
+            <h3 class="crossbox-title">{{article.title}}</h3>
+            <p class="crossbox-text" ng-bind-html="article.desc | tobr | unsafe"></p>
+          </div>
+        </div>
+
+        <div class="crossbox hidden-xs hidden-sm" ng-repeat="article in list.rows">
+          <div class="crossbox-image" ng-background="{{article.coverimage | cdn}}"  ng-if="$index % 2 == 0"></div>
+          <div class="crossbox-body">
+            <small class="crossbox-category" ng-if="article.category">{{article.category}}</small>
+            <h3 class="crossbox-title">{{article.title}}</h3>
+            <p class="crossbox-text" ng-bind-html="article.desc | tobr | unsafe"></p>
+          </div>
+          <div class="crossbox-image" ng-background="{{article.coverimage | cdn}}"  ng-if="$index % 2 != 0"></div>
         </div>
       </div>
 

@@ -3,9 +3,7 @@ import bookable from 'bookable';
 export default ['$timeout', function($timeout) {
   return {
     restrict: 'A',
-    scope: {
-      business: '='
-    },
+    scope: {},
     link(scope, element, attrs) {
       const root = scope.$root;
 
