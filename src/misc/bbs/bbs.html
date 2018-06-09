@@ -56,7 +56,7 @@
 
       <div class="x-bookable-bbs-thumbnail" ng-switch-when="thumbnail">
         <div class="row" ng-show="list.rows.length">
-          <div class="col-xs-{{colxs || colsm || colmd || col || 4}} col-sm-{{colsm || colmd || col || 4}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 4}}" ng-repeat="article in list.rows">
+          <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 6}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 3}}" ng-repeat="article in list.rows">
             <div class="thumbnail">
               <div class="thumbnail-image pointer" ng-background="{{article.thumbnail | cdn}}" ng-click="select(article)"></div>
               <div class="caption">
