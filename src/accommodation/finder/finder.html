@@ -15,7 +15,7 @@
 
       <div ng-if="bookable.rates">
         <div class="media media-border" ng-repeat="roomrates in bookable.rates" ng-class="{
-            'bg-lighter': isselected(roomrates.id)
+            'selected': isselected(roomrates.id)
           }">
           <div class="media-left media-middle hidden-xs">
             <div class="media-image pointer" ng-background="{{roomrates.id | roompic:accommodation.roomtypes}}" ng-click="openslideshow(roomrates.id)"></div>

@@ -1,6 +1,6 @@
 import GoogleMapsLoader from 'google-maps';
 
-export default ['safeApply', 'event', '$timeout', 'evalattr', function(safeApply, event, $timeout, evalattr) {
+export default ['safeApply', 'event', '$timeout', 'evalattr', 'threshold', function(safeApply, event, $timeout, evalattr, threshold) {
   return {
     template: require('./googlemaps.html'),
     replace: true,
@@ -14,7 +14,7 @@ export default ['safeApply', 'event', '$timeout', 'evalattr', function(safeApply
         safeApply(scope);
       };
 
-      const refresh = () => {
+      const refresh = threshold(() => {
         scope.$root.ensurebusiness({
           id: attrs.aid,
           serviceid: attrs.serviceid
@@ -60,7 +60,7 @@ export default ['safeApply', 'event', '$timeout', 'evalattr', function(safeApply
             });
           });
         });
-      };
+      }, 100);
 
       scope.refresh = refresh;
 

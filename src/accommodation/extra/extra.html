@@ -13,12 +13,14 @@
         </h4>
         <div class="media-desc">
           <div ng-bind-html="extra.desc | tobr | unsafe"></div>
-          <small>최소 {{extra.minimum || '-'}}{{extra.unit}} / 최대 {{extra.maximum || '-'}}{{extra.unit}}</small>
+          <small>최소 {{extra.minimum || '-'}}{{extra.unit}} / 최대 {{extra.maximum || '-'}}{{extra.unit}} / {{extra.unit}}당 {{extra.price | currency:accommodation.currency}}</small>
         </div>
       </div>
 
       <div class="media-body media-middle" ng-if="mini">
-        {{extra.name}}
+        <p>{{extra.name}}</p>
+        <small class="block">최소 {{extra.minimum || '-'}}{{extra.unit}} / 최대 {{extra.maximum || '-'}}{{extra.unit}}</small>
+        <small class="block">{{extra.unit}}당 {{extra.price | currency:accommodation.currency}}</small>
       </div>
 
       <div class="media-right media-middle text-right" style="min-width:150px;">

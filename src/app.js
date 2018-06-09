@@ -18,6 +18,7 @@ import cdn from './util/cdn';
 import threshold from './util/threshold';
 import basename from './util/basename';
 import parsequery from './util/parse-query';
+import ellipsis from './util/ellipsis';
 
 import service_evalattr from './service/evalattr/evalattr';
 import service_event from './service/event/event';
@@ -48,6 +49,7 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
   .filter('range', () => range)
   .filter('cdn', () => cdn)
   .filter('roompic', () => roompic)
+  .filter('ellipsis', () => ellipsis)
   .service('evalattr', service_evalattr)
   .service('evalattr', service_evalattr)
   .service('event', service_event)

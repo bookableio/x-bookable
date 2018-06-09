@@ -11,7 +11,7 @@
   @import "~bootstrap-theme-attrs/less/bootstrap/less/glyphicons";
 
   // Core CSS
-  @import "~bootstrap-theme-attrs/less/bootstrap/less/scaffolding";
+  //@import "~bootstrap-theme-attrs/less/bootstrap/less/scaffolding";
   @import "~bootstrap-theme-attrs/less/bootstrap/less/type";
   @import "~bootstrap-theme-attrs/less/bootstrap/less/code";
   @import "~bootstrap-theme-attrs/less/bootstrap/less/grid";
@@ -87,7 +87,7 @@
   //@import "~bootstrap-theme-attrs/less/flexbox";
   @import "~bootstrap-theme-attrs/less/util";
   //@import "~bootstrap-theme-attrs/less/tooltip";
-  @import "~bootstrap-theme-attrs/less/base";
+  //@import "~bootstrap-theme-attrs/less/base";
 
   .btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
     display: table;
@@ -103,10 +103,23 @@
     content: " ";
   }
 
-  :after, :before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+  *, :after, :before {
     box-sizing: border-box;
+  }
+
+  select.form-control {
+    outline: none;
+    box-shadow: none;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: @arrow-image;
+    background-position: 90% 50%;
+    background-position: right 5px center;
+    background-repeat: no-repeat;
+    background-size: 12px;
+    padding-right: @padding-base-horizontal + 10px;
   }
 
   @import "icon";

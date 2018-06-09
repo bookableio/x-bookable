@@ -55,8 +55,12 @@
   .thumbnail-desc {
     //display: none;
     text-align: justify;
-    font-size: 0.95em;
+    font-size: 0.9em;
     padding: 8px;
+
+    p, small, em {
+      margin: 0;
+    }
 
     small {
       font-size: 95%;
@@ -75,4 +79,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 23px;
+}
+
+a, a:hover, a:focus {
+  outline: none;
+  text-decoration: none;
 }

@@ -28,20 +28,18 @@
     </div>
 
     <div class="row" ng-switch-when="thumbnail">
-      <div class="col-xs-{{colxs || colsm || colmd || col || 4}} col-sm-{{colsm || colmd || col || 4}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 4}}" ng-repeat="roomtype in accommodation.roomtypes" ng-style="{
-        'clear': $index % 4 === 0 && 'both'
-      }">
+      <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 6}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 3}}" ng-repeat="roomtype in accommodation.roomtypes">
         <div class="thumbnail">
           <div class="thumbnail-image pointer" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}" ng-click="select(roomtype)"></div>
           <div class="caption">
             <a href class="thumbnail-title" ng-click="select(roomtype)">{{roomtype.name}}</a>
             <div class="thumbnail-desc">
-              <small class="oneline">1박 <b>{{roomtype.price | currency:accommodation.currency}}</b> 부터</small>
-              <small class="oneline">
+              <p class="oneline">1박 <b>{{roomtype.price | currency:accommodation.currency}}</b> 부터</p>
+              <p class="oneline">
                 {{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인
                 <span ng-if="roomtype.info.size"> / {{roomtype.info.size}}</span>
                 <span ng-if="roomtype.info.structure"> / {{roomtype.info.structure}}</span>
-              </small>
+              </p>
             </div>
             <p ng-if="buttonLabel"><a href ng-click="select(roomtype)" class="btn btn-primary" role="button">{{buttonLabel}}</a></p>
           </div>
@@ -68,7 +66,7 @@
     </div>
 
     <div class="row" ng-switch-default>
-      <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 12}} col-md-{{colmd || col || 12}} col-lg-{{collg || col || 12}}" ng-repeat="roomtype in accommodation.roomtypes">
+      <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 12}} col-md-{{colmd || col || 6}} col-lg-{{collg || col || 6}}" ng-repeat="roomtype in accommodation.roomtypes">
         <div class="media" ng-class="{
           'media-border': border
         }">

@@ -47,7 +47,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
         summary.price = 0;
 
         const rooms = [];
-        scope.selected.forEach((roomrates) => {
+        scope.selected.sort((a, b) => a.date - b.date).forEach((roomrates) => {
           let extracharge = 0;
           const person = summary.adults + summary.children;
           if( roomrates.capacity < person ) {
@@ -67,6 +67,11 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
           summary.extracharge += extracharge * summary.qty;
           summary.price += ((roomrates.price + extracharge) * summary.qty);
 
+          roomrates.qty = summary.qty;
+          roomrates.adults = summary.adults;
+          roomrates.children = summary.children;
+          roomrates.calcprice = ((roomrates.price + extracharge) * summary.qty);
+
           rooms.push({
             id: roomrates.roomtypeid,
             date: roomrates.date,
@@ -78,8 +83,6 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
 
         if( summary.price <= 0 ) summary.valid = false;
         if( summary.adults <= 0 ) summary.valid = false;
-
-        if( !summary.valid ) return;
 
         scope.summary = summary;
         scope.rooms = rooms;
@@ -237,6 +240,11 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
 
       attrs.$observe('useCart', () => {
         scope.useCart = 'useCart' in attrs && evalattr(attrs.useCart) !== 'false';
+        safeApply(scope);
+      });
+
+      attrs.$observe('showDetail', () => {
+        scope.showDetail = 'showDetail' in attrs && attrs.showDetail !== 'false';
         safeApply(scope);
       });
 

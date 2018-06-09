@@ -26,7 +26,7 @@
         </div>
         <div class="col-xs-6 col-sm-4 text-right">
           <div class="btn-group" role="group">
-            <a href class="btn btn-header btn-default" ng-click="clear()">달력으로</a>
+            <a href class="btn btn-header btn-default" ng-click="clear()"><i class="icon-calendar"></i> 달력보기</a>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@
                 <a href class="btn btn-primary btn-block" ng-click="find()" ng-disabled="!form.checkin">객실검색</a>
               </div>
               <div class="form-group visible-xs">
-                <a href class="btn btn-primary btn-block btn-xl" ng-click="find()" ng-disabled="!form.checkin">객실검색</a>
+                <a href class="btn btn-primary btn-block btn-lg" ng-click="find()" ng-disabled="!form.checkin">객실검색</a>
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@
       </div>
 
       <div class="mv15">
-        <bookable-accommodation-finder checkin="{{checkin}}" checkout="{{checkout}}" days="{{days}}" roomtypeid="{{roomtypeid}}" ng-update="setrooms($rooms)"></bookable-accommodation-finder>
+        <bookable-accommodation-finder checkin="{{checkin}}" checkout="{{checkout}}" days="{{days}}" guests="{{guests}}" roomtypeid="{{roomtypeid}}" ng-update="setrooms($rooms)"></bookable-accommodation-finder>
       </div>
 
       <div class="mv15">

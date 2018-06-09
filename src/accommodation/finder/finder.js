@@ -114,7 +114,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', funct
             scope.bookable = bookable;
 
             bookable.rates.forEach((roomrates) => {
-              roomrates.adults = +roomrates.capacity || 1;
+              roomrates.adults = +scope.guests || +roomrates.capacity || 1;
               roomrates.children = 0;
               roomrates.qty = 1;
             });
