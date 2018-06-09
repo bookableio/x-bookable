@@ -3,16 +3,14 @@ import bookable from 'bookable';
 
 export default ['safeApply', 'event', '$timeout', 'evalattr', function(safeApply, event, $timeout, evalattr) {
   return {
-    require: '?ngModel',
     template: require('./inquiry.html'),
     replace: true,
     scope: {
-      ngModel: '=',
       mobile: '@',
       cn: '@'
     },
     restrict: 'E',
-    link(scope, element, attrs, ngModel) {
+    link(scope, element, attrs) {
       function error(error) {
         console.error(error);
         scope.error = error;

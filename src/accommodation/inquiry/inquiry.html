@@ -43,7 +43,7 @@
         "{{reservation.created | moment:'YYYY-MM-DD (ddd)'}} {{reservation.name}}님이 예약하신 내역입니다."
       </div>
 
-      <hr class="dashed mt0">
+      <hr class="dashed">
 
       <form class="form-horizontal p15">
         <div class="form-group">
@@ -81,8 +81,6 @@
           </div>
         </div>
 
-        <hr class="dashed">
-
         <div class="form-group">
           <label class="col-sm-3 control-label">객실</label>
 
@@ -97,7 +95,7 @@
               </thead>
               <tbody>
                 <tr ng-if="!reservation.rooms.length">
-                  <td class="text-muted text-center" colspan="7">객실을 추가해주세요.</td>
+                  <td class="text-muted text-center" colspan="7">예약된 객실이 없습니다.</td>
                 </tr>
                 <tr ng-repeat="room in reservation.rooms">
                   <td class="text-center v-middle">{{room.date | moment:'MM.DD (ddd)'}}</td>
@@ -112,7 +110,63 @@
           </div>
           <div class="col-sm-offset-3 col-sm-9 pt5 text-right">
             <p class="form-control-static p5">
-              <span class="bold">총 요금 : </span>
+              <span class="bold">총 객실 요금 : </span>
+              <span class="text-primary bold">{{reservation.bill.roomcharge | currency:accommodation.currency}}</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="reservation.extra.length">
+          <label class="col-sm-3 control-label">부가서비스</label>
+
+          <div class="col-sm-9 pt5">
+            <table class="table table-striped table-bordered m0">
+              <thead>
+                <tr>
+                  <th class="text-center">부가서비스</th>
+                  <th class="text-center" width="25%">수량</th>
+                  <th class="text-center" width="25%">요금</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="extra in reservation.extra">
+                  <td class="text-center v-middle">{{extra.name}}</td>
+                  <td class="text-center v-middle">{{extra.qty}}</td>
+                  <td class="text-center v-middle">
+                    {{extra.price | currency:accommodation.currency}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-offset-3 col-sm-9 pt5 text-right">
+            <p class="form-control-static p5">
+              <span class="bold">총 부가서비스 요금 : </span>
+              <span class="text-primary bold">{{reservation.bill.extracharge | currency:accommodation.currency}}</span>
+            </p>
+          </div>
+        </div>
+
+        <hr class="dashed">
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">합계</label>
+
+          <div class="col-sm-9 pt5 text-right">
+            <p class="form-control-static p5">
+              <span class="bold">총 계산된 요금 : </span>
+              <span class="text-primary bold">{{reservation.bill.calculated | currency:accommodation.currency}}</span>
+            </p>
+          </div>
+          <div class="col-sm-offset-3 col-sm-9 pt5 text-right" ng-if="reservation.bill.customdiscount">
+            <p class="form-control-static p5">
+              <span class="bold">할인금액 : </span>
+              <span class="text-primary bold">{{reservation.bill.customdiscount | currency:accommodation.currency}}</span>
+            </p>
+          </div>
+          <div class="col-sm-offset-3 col-sm-9 pt5 text-right">
+            <p class="form-control-static p5">
+              <span class="bold">결제금액 : </span>
               <span class="text-primary bold">{{reservation.price | currency:accommodation.currency}}</span>
             </p>
           </div>

@@ -1,13 +1,13 @@
 import bookable from 'bookable';
 
-export default ['$timeout', function($timeout) {
+export default ['$timeout', 'threshold', function($timeout, threshold) {
   return {
     restrict: 'A',
     scope: {},
     link(scope, element, attrs) {
       const root = scope.$root;
 
-      const refresh = () => {
+      const refresh = threshold(() => {
         const bbsid = attrs.bookableBbsIf || attrs.bBbsIf;
         if( !root.business || !bbsid ) return;
 
@@ -15,9 +15,9 @@ export default ['$timeout', function($timeout) {
           offset: 0,
           limit: 1
         }).localcache(3000).exec((err, list) => {
-          !err && list.total > 0 && element.css('display', null);
+          !err && list.total > 0 && element.css('display', '');
         });
-      };
+      }, 10);
 
       root.$on('bookableloaded', () => {
         $timeout(refresh, 0);

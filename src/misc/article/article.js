@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import bookable from 'bookable';
 
-export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply, $timeout, event, evalattr) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', 'threshold', function(safeApply, $timeout, event, evalattr, threshold) {
   return {
     template: require('./article.html'),
     replace: true,
@@ -15,7 +15,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
         safeApply(scope);
       };
 
-      const refresh = () => {
+      const refresh = threshold(() => {
         const groupid = evalattr(attrs.groupid);
         const articleid = evalattr(attrs.articleid);
 
@@ -53,7 +53,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
             });
           });
         });
-      };
+      }, 100);
 
       attrs.$observe('buttonLabel', () => {
         scope.buttonLabel = evalattr(attrs.buttonLabel);

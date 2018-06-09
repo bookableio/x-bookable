@@ -5,7 +5,7 @@ import termsmodal from '../../misc/terms-modal/terms-modal';
 
 document.createElement('ng-slick');
 
-export default ['safeApply', 'event', '$timeout', function(safeApply, event, $timeout) {
+export default ['safeApply', 'event', '$timeout', 'threshold', function(safeApply, event, $timeout, threshold) {
   return {
     require: '?ngModel',
     template: require('./form.html'),
@@ -37,7 +37,7 @@ export default ['safeApply', 'event', '$timeout', function(safeApply, event, $ti
         });
       };
 
-      const validate = () => {
+      const validate = threshold(() => {
         if( !scope.rooms ) return;
 
         delete scope.validated;
@@ -53,7 +53,7 @@ export default ['safeApply', 'event', '$timeout', function(safeApply, event, $ti
           scope.validated = validated;
           safeApply(scope);
         });
-      };
+      }, 100);
 
       const selectpaymentmethod = (paymentmethod) => {
         scope.selectedpaymentmethod = paymentmethod;

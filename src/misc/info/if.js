@@ -8,7 +8,7 @@ export default ['$timeout', function($timeout) {
       const refresh = () => {
         const key = attrs.bookableIf || attrs.bIf;
         const value = root.business && key && root.$eval(key);
-        element.css('display', value ? null : 'none');
+        element.css('display', value ? '' : 'none');
       };
 
       root.$on('bookableloaded', () => {

@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import bookable from 'bookable';
 
-export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply, $timeout, event, evalattr) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', 'threshold', function(safeApply, $timeout, event, evalattr, threshold) {
   return {
     require: '?ngModel',
     template: require('./bbs.html'),
@@ -18,7 +18,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
         safeApply(scope);
       };
 
-      const refresh = (offset) => {
+      const refresh = threshold((offset) => {
         const limit = +scope.pagesize || 15;
         const groupid = scope.groupid;
 
@@ -64,7 +64,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
             });
           });
         });
-      };
+      }, 100);
 
       const select = (article) => {
         if( scope.selected && scope.selected.id === article.id ) scope.selected = null;
