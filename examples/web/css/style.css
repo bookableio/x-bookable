@@ -18,6 +18,20 @@ body.bookable-loaded {
   opacity: 1;
 }
 
+input:focus {
+  box-shadow: none;
+}
+
+a, a:hover, a:focus, a:active {
+  color: #5c5c5c;
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover, a:focus {
+  color: #999;
+}
+
 /* header */
 .header {
   margin-bottom: 30px;
