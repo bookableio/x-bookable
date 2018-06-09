@@ -1,7 +1,7 @@
 import xmodal from 'x-modal';
 import bookable from 'bookable';
 import paymentfn from '../paymentfn.js';
-import termsmodal from '../../common/terms-modal/terms-modal';
+import termsmodal from '../../misc/terms-modal/terms-modal';
 
 document.createElement('ng-slick');
 

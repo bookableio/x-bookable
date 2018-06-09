@@ -1,30 +1,28 @@
 <div class="x-bookable" ng-show="accommodation.extras.length">
   <div class="x-bookable-extra">
-    <div class="bt">
-      <div class="media pv25 m0 bb" ng-repeat="extra in accommodation.extras" ng-class="{
-          'bg-lighter': isselected(extra.id)
-        }">
-        <div class="media-left media-middle hidden-xs" ng-if="!mini">
-          <div class="w90 ratio-1by1 img-circle" ng-background="{{extra.thumbnail | cdn}}"></div>
-        </div>
+      <div class="media media-border" ng-repeat="extra in accommodation.extras" ng-class="{
+        'bg-lighter': isselected(extra.id)
+      }">
+      <div class="media-left media-middle hidden-xs" ng-if="!mini">
+        <div class="media-image" ng-background="{{extra.thumbnail | cdn}}"></div>
+      </div>
 
-        <div class="media-body media-middle" ng-if="!mini">
-          <h4 class="media-heading">
-            {{extra.name}}<small class="hidden-xs" ng-if="!mini">{{extra.name_en}}</small>
-          </h4>
-          <div class="media-desc fs13">
-            <div ng-bind-html="extra.desc | tobr | unsafe"></div>
-            <small>최소 {{extra.minimum || '-'}}{{extra.unit}} / 최대 {{extra.maximum || '-'}}{{extra.unit}}</small>
-          </div>
+      <div class="media-body media-middle" ng-if="!mini">
+        <h4 class="media-heading">
+          {{extra.name}}<small class="hidden-xs" ng-if="!mini">{{extra.name_en}}</small>
+        </h4>
+        <div class="media-desc">
+          <div ng-bind-html="extra.desc | tobr | unsafe"></div>
+          <small>최소 {{extra.minimum || '-'}}{{extra.unit}} / 최대 {{extra.maximum || '-'}}{{extra.unit}}</small>
         </div>
+      </div>
 
-        <div class="media-body media-middle" ng-if="mini">
-          {{extra.name}}
-        </div>
+      <div class="media-body media-middle" ng-if="mini">
+        {{extra.name}}
+      </div>
 
-        <div class="media-right media-middle text-right" style="min-width:150px;">
-          <ng-incrementer min="0" max="{{extra.maximum}}" suffix="{{extra.unit}}" ng-model="extra.qty" ng-change="updateoptions()"></ng-incrementer>
-        </div>
+      <div class="media-right media-middle text-right" style="min-width:150px;">
+        <ng-incrementer min="0" max="{{extra.maximum}}" suffix="{{extra.unit}}" ng-model="extra.qty" ng-change="updateoptions()"></ng-incrementer>
       </div>
     </div>
 

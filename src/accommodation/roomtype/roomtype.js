@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default ['safeApply', '$timeout', 'event', 'staged', 'evalattr', function(safeApply, $timeout, event, staged, evalattr) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply, $timeout, event, evalattr) {
   return {
     template: require('./roomtype.html'),
     replace: true,

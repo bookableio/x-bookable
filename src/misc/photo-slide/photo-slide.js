@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', 'threshold', function(safeApply, $timeout, slideshow, staged, evalattr, threshold) {
+export default ['safeApply', '$timeout', 'slideshow', 'evalattr', 'threshold', function(safeApply, $timeout, slideshow, evalattr, threshold) {
   return {
     require: '?ngModel',
     template: require('./photo-slide.html'),

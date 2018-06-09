@@ -9,6 +9,7 @@ export default ['$timeout', function($timeout) {
 
       const refresh = () => {
         const bbsid = attrs.bookableBbsIf || attrs.bBbsIf;
+        if( !scope.business || !bbsid ) return;
 
         bookable.get(`/app/bbs/${scope.business.serviceid}/${bbsid}/data`, {
           offset: 0,

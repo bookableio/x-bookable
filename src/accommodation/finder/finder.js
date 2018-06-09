@@ -1,7 +1,7 @@
 import moment from 'moment';
 import bookable from 'bookable';
 
-export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', 'slideshow', function(safeApply, $timeout, event, evalattr, staged, slideshow) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', function(safeApply, $timeout, event, evalattr, slideshow) {
   return {
     template: require('./finder.html'),
     replace: true,
@@ -84,7 +84,6 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', 'slidesh
       };
 
       const refresh = () => {
-        if( !staged(element) ) return;
         if( !scope.checkin ) return;
 
         const checkin = moment(scope.checkin);

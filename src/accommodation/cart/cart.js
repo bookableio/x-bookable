@@ -2,7 +2,7 @@ import xmodal from 'x-modal';
 import bookable from 'bookable';
 import cart from '../cart.js';
 
-export default ['safeApply', '$timeout', 'event', 'staged', 'evalattr', function(safeApply, $timeout, event, staged, evalattr) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply, $timeout, event, evalattr) {
   return {
     require: '?ngModel',
     template: require('./cart.html'),
@@ -55,8 +55,6 @@ export default ['safeApply', '$timeout', 'event', 'staged', 'evalattr', function
       };
 
       const validation = () => {
-        if( !staged(element) ) return;
-
         const accommodation = scope.accommodation;
         const reservation = scope.reservation;
 
@@ -71,8 +69,6 @@ export default ['safeApply', '$timeout', 'event', 'staged', 'evalattr', function
       };
 
       const refresh = () => {
-        if( !staged(element) ) return;
-
         bookable.info({
           id: attrs.aid,
           serviceid: attrs.serviceid,

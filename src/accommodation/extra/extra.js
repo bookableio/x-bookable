@@ -1,6 +1,6 @@
 import bookable from 'bookable';
 
-export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function(safeApply, $timeout, event, evalattr, staged) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply, $timeout, event, evalattr) {
   return {
     template: require('./extra.html'),
     replace: true,
@@ -43,8 +43,6 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
       };
 
       const refresh = () => {
-        if( !staged(element) ) return;
-
         delete scope.ready;
 
         bookable.info({

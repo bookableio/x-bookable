@@ -1,60 +1,92 @@
 <div class="x-bookable">
-  <div class="x-accommodation x-roomtypes" ng-switch on="listingStyle">
-    <div class="row nogap" ng-switch-when="rates">
+  <div class="x-bookable-roomtypes" ng-switch on="listingtype">
+    <div class="row" ng-switch-when="rates">
       <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 12}} col-md-{{colmd || col || 12}} col-lg-{{collg || col || 12}}" ng-repeat="roomtype in accommodation.roomtypes">
-        <div class="media mh10 pv25 pointer">
-          <div class="media-left media-middle" ng-click="select(roomtype)">
-            <div class="w90 ratio-1by1 img-circle" ng-background="{{roomtype.photo[0].thumbnails['128'].url | cdn}}"></div>
+        <div class="media" ng-class="{
+          'media-border': border
+        }">
+          <div class="media-left media-middle">
+            <div class="media-image pointer" ng-background="{{roomtype.photo[0].thumbnails['128'].url | cdn}}" ng-click="select(roomtype)"></div>
           </div>
-          <div class="media-body media-middle" ng-click="select(roomtype)">
-            <h4 class="media-heading">{{roomtype.name}} <small>{{roomtype.name_en}}</small></h4>
-            <div class="media-desc">
-              <div class="mv5">
-                <div ng-bind-html="roomtype.structure | unsafe"></div>
+          <div class="media-body media-middle">
+            <a href ng-click="select(roomtype)">
+              <h4 class="media-heading">{{roomtype.name}} <small>{{roomtype.name_en}}</small></h4>
+              <div class="media-desc">
+                <div class="mv5">
+                  <div ng-bind-html="roomtype.structure | unsafe"></div>
+                </div>
+                기본 {{roomtype.capacity || '-'}}인 / 최대 {{roomtype.maximum || '-'}}인,
+                1박 {{roomtype.price | currency:accommodation.currency}} ~
               </div>
-              기본 {{roomtype.capacity || '-'}}인 / 최대 {{roomtype.maximum || '-'}}인,
-              1박 {{roomtype.price | currency:accommodation.currency}} ~
-            </div>
+            </a>
           </div>
-          <div class="media-right media-middle hidden-xs">
-            <a href ng-click="select(roomtype)" class="btn btn-primary">{{buttonLabel || '객실보기'}}</a>
+          <div class="media-right media-middle hidden-xs" ng-if="buttonLabel">
+            <a href ng-click="select(roomtype)" class="btn btn-primary">{{buttonLabel}}</a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row nogap" ng-switch-when="thumbnail">
+    <div class="row" ng-switch-when="thumbnail">
+      <div class="col-xs-{{colxs || colsm || colmd || col || 4}} col-sm-{{colsm || colmd || col || 4}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 4}}" ng-repeat="roomtype in accommodation.roomtypes" ng-style="{
+        'clear': $index % 4 === 0 && 'both'
+      }">
+        <div class="thumbnail">
+          <div class="thumbnail-image pointer" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}" ng-click="select(roomtype)"></div>
+          <div class="caption">
+            <a href class="thumbnail-title" ng-click="select(roomtype)">{{roomtype.name}}</a>
+            <div class="thumbnail-desc">
+              <small class="oneline">1박 <b>{{roomtype.price | currency:accommodation.currency}}</b> 부터</small>
+              <small class="oneline">
+                {{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인
+                <span ng-if="roomtype.info.size"> / {{roomtype.info.size}}</span>
+                <span ng-if="roomtype.info.structure"> / {{roomtype.info.structure}}</span>
+              </small>
+            </div>
+            <p ng-if="buttonLabel"><a href ng-click="select(roomtype)" class="btn btn-primary" role="button">{{buttonLabel}}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row nogap" ng-switch-when="picture">
       <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 6}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 4}}" ng-repeat="roomtype in accommodation.roomtypes">
         <div class="picture picture-flat picture-anim pointer" ng-click="select(roomtype)">
           <div class="image ratio-3by2" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}"></div>
           <div class="picture-title" href route>
-            {{roomtype.name}} <small>{{roomtype.name_en}}</small><br>
-            <small>
-              {{roomtype.structure}} <br>
-              {{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인,
-              1박 {{roomtype.price | currency:accommodation.currency}} ~
+            <div class="nowrap">{{roomtype.name}} <small>{{roomtype.name_en}}</small></div>
+
+            <small class="oneline">1박 <b>{{roomtype.price | currency:accommodation.currency}}</b> 부터</small>
+            <small class="oneline">
+              {{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인
+              <span ng-if="roomtype.info.size"> / {{roomtype.info.size}}</span>
+              <span ng-if="roomtype.info.structure"> / {{roomtype.info.structure}}</span>
             </small>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row nogap" ng-switch-default>
+    <div class="row" ng-switch-default>
       <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 12}} col-md-{{colmd || col || 12}} col-lg-{{collg || col || 12}}" ng-repeat="roomtype in accommodation.roomtypes">
-        <div class="media mh10 pv25 pointer">
-          <div class="media-left media-middle" ng-click="select(roomtype)">
-            <div class="w90 ratio-1by1 img-circle" ng-background="{{roomtype.photo[0].thumbnails['128'].url | cdn}}"></div>
+        <div class="media" ng-class="{
+          'media-border': border
+        }">
+          <div class="media-left media-middle">
+            <div class="media-image pointer" ng-background="{{roomtype.photo[0].thumbnails['128'].url | cdn}}" ng-click="select(roomtype)"></div>
           </div>
-          <div class="media-body media-middle" ng-click="select(roomtype)">
-            <h4 class="media-heading">{{roomtype.name}} <small>{{roomtype.name_en}}</small></h4>
-            <div class="media-desc">
-              <div class="mv5">
-                <div ng-bind-html="roomtype.desc | tobr | unsafe"></div>
+          <div class="media-body media-middle">
+            <a href ng-click="select(roomtype)">
+              <h4 class="media-heading">{{roomtype.name}} <small>{{roomtype.name_en}}</small></h4>
+              <div class="media-desc">
+                <div class="mv5">
+                  <div ng-bind-html="roomtype.desc | tobr | unsafe"></div>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
-          <div class="media-right media-middle hidden-xs">
-            <a href ng-click="select(roomtype)" class="btn btn-primary">{{buttonLabel || '객실보기'}}</a>
+          <div class="media-right media-middle hidden-xs" ng-if="buttonLabel">
+            <a href ng-click="select(roomtype)" class="btn btn-primary">{{buttonLabel}}</a>
           </div>
         </div>
       </div>

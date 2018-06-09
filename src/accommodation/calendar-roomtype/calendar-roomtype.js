@@ -1,7 +1,7 @@
 import bookable from 'bookable';
 import moment from 'moment';
 
-export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function(safeApply, $timeout, event, evalattr, staged) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply, $timeout, event, evalattr) {
   return {
     require: '?ngModel',
     replace: true,

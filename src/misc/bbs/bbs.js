@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import bookable from 'bookable';
 
-export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function(safeApply, $timeout, event, evalattr, staged) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply, $timeout, event, evalattr) {
   return {
     require: '?ngModel',
     template: require('./bbs.html'),
@@ -19,8 +19,6 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
       };
 
       const refresh = (offset) => {
-        if( !staged(element) ) return;
-
         const limit = +scope.pagesize || 15;
         const groupid = scope.groupid;
 
@@ -129,6 +127,16 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
 
       attrs.$observe('articleid', () => {
         scope.articleid = evalattr(attrs.articleid);
+        safeApply(scope);
+      });
+
+      attrs.$observe('buttonLabel', () => {
+        scope.buttonLabel = evalattr(attrs.buttonLabel);
+        safeApply(scope);
+      });
+
+      attrs.$observe('border', () => {
+        scope.border = 'border' in attrs && attrs.border !== 'false';
         safeApply(scope);
       });
 

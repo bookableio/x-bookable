@@ -1,4 +1,4 @@
-export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', function(safeApply, $timeout, slideshow, staged, evalattr) {
+export default ['safeApply', '$timeout', 'slideshow', 'evalattr', function(safeApply, $timeout, slideshow, evalattr) {
   return {
     require: '?ngModel',
     template: require('./thumbnails.html'),
@@ -20,7 +20,7 @@ export default ['safeApply', '$timeout', 'slideshow', 'staged', 'evalattr', func
         const slidesetid = evalattr(attrs.slidesetid);
         const slideid = evalattr(attrs.slideid);
 
-        if( !slidesetid || !staged(element) ) return;
+        if( !slidesetid ) return;
 
         scope.$root.ensurebusiness({
           id: attrs.aid,

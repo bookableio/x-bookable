@@ -1,0 +1,146 @@
+.x-accommodation.x-calendar {
+  max-width: 380px;
+  margin: 0 auto;
+
+  .x-calendar-header {
+    margin-bottom: 20px;
+
+    .x-calendar-title {
+      font-size: 18px;
+      line-height: 32px;
+      margin: 0;
+      vertical-align: middle;
+    }
+  }
+
+  &.x-calendar-disabled {
+    opacity: .5;
+  }
+
+  .x-calendar-body {
+    table {
+      width: 100%;
+      table-layout: fixed;
+      border-spacing: 0;
+      border-collapse: collapse;
+
+      th, td {
+        position: relative;
+        text-align: center;
+        vertical-align: middle;
+        user-select: none;
+      }
+
+      th {
+        margin: 0;
+        padding: 3px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+      }
+
+      td {
+        vertical-align: top;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+        transition: background-color 0.2s;
+        cursor: hand;
+        cursor: pointer;
+        padding: 2px;
+      }
+
+      .x-calendar-daywrap {
+        position: relative;
+        padding-top: 100%;
+        border-radius: 50%;
+
+        .x-calendar-daybody {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          text-align: center;
+          margin-top: -10px;
+
+          span.x-calendar-day {
+            display: inline-block;
+            max-width: 99%;
+            height: 20px;
+          }
+
+          span.x-calendar-desc {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 100;
+            color: darken(@muted, 30%);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            height: 20px;
+          }
+        }
+      }
+
+      td.x-calendar-selected .x-calendar-daywrap {
+        background-color: @brand-default;
+
+        span.x-calendar-day, span.x-calendar-desc {
+          color: white !important;
+        }
+      }
+
+      td.x-calendar-satday {
+        span.x-calendar-day {
+          color: @brand-info;
+        }
+      }
+
+      td.x-calendar-sunday, td.x-calendar-holiday {
+        span.x-calendar-day {
+          color: @brand-danger;
+        }
+      }
+
+      td.x-calendar-today {
+        .x-calendar-daywrap {
+          border: 1px dashed @brand-default;
+        }
+
+        span.x-calendar-day {
+          color: @brand-success;
+        }
+      }
+
+      td.x-calendar-prevmonth, td.x-calendar-nextmonth {
+        span.x-calendar-day {
+          color: darken(@muted, 20%);
+        }
+      }
+
+      td.x-calendar-pastdate, td.x-calendar-mutedday {
+        cursor: not-allowed;
+
+        span.x-calendar-day {
+          color: @muted;
+        }
+      }
+
+      td.x-calendar-prevmonth, td.x-calendar-nextmonth, td.x-calendar-pastdate {
+        &.x-calendar-satday {
+          span.x-calendar-day {
+            color: lighten(@brand-info, 20%);
+          }
+        }
+
+        &.x-calendar-sunday {
+          span.x-calendar-day {
+            color: lighten(@brand-danger, 20%);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.x-bookable-bbs {
+  table.table {
+    border-bottom: 1px solid @border-color;
+
+    th, td {
+      text-align: center;
+      vertical-align: middle;
+      height: 45px;
+    }
+
+    th {
+      font-weight: bold;
+      border-bottom: 1px solid darken(@border-color, 25%);
+    }
+
+    .x-bookable-bbs-title, .x-bookable-bbs-desc {
+      text-align: left;
+    }
+
+    .x-bookable-bbs-desc {
+      padding: 20px;
+    }
+
+    .x-bookable-bbs-arrow {
+      transition: transform .15s ease-out;
+    }
+
+    .x-bookable-bbs-arrow-down {
+      transform: rotate(90deg);
+    }
+
+    @media(max-width: @screen-sm) {
+      thead, th, td {
+        display: none;
+      }
+      .x-bookable-bbs-title {
+        display: table-cell;
+      }
+    }
+
+  }
+}

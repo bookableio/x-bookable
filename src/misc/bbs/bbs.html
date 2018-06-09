@@ -35,7 +35,7 @@
             <th width="80">조회수</th>
           </thead>
           <tbody>
-            <tr ng-repeat="article in list.rows" class="pointer">
+            <tr ng-repeat="article in list.rows">
               <td>{{articleno($index)}}</td>
               <td class="x-bookable-bbs-title">
                 <a href ng-click="select(article)">{{article.title}}</a>
@@ -59,14 +59,12 @@
           <div class="col-xs-{{colxs || colsm || colmd || col || 4}} col-sm-{{colsm || colmd || col || 4}} col-md-{{colmd || col || 4}} col-lg-{{collg || col || 4}}" ng-repeat="article in list.rows" ng-style="{
             'clear': $index % 4 === 0 && 'both'
           }">
-            <div class="media media-vertical pointer mb15" ng-click="select(article)">
-              <div class="mb10">
-                <div style="width:100%;height:250px;" ng-background="{{article.thumbnail | cdn}}"></div>
-              </div>
-              <div class="media-body media-middle ph5">
-                <div class="media-heading text-center">
-                  {{article.title}}
-                </div>
+            <div class="thumbnail">
+              <div class="thumbnail-image pointer" ng-background="{{article.thumbnail | cdn}}" ng-click="select(article)"></div>
+              <div class="caption">
+                <a href class="thumbnail-title" ng-click="select(article)">{{article.title}}</a>
+                <p class="thumbnail-desc">{{article.desc}}</pdiv>
+                <p ng-if="buttonLabel"><a href ng-click="select(article)" class="btn btn-primary" role="button">{{buttonLabel}}</a></p>
               </div>
             </div>
           </div>
@@ -82,21 +80,28 @@
       <div class="x-bookable-bbs-default" ng-switch-default>
         <div class="row" ng-show="list.rows.length">
           <div class="col-xs-{{colxs || colsm || colmd || col || 12}} col-sm-{{colsm || colmd || col || 12}} col-md-{{colmd || col || 12}} col-lg-{{collg || col || 12}}" ng-repeat="article in list.rows">
-            <div class="media pv25 mh10 pointer" ng-click="select(article)">
+            <div class="media" ng-class="{
+              'media-border': border
+            }">
               <div class="media-left media-middle">
-                <img class="w90" ng-src="{{article.thumbnail | cdn}}">
+                <div class="media-image pointer" ng-background="{{article.thumbnail | cdn}}" ng-click="select(article)"></div>
               </div>
               <div class="media-body media-middle">
-                <div class="cols">
-                  <div class="col">
-                    <h4 class="media-heading">{{article.title}}</h4>
+                <a href ng-click="select(article)">
+                  <div class="cols">
+                    <div class="col">
+                      <h4 class="media-heading">{{article.title}}</h4>
+                    </div>
+                    <div class="col text-right text-light" ng-if="article.startdate || article.enddate">
+                      {{article.startdate | date:'yyyy.MM.dd'}} ~ {{article.enddate | date:'yyyy.MM.dd'}}
+                    </div>
                   </div>
-                  <div class="col text-right text-light" ng-if="article.startdate || article.enddate">
-                    {{article.startdate | date:'yyyy.MM.dd'}} ~ {{article.enddate | date:'yyyy.MM.dd'}}
-                  </div>
-                </div>
-                <div class="media-desc" ng-bind-html="article.desc | unsafe"></div>
-                <div class="media-badge media-badge-lg hidden"><i class="icon-tag"></i></div>
+                  <div class="media-desc" ng-bind-html="article.desc | unsafe"></div>
+                  <div class="media-badge media-badge-lg hidden"><i class="icon-tag"></i></div>
+                </a>
+              </div>
+              <div class="media-right media-middle hidden-xs" ng-if="buttonLabel">
+                <a href ng-click="select(article)" class="btn btn-primary">{{buttonLabel}}</a>
               </div>
             </div>
           </div>

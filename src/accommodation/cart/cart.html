@@ -1,21 +1,21 @@
 <div class="x-bookable">
-  <div class="x-accommodation x-cart">
+  <div class="x-bookable-cart x-accommodation">
     <div class="alert alert-info text-center" role="alert" ng-if="!accommodation">
       <span>데이터를 불러오는 중입니다.</span>
     </div>
-    
+
     <div class="alert alert-warning text-center" role="alert" ng-if="accommodation && !reservation.rooms.length">
       <span>아직 추가된 객실이 없습니다.</span>
     </div>
-    
+
     <div class="mb15 p15" ng-if="accommodation && reservation.rooms.length">
-      <div class="media pv15 bt" ng-repeat="roomtype in reservation.roomtypes" ng-if="roomtype.rooms.length">
+      <div class="media" ng-repeat="roomtype in reservation.roomtypes" ng-if="roomtype.rooms.length">
         <div class="media-left media-middle">
           <a href="/rooms/{{roomtype.id}}" route><img class="w90 img-circle" ng-src="{{roomtype.id | roompic:accommodation.roomtypes}}"></a>
         </div>
         <div class="media-body media-middle">
           <h4 class="media-heading mb15"><a href="/rooms/{{room.id}}" route>{{roomtype.name}}<small>{{roomtype.name_en}}</small></a></h4>
-          
+
           <div class="row nogap mb0 pv10 bb border-dotted" ng-repeat="room in roomtype.rooms">
             <div class="col-xs-12 col-sm-6">
               <p class="form-control-static">
@@ -48,7 +48,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="row nogap mt15">
             <div class="col-xs-6">
               <p class="form-control-static text-light">
@@ -63,7 +63,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="bt pv15" ng-show="accommodation && reservation">
         <div class="row">
           <div class="col-xs-6">
@@ -71,7 +71,7 @@
           </div>
           <div class="col-xs-6 text-right">
             <span class="text-light mr15">결제예정금액 : </span> <b>{{reservation.price | currency:reservation.currency}}</b>
-            
+
             <small ng-if="reservation.bill.calculated - reservation.price">
               ({{reservation.bill.calculated - reservation.price | currency:accommodation.currency}} 할인)
             </small>

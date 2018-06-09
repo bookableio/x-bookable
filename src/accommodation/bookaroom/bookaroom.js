@@ -3,7 +3,7 @@ import xmodal from 'x-modal';
 import bookable from 'bookable';
 import cart from '../cart';
 
-export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function(safeApply, $timeout, event, evalattr, staged) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply, $timeout, event, evalattr) {
   return {
     require: '?ngModel',
     template: require('./bookaroom.html'),
@@ -31,8 +31,6 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'staged', function
       };
 
       const calc = () => {
-        if( !staged(element) ) return;
-
         const summary = scope.summary;
         summary.valid = true;
         summary.adults = +summary.adults || 0;

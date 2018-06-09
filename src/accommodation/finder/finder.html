@@ -1,115 +1,107 @@
 <div class="x-bookable">
-  <div class="alert alert-info text-center m0" role="alert" ng-if="!ready && initialmessage">
-    <span ng-bind-html="initialmessage | unsafe"></span>
-  </div>
-
-  <div class="x-accommodation x-finder" ng-if="ready">
-    <div class="alert alert-danger text-center" role="alert" ng-if="bookable && !bookable.rates.length">
-      죄송합니다. 해당 조건으로는 예약 가능한 객실이 없습니다.
+  <div class="x-bookable-finder x-bookable-accommodation">
+    <div class="alert alert-info" role="alert" ng-if="!ready && initialmessage">
+      <span ng-bind-html="initialmessage | unsafe"></span>
     </div>
 
-    <div class="alert alert-info text-center" role="alert" ng-if="bookable && bookable.rates.length">
-      <b>{{bookable.checkin | moment:'YYYY년 MM월 DD일 (dd)'}}</b> 부터 <b>{{bookable.days}}박</b>으로 예약 가능한 객실이 <b>{{bookable.rates.length}}</b>개 있습니다.
-    </div>
+    <div class="x-bookable-finder-body" ng-if="ready">
+      <div class="alert alert-danger" role="alert" ng-if="bookable && !bookable.rates.length">
+        죄송합니다. 해당 조건으로는 예약 가능한 객실이 없습니다.
+      </div>
 
-    <div class="bt" ng-if="bookable.rates">
-      <div class="media pv25 m0 bb" ng-repeat="roomrates in bookable.rates" ng-class="{
-          'bg-lighter': isselected(roomrates.id)
-        }">
-        <div class="media-left media-middle hidden-xs">
-          <a href ng-click="openslideshow(roomrates.id)">
-            <img class="w90 img-circle" ng-src="{{roomrates.id | roompic:accommodation.roomtypes}}">
-          </a>
-        </div>
+      <div class="alert alert-info" role="alert" ng-if="bookable && bookable.rates.length">
+        <b>{{bookable.checkin | moment:'YYYY년 MM월 DD일 (dd)'}}</b> 부터 <b>{{bookable.days}}박</b>으로 예약 가능한 객실이 <b>{{bookable.rates.length}}</b>개 있습니다.
+      </div>
 
-        <div class="media-body media-middle">
-          <h4 class="media-heading">
-            {{roomrates.name}}<small class="hidden-xs" ng-if="!mini">{{roomrates.name_en}}</small>
-          </h4>
-          <div class="media-desc fs13">
-            <div>
-              <b>{{roomrates.checkin | moment:'M월 D일(ddd)'}}</b> / <b>{{bookable.days}}</b>박 /
-              <span ng-if="!isselected(roomrates.id) || !roomrates.calcprice">
-                <b>{{roomrates.capacity || '-'}}</b>인 기준 <b>{{roomrates.price | currency:bookable.currency}}</b> ~
-              </span>
-              <span ng-if="isselected(roomrates.id) && roomrates.calcprice">
-                  <b>{{roomrates.qty}}</b>개 객실 / <b>{{roomrates.adults + roomrates.children}}</b>인 <b>{{roomrates.calcprice | currency:bookable.currency}}</b>
-              </span>
-            </div>
-            <small>{{roomrates.capacity || '-'}}인 객실 / 최대 {{roomrates.maximum || '-'}}인</small>
+      <div ng-if="bookable.rates">
+        <div class="media media-border" ng-repeat="roomrates in bookable.rates" ng-class="{
+            'bg-lighter': isselected(roomrates.id)
+          }">
+          <div class="media-left media-middle hidden-xs">
+            <div class="media-image pointer" ng-background="{{roomrates.id | roompic:accommodation.roomtypes}}" ng-click="openslideshow(roomrates.id)"></div>
           </div>
-        </div>
 
-        <div class="media-right media-middle text-right text-light hidden-xs hidden-sm" style="min-width:400px;" ng-show="isselected(roomrates.id)">
-          <div class="row gap3">
-            <div class="col-xs-4 col-sm-offset-3 col-sm-3 col-md-offset-3 col-md-3 pr5">
+          <div class="media-body media-middle">
+            <h4 class="media-heading">
+              {{roomrates.name}}<small class="hidden-xs" ng-if="!mini">{{roomrates.name_en}}</small>
+            </h4>
+            <div class="media-desc">
+              <div>
+                <b>{{roomrates.checkin | moment:'M월 D일(ddd)'}}</b> / <b>{{bookable.days}}</b>박 /
+                <span ng-if="!isselected(roomrates.id) || !roomrates.calcprice">
+                  <b>{{roomrates.capacity || '-'}}</b>인 기준 <b>{{roomrates.price | currency:bookable.currency}}</b> ~
+                </span>
+                <span ng-if="isselected(roomrates.id) && roomrates.calcprice">
+                    <b>{{roomrates.qty}}</b>개 객실 / <b>{{roomrates.adults + roomrates.children}}</b>인 <b>{{roomrates.calcprice | currency:bookable.currency}}</b>
+                </span>
+              </div>
+              <small>{{roomrates.capacity || '-'}}인 객실 / 최대 {{roomrates.maximum || '-'}}인</small>
+            </div>
+          </div>
+
+          <div class="media-right media-middle text-right text-light hidden-xs hidden-sm" style="min-width:400px;" ng-show="isselected(roomrates.id)">
+            <div class="row gap3">
+              <div class="col-xs-4 col-sm-offset-3 col-sm-3 col-md-offset-3 col-md-3 pr5">
+                <select class="form-control" ng-model="roomrates.qty" ng-change="updateoptions()">
+                  <option ng-repeat="n in [] | range:1:roomrates.vacancy" ng-value="{{n}}">{{n}}개 객실</option>
+                </select>
+              </div>
+              <div class="col-xs-4 col-sm-3 col-md-3 pr5">
+                <select class="form-control" ng-model="roomrates.adults" ng-change="updateoptions()">
+                  <option ng-repeat="n in [] | range:1:roomrates.maximum - roomrates.children" ng-value="{{n}}">성인 {{n}}명</option>
+                </select>
+              </div>
+              <div class="col-xs-4 col-sm-3 col-md-3">
+                <select class="form-control" ng-model="roomrates.children" ng-change="updateoptions()">
+                  <option ng-repeat="n in [] | range:0:roomrates.maximum - roomrates.adults" ng-value="{{n}}">아동 {{n}}명</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="media-right media-middle">
+            <div ng-show="isselected(roomrates.id)">
+              <a href class="btn btn-danger" ng-click="deselect(roomrates.id)"><i class="icon-x"></i> 선택취소</a>
+            </div>
+            <div ng-show="!isselected(roomrates.id)">
+              <a href class="btn btn-info" ng-click="select(roomrates.id)"><i class="icon-plus"></i> 선택하기</a>
+            </div>
+          </div>
+          <div class="media-badge media-badge-lg" ng-if="room.recommend">추천</div>
+
+          <!-- xs 인원선택 -->
+          <div class="row gap3 visible-xs mt15" ng-if="isselected(roomrates.id)">
+            <div class="col-xs-4">
               <select class="form-control" ng-model="roomrates.qty" ng-change="updateoptions()">
                 <option ng-repeat="n in [] | range:1:roomrates.vacancy" ng-value="{{n}}">{{n}}개 객실</option>
               </select>
             </div>
-            <div class="col-xs-4 col-sm-3 col-md-3 pr5">
+            <div class="col-xs-4">
               <select class="form-control" ng-model="roomrates.adults" ng-change="updateoptions()">
                 <option ng-repeat="n in [] | range:1:roomrates.maximum - roomrates.children" ng-value="{{n}}">성인 {{n}}명</option>
               </select>
             </div>
-            <div class="col-xs-4 col-sm-3 col-md-3">
+            <div class="col-xs-4">
               <select class="form-control" ng-model="roomrates.children" ng-change="updateoptions()">
                 <option ng-repeat="n in [] | range:0:roomrates.maximum - roomrates.adults" ng-value="{{n}}">아동 {{n}}명</option>
               </select>
             </div>
           </div>
+          <!-- // xs 인원선택 -->
         </div>
-        <div class="media-right media-middle">
-          <div ng-show="isselected(roomrates.id)">
-            <a href class="btn btn-danger" ng-click="deselect(roomrates.id)"><i class="icon-x"></i> 선택취소</a>
-          </div>
-          <div ng-show="!isselected(roomrates.id)">
-            <a href class="btn btn-info" ng-click="select(roomrates.id)"><i class="icon-plus"></i> 선택하기</a>
-          </div>
-        </div>
-        <div class="media-badge media-badge-lg" ng-if="room.recommend">추천</div>
+      </div>
 
-        <!-- xs 인원선택 -->
-        <div class="row gap3 visible-xs mt15" ng-if="isselected(roomrates.id)">
-          <div class="col-xs-4">
-            <select class="form-control" ng-model="roomrates.qty" ng-change="updateoptions()">
-              <option ng-repeat="n in [] | range:1:roomrates.vacancy" ng-value="{{n}}">{{n}}개 객실</option>
-            </select>
-          </div>
-          <div class="col-xs-4">
-            <select class="form-control" ng-model="roomrates.adults" ng-change="updateoptions()">
-              <option ng-repeat="n in [] | range:1:roomrates.maximum - roomrates.children" ng-value="{{n}}">성인 {{n}}명</option>
-            </select>
-          </div>
-          <div class="col-xs-4">
-            <select class="form-control" ng-model="roomrates.children" ng-change="updateoptions()">
-              <option ng-repeat="n in [] | range:0:roomrates.maximum - roomrates.adults" ng-value="{{n}}">아동 {{n}}명</option>
-            </select>
-          </div>
+      <div class="row nogap mt15">
+        <div class="col-xs-6">
+          <p class="form-control-static text-light">
+            <b>{{rooms.length}}</b>개의 객실예약
+          </p>
         </div>
-        <!-- // xs 인원선택 -->
+        <div class="col-xs-6 text-right">
+          <p class="form-control-static">
+            총 객실요금 : <b>{{totalprice | currency:accommodation.currency}}</b>
+          </p>
+        </div>
       </div>
     </div>
-
-    <div class="row nogap mt15">
-      <div class="col-xs-6">
-        <p class="form-control-static text-light">
-          <b>{{rooms.length}}</b>개의 객실예약
-        </p>
-      </div>
-      <div class="col-xs-6 text-right">
-        <p class="form-control-static">
-          총 객실요금 : <b>{{totalprice | currency:accommodation.currency}}</b>
-        </p>
-      </div>
-    </div>
-
-    <!--
-    <div class="x-bookable-vsep"></div>
-
-    <div class="text-center">
-      <a href class="btn btn-primary btn-xl" ng-disabled="selected.length" ng-click="submit()">예약하기</a>
-    </div>
-    -->
   </div>
 </div>

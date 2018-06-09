@@ -28,5 +28,15 @@
     .x-bookable-bbs-arrow-down {
       transform: rotate(90deg);
     }
+
+    @media(max-width: @screen-sm) {
+      thead, th, td {
+        display: none;
+      }
+      .x-bookable-bbs-title {
+        display: table-cell;
+      }
+    }
+
   }
 }

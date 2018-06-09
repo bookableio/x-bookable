@@ -35,12 +35,17 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
       attrs.$observe('serviceid', refresh);
 
       attrs.$observe('buttonLabel', () => {
-        scope.buttonLabel = attrs.buttonLabel;
+        scope.buttonLabel = evalattr(attrs.buttonLabel);
         safeApply(scope);
       });
 
-      attrs.$observe('listingStyle', () => {
-        scope.listingStyle = attrs.listingStyle;
+      attrs.$observe('listingtype', () => {
+        scope.listingtype = attrs.listingtype;
+        safeApply(scope);
+      });
+
+      attrs.$observe('border', () => {
+        scope.border = 'border' in attrs && attrs.border !== 'false';
         safeApply(scope);
       });
 
@@ -50,8 +55,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
       attrs.$observe('colmd', () => safeApply(scope, () => scope.colmd = +evalattr(attrs.colmd)));
       attrs.$observe('collg', () => safeApply(scope, () => scope.collg = +evalattr(attrs.collg)));
 
-      scope.buttonLabel = attrs.buttonLabel;
-      scope.listingStyle = attrs.listingStyle;
+      scope.listingtype = attrs.listingtype;
       scope.refresh = refresh;
       scope.select = select;
 

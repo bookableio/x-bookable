@@ -1,7 +1,7 @@
 import xmodal from 'x-modal';
 import bookable from 'bookable';
 
-export default ['safeApply', 'event', 'staged', '$timeout', 'evalattr', function(safeApply, event, staged, $timeout, evalattr) {
+export default ['safeApply', 'event', '$timeout', 'evalattr', function(safeApply, event, $timeout, evalattr) {
   return {
     require: '?ngModel',
     template: require('./inquiry.html'),

@@ -24,10 +24,10 @@ import service_event from './service/event/event';
 import service_slideshow from './service/slideshow/slideshow';
 import service_staged from './service/staged/staged';
 import service_scrollto from './service/scrollto/scrollto';
-import common_fclick from './common/fclick/fclick';
-import common_info from './common/info/info';
-import common_if from './common/info/if';
-import common_bbs_if from './common/info/bbs-if';
+import common_fclick from './misc/fclick/fclick';
+import common_info from './misc/info/info';
+import common_if from './misc/info/if';
+import common_bbs_if from './misc/info/bbs-if';
 
 import directives from './directives';
 
