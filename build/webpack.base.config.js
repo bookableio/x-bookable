@@ -7,6 +7,7 @@ const pkg = require('../package.json');
 const src = path.resolve(__dirname, '../src');
 const postcssoptions = {
   ident: 'postcss',
+  sourceMap: true,
   plugins: (loader) => [
     require('postcss-import')(),
     require('postcss-cssnext')({
@@ -55,7 +56,8 @@ module.exports = {
             {
               loader: 'css-loader',
               options: {
-                importLoaders: 1
+                importLoaders: 1,
+                sourceMap: true
               }
             }, {
               loader: 'postcss-loader',
@@ -70,7 +72,8 @@ module.exports = {
           use: [{
             loader: 'css-loader',
             options: {
-              importLoaders: 1
+              importLoaders: 1,
+              sourceMap: true
             }
           }, {
             loader: 'postcss-loader',
@@ -78,7 +81,8 @@ module.exports = {
           }, {
             loader: 'less-loader',
             options: {
-              noIeCompat: false
+              noIeCompat: false,
+              sourceMap: true
             }
           }
         ]})
