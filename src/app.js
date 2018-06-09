@@ -71,7 +71,7 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
         scope.business = business;
         loaded = true;
 
-        scope.$emit('load', business);
+        scope.$emit('bookableloaded', business);
 
         safeApply(scope);
       });

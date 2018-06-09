@@ -3,15 +3,17 @@ import bookable from 'bookable';
 export default ['$timeout', function($timeout) {
   return {
     restrict: 'A',
-    priority: 100,
+    scope: {
+      business: '='
+    },
     link(scope, element, attrs) {
-      element.css('display', 'none');
+      const root = scope.$root;
 
       const refresh = () => {
         const bbsid = attrs.bookableBbsIf || attrs.bBbsIf;
-        if( !scope.business || !bbsid ) return;
+        if( !root.business || !bbsid ) return;
 
-        bookable.get(`/app/bbs/${scope.business.serviceid}/${bbsid}/data`, {
+        bookable.get(`/app/bbs/${root.business.serviceid}/${bbsid}/data`, {
           offset: 0,
           limit: 1
         }).localcache(3000).exec((err, list) => {
@@ -19,9 +21,11 @@ export default ['$timeout', function($timeout) {
         });
       };
 
-      scope.$root.$watch('business', () => {
+      root.$on('bookableloaded', () => {
         $timeout(refresh, 0);
       });
+
+      element.css('display', 'none');
       $timeout(refresh, 0);
     }
   };

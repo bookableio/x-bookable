@@ -1,14 +1,16 @@
 export default ['$timeout', function($timeout) {
   return {
     restrict: 'A',
-    priority: 100,
+    scope: {},
     link(scope, element, attrs) {
+      const root = scope.$root;
+
       const refresh = () => {
         const key = attrs.bookableInfo || attrs.bInfo;
-        scope.business && key && element.html(scope.$eval(key) || '');
+        root.business && key && element.html(root.$eval(key) || '');
       };
 
-      scope.$root.$watch('business', () => {
+      root.$on('bookableloaded', () => {
         $timeout(refresh, 0);
       });
       $timeout(refresh, 0);
