@@ -6,8 +6,8 @@ export default ['$timeout', function($timeout) {
         const root = scope.$root;
 
         const refresh = () => {
-          const key = attrs.bookableInfo || attrs.bInfo;
-          root.business && key && element.html(root.$eval(key) || '');
+          const href = attrs.bookableHref || attrs.bHref;
+          root.business && href && element.attr('href', root.$eval(href) || '');
         };
 
         root.$on('bookableloaded', () => {

@@ -27,6 +27,7 @@ import service_staged from './service/staged/staged';
 import service_scrollto from './service/scrollto/scrollto';
 import common_fclick from './misc/fclick/fclick';
 import common_info from './misc/info/info';
+import common_href from './misc/info/href';
 import common_if from './misc/info/if';
 import common_bbs_if from './misc/info/bbs-if';
 
@@ -105,6 +106,8 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
   .directive('bookableIf', common_if)
   .directive('bInfo', common_info)
   .directive('bookableInfo', common_info)
+  .directive('bHref', common_href)
+  .directive('bookableHref', common_href)
   .directive('bBbsIf', common_bbs_if)
   .directive('bookableBbsIf', common_bbs_if);
 
