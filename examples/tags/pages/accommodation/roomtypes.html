@@ -4,6 +4,11 @@
     <bookable-accommodation-roomtypes onselect="location.href='#accommodation/roomtype?roomtypeid=' + event.detail.roomtype.id"></bookable-accommodation-roomtypes>
   </div>
 
+  <h1 class="section-title">객실목록 - 컬럼수제어</h1>
+  <div class="section-body">
+    <bookable-accommodation-roomtypes col="12" colxs="12" colsm="12" colmd="6" collg="4" onselect="location.href='#accommodation/roomtype?roomtypeid=' + event.detail.roomtype.id"></bookable-accommodation-roomtypes>
+  </div>
+
   <h1 class="section-title">객실목록 - 요금표시형</h1>
   <div class="section-body">
     <bookable-accommodation-roomtypes listingtype="rates" onselect="location.href='#accommodation/roomtype?roomtypeid=' + event.detail.roomtype.id" button-label="예약하기"></bookable-accommodation-roomtypes>
@@ -14,8 +19,8 @@
     <bookable-accommodation-roomtypes listingtype="thumbnail" onselect="location.href='#accommodation/roomtype?roomtypeid=' + event.detail.roomtype.id"></bookable-accommodation-roomtypes>
   </div>
 
-  <h1 class="section-title">객실목록 - responsive</h1>
+  <h1 class="section-title">객실목록 - 교차나열</h1>
   <div class="section-body">
-    <bookable-accommodation-roomtypes col="6" colxs="12" onselect="location.href='#accommodation/roomtype?roomtypeid=' + event.detail.roomtype.id"></bookable-accommodation-roomtypes>
+    <bookable-accommodation-roomtypes listingtype="crossbox" onselect="location.href='#accommodation/roomtype?roomtypeid=' + event.detail.roomtype.id"></bookable-accommodation-roomtypes>
   </div>
 </div>

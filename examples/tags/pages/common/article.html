@@ -1,6 +1,11 @@
 <div class="section">
   <h1 class="section-title">게시물 내용</h1>
   <div class="section-body">
-    <bookable-article groupid="$param:gid" articleid="$param:id"></bookable-article>
+    <bookable-article groupid="$param:gid" articleid="$param:id">
+      <div class="empty">
+        <div class="empty-icon"><i class="icon-alert-triangle"></i></div>
+        <div class="empty-text">게시물이 없습니다.</div>
+      </div>
+    </bookable-article>
   </div>
 </div>
