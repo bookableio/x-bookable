@@ -10,18 +10,20 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th class="text-center" width="30%">객실명</th>
-            <th class="text-center" width="15%">기본</th>
-            <th class="text-center" width="15%">최대</th>
+            <th class="text-center hidden-xs" width="30%">객실명</th>
+            <th class="text-center">인원</th>
+            <th class="text-center">최대</th>
+            <th class="text-center hidden-xs">크기</th>
             <th class="text-center">객실구조</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="text-center">{{roomtype.name}}</td>
+            <td class="text-center hidden-xs">{{roomtype.name}}</td>
             <td class="text-center">{{roomtype.capacity}}명</td>
             <td class="text-center">{{roomtype.maximum}}명</td>
-            <td class="text-center">{{roomtype.structure || '-'}}</td>
+            <td class="text-center hidden-xs">{{roomtype.info.size || '-'}}</td>
+            <td class="text-center">{{roomtype.info.structure || '-'}}</td>
           </tr>
         </tbody>
       </table>
@@ -53,7 +55,7 @@
         </table>
       </div>
 
-      <p class="fs12 mt10 text-right">(예약하실 날짜와 인원수에 따라 요금이 달라질 수 있습니다. 예약 진행시 정확한 요금이 표시됩니다.)</p>
+      <p class="fs12 mt10 text-right">(예약하실 날짜와 인원수에 따라 요금이 달라질 수 있습니다.)</p>
     </div>
 
     <div class="mt20 pv10" ng-if="roomtype.html">
@@ -69,14 +71,6 @@
 
     <div class="mt20 pv10">
       <h4 class="mt0">입금안내</h4>
-
-      <address class="fs13">
-        <strong>입금계좌</strong><br>
-        <span>{{accommodation.info.account}}</span><br><br>
-
-        <strong>예약전화</strong><br>
-        <span>{{accommodation.tel}}</span><br><br>
-      </address>
 
       <div ng-bind-html="accommodation.terms.payment | unsafe"></div>
     </div>
