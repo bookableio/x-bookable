@@ -23,4 +23,19 @@
   <div class="section-body">
     <bookable-article-list groupid="tourguide" listingtype="tiny" ondetail="location.href='#common/article?gid=tourguide&id=' + event.detail.article.id" paging="false" pagesize="3"></bookable-article-list>
   </div>
+
+  <h1 class="section-title">게시물 목록 - 교차나열</h1>
+  <div class="section-body">
+    <bookable-article-list groupid="tourguide" listingtype="crossbox" ondetail="location.href='#common/article?gid=tourguide&id=' + event.detail.article.id" paging="false" pagesize="3"></bookable-article-list>
+  </div>
+
+  <h1 class="section-title">게시물 목록 - 게시물 없는 경우</h1>
+  <div class="section-body">
+    <bookable-article-list groupid="notexists">
+      <div class="empty">
+        <div class="empty-icon"><i class="icon-alert-triangle"></i></div>
+        <div class="empty-text">게시물이 없습니다.</div>
+      </div>
+    </bookable-article-list>
+  </div>
 </div>
