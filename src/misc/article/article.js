@@ -4,10 +4,10 @@ import bookable from 'bookable';
 export default ['safeApply', '$timeout', 'event', 'evalattr', 'threshold', function(safeApply, $timeout, event, evalattr, threshold) {
   return {
     template: require('./article.html'),
-    replace: true,
-    scope: {
-    },
+    scope: {},
     restrict: 'E',
+    replace: true,
+    transclude: true,
     link(scope, element, attrs) {
       const error = (error) => {
         console.error(error);
@@ -21,7 +21,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'threshold', funct
 
         if( !groupid || !articleid ) {
           scope.loaded = true;
-          return;
+          return safeApply(scope);
         }
 
         bookable.info({

@@ -1,11 +1,8 @@
 <div class="x-bookable">
   <div class="x-bookable-article">
-    <div class="x-bookable-empty empty" ng-if="loaded && !article">
-      <div class="empty-icon"><i class="icon-alert-triangle"></i></div>
-      <div class="empty-text">게시물을 찾을 수 없습니다.</div>
-    </div>
+    <div class="x-bookable-article-empty" ng-show="loaded && !article" ng-transclude></div>
 
-    <div class="x-bookable-article-body" ng-if="loaded && article">
+    <div class="x-bookable-article-body" ng-show="loaded && article">
       <div class="x-bookable-article-cover cover text-white ratio-16by9" ng-if="article.coverimage">
         <div class="x-bookable-article-cover-bg cover-bg article-cover" ng-background="{{article.coverimage | cdn}}"></div>
         <div class="x-bookable-article-cover-shadow cover-shadow"></div>

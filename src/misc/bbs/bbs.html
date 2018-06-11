@@ -69,22 +69,34 @@
 
       <div class="x-bookable-bbs-crossbox" ng-switch-when="crossbox">
         <div class="crossbox visible-xs visible-sm" ng-repeat="article in list.rows">
-          <div class="crossbox-image" ng-background="{{article.coverimage | cdn}}"></div>
+          <div class="crossbox-image" ng-background="{{article.coverimage | cdn}}" ng-class="{
+            pointer: hasdetail()
+          }" ng-click="select(article)"></div>
           <div class="crossbox-body">
             <small class="crossbox-category" ng-if="article.category">{{article.category}}</small>
-            <h3 class="crossbox-title">{{article.title}}</h3>
-            <p class="crossbox-text" ng-bind-html="article.desc | tobr | unsafe"></p>
+            <h3 class="crossbox-title" ng-class="{
+              pointer: hasdetail()
+            }" ng-click="select(article)">{{article.title}}</h3>
+            <p class="crossbox-text" ng-bind-html="article.desc | tobr | unsafe" ng-class="{
+              pointer: hasdetail()
+            }" ng-click="select(article)"></p>
           </div>
         </div>
 
         <div class="crossbox hidden-xs hidden-sm" ng-repeat="article in list.rows">
-          <div class="crossbox-image" ng-background="{{article.coverimage | cdn}}"  ng-if="$index % 2 == 0"></div>
+          <div class="crossbox-image" ng-background="{{article.coverimage | cdn}}"  ng-if="$index % 2 == 0" ng-class="{
+            pointer: hasdetail()
+          }" ng-click="select(article)"></div>
           <div class="crossbox-body">
             <small class="crossbox-category" ng-if="article.category">{{article.category}}</small>
-            <h3 class="crossbox-title">{{article.title}}</h3>
+            <h3 class="crossbox-title" ng-class="{
+              pointer: hasdetail()
+            }" ng-click="select(article)">{{article.title}}</h3>
             <p class="crossbox-text" ng-bind-html="article.desc | tobr | unsafe"></p>
           </div>
-          <div class="crossbox-image" ng-background="{{article.coverimage | cdn}}"  ng-if="$index % 2 != 0"></div>
+          <div class="crossbox-image" ng-background="{{article.coverimage | cdn}}"  ng-if="$index % 2 != 0" ng-class="{
+            pointer: hasdetail()
+          }" ng-click="select(article)"></div>
         </div>
       </div>
 

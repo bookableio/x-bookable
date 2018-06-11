@@ -3,13 +3,10 @@ import bookable from 'bookable';
 
 export default ['safeApply', '$timeout', 'event', 'evalattr', 'threshold', function(safeApply, $timeout, event, evalattr, threshold) {
   return {
-    require: '?ngModel',
     template: require('./bbs.html'),
-    replace: true,
-    scope: {
-      ngModel: '='
-    },
+    scope: {},
     restrict: 'E',
+    replace: true,
     transclude: true,
     link(scope, element, attrs) {
       const error = (error) => {
@@ -100,6 +97,8 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'threshold', funct
         return setlastindex - index;
       };
 
+      const hasdetail = () => !!(attrs.ondetail || attrs.ngDetail);
+
       attrs.$observe('buttonLabel', () => {
         scope.buttonLabel = evalattr(attrs.buttonLabel);
         safeApply(scope);
@@ -152,6 +151,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'threshold', funct
       scope.refresh = refresh;
       scope.select = select;
       scope.articleno = articleno;
+      scope.hasdetail = hasdetail;
       scope.usePaging = true;
 
       $timeout(refresh, 0);
