@@ -39,6 +39,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'threshold', funct
             }).exec((err, list) => {
               if( err ) return error(err);
 
+              scope.loaded = true;
               scope.accommodation = accommodation;
               scope.dataset = scope.bbs = dataset;
               scope.list = list;

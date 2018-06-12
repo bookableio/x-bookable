@@ -1,8 +1,8 @@
 <div class="x-bookable">
   <div class="x-bookable-bbs">
-    <div ng-show="!list.rows.length" ng-transclude></div>
+    <div ng-show="loaded && !list.rows.length" ng-transclude></div>
 
-    <div ng-switch on="listingtype" ng-if="list.rows.length">
+    <div ng-switch on="listingtype" ng-show="loaded && list.rows.length">
       <div class="x-bookable-bbs-faq" ng-switch-when="faq">
         <table class="table">
           <tbody>
@@ -138,7 +138,7 @@
       </div>
     </div>
 
-    <div class="text-center pt25" ng-show="usePaging">
+    <div class="text-center pt25" ng-show="loaded && usePaging">
       <pagination ng-model="paging"></pagination>
     </div>
   </div>
