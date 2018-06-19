@@ -93,7 +93,7 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
             type: paymentmethod.type,
             name : '객실예약',
             price : reservation.price,
-            options: {
+            options: paymentmethod.options && {
               pg : paymentmethod.options.pg,
               cid: paymentmethod.options.cid,
               pay_method : paymentmethod.options.method,

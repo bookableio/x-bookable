@@ -15,29 +15,32 @@ function loadscript(done) {
   document.head.appendChild(script);
 }
 
-export default (info, done) => {
-  if( !info || ~['banking', 'direct'].indexOf(info.type) ) {
+export default (options = {}, done) => {
+  const paymentmethod = options.paymentmethod;
+  const reservation = options.reservation;
+
+  if( !paymentmethod || ~['default', 'banking', 'direct'].indexOf(paymentmethod.type) ) {
     return xmodal.confirm('예약하시겠습니까?', (b) => {
       if( b ) return done();
     });
   }
 
-  if( info.type === 'pg' ) {
+  if( paymentmethod.type === 'iamport' ) {
     loadscript((err, IMP) => {
       if( err ) return done(err);
 
-      IMP.init(info.options.cid);
+      IMP.init(paymentmethod.options.cid);
       IMP.request_pay({
-        name : info.name,
-        amount : info.price,
-        pg : info.options.pg,
-        pay_method : info.options.pay_method,
-        merchant_uid : info.options.uid,
-        buyer_email : info.options.buyer_email || '',
-        buyer_name : info.options.buyer_name,
-        buyer_tel : info.options.buyer_tel || '',
-        buyer_addr : info.options.buyer_addr || '',
-        buyer_postcode : info.options.buyer_postcode || '',
+        name : options.name,
+        amount : reservation.price,
+        pg : paymentmethod.options.pg,
+        pay_method : paymentmethod.options.method,
+        merchant_uid : reservation.vid,
+        buyer_email : reservation.email || '',
+        buyer_name : reservation.name,
+        buyer_tel : reservation.mobile || '',
+        buyer_addr : reservation.info.address || '',
+        buyer_postcode : reservation.info.postcode || '',
       }, (response) => {
         if ( !response.success ) return done(new Error('결제에 실패하였습니다.' + response.error_msg));
 
