@@ -30,6 +30,7 @@ import common_info from './misc/info/info';
 import common_href from './misc/info/href';
 import common_if from './misc/info/if';
 import common_bbs_if from './misc/info/bbs-if';
+import common_bbs_exists from './misc/info/bbs-exists';
 import common_copyright from './misc/info/copyright';
 
 import directives from './directives';
@@ -111,6 +112,8 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
   .directive('bookableHref', common_href)
   .directive('bBbsIf', common_bbs_if)
   .directive('bookableBbsIf', common_bbs_if)
+  .directive('bBbsExists', common_bbs_exists)
+  .directive('bookableBbsExists', common_bbs_exists)
   .directive('bCopyright', common_copyright)
   .directive('bookableCopyright', common_copyright);
 
