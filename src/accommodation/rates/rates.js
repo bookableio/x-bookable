@@ -32,10 +32,13 @@ export default ['safeApply', '$timeout', 'event', function(safeApply, $timeout, 
         event.fire(element, 'select', {roomtype});
       };
 
+      const exists = key => !!(scope.accommodation.roomtypes || []).find(roomtype => roomtype.info && roomtype.info[key]);
+
       event.regist(element, attrs);
 
       scope.refresh = refresh;
       scope.select = select;
+      scope.exists = exists;
 
       $timeout(refresh, 0);
     }

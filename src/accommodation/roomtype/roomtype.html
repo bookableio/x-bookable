@@ -13,8 +13,8 @@
             <th class="text-center hidden-xs" width="30%">객실명</th>
             <th class="text-center">인원</th>
             <th class="text-center">최대</th>
-            <th class="text-center hidden-xs">크기</th>
-            <th class="text-center">객실구조</th>
+            <th class="text-center hidden-xs" ng-if="roomtype.info.size">크기</th>
+            <th class="text-center" ng-if="roomtype.info.structure">객실구조</th>
           </tr>
         </thead>
         <tbody>
@@ -22,8 +22,8 @@
             <td class="text-center hidden-xs">{{roomtype.name}}</td>
             <td class="text-center">{{roomtype.capacity}}명</td>
             <td class="text-center">{{roomtype.maximum}}명</td>
-            <td class="text-center hidden-xs">{{roomtype.info.size || '-'}}</td>
-            <td class="text-center">{{roomtype.info.structure || '-'}}</td>
+            <td class="text-center hidden-xs" ng-if="roomtype.info.size">{{roomtype.info.size}}</td>
+            <td class="text-center" ng-if="roomtype.info.structure">{{roomtype.info.structure}}</td>
           </tr>
         </tbody>
       </table>

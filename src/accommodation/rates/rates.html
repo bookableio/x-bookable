@@ -13,8 +13,8 @@
         <thead>
           <tr>
             <th width="200">객실</th>
-            <th width="200" class="hidden-xs hidden-sm">구조</th>
-            <th width="70" class="hidden-xs hidden-sm">면적</th>
+            <th width="200" class="hidden-xs hidden-sm" ng-if="exists('structure')">구조</th>
+            <th width="70" class="hidden-xs hidden-sm" ng-if="exists('size')">면적</th>
             <th width="50" class="hidden-xs">인원</th>
             <th width="50" class="hidden-xs">최대</th>
             <th ng-repeat="tpl in accommodation.ratestpls">{{tpl.name}}</th>
@@ -27,8 +27,8 @@
           </tr>
           <tr ng-repeat="roomtype in accommodation.roomtypes">
             <td class="x-bookable-rates-roomtype-name"><a href ng-click="select(roomtype)">{{roomtype.name}}</a></td>
-            <td class="x-bookable-rates-roomtype-structure hidden-xs hidden-sm">{{roomtype.info.structure || '-'}}</td>
-            <td class="x-bookable-rates-roomtype-size hidden-xs hidden-sm">{{roomtype.info.size || '-'}}</td>
+            <td class="x-bookable-rates-roomtype-structure hidden-xs hidden-sm" ng-if="exists('structure')">{{roomtype.info.structure || '-'}}</td>
+            <td class="x-bookable-rates-roomtype-size hidden-xs hidden-sm" ng-if="exists('size')">{{roomtype.info.size || '-'}}</td>
             <td class="x-bookable-rates-roomtype-capacit hidden-xs">{{roomtype.capacity}}명</td>
             <td class="x-bookable-rates-roomtype-maximum hidden-xs">{{roomtype.maximum}}명</td>
             <td class="x-bookable-rates-roomtype-price" ng-repeat="tpl in accommodation.ratestpls">{{(tpl.rates[roomtype.id].price || roomtype.price) | currency:accommodation.currency}}</td>
