@@ -8,14 +8,20 @@ export default ['$timeout','threshold',  function($timeout, threshold) {
         const root = scope.$root;
 
         const refresh = threshold(() => {
-          const bbsid = attrs.bookableBbsIf || attrs.bBbsIf;
-          if( !root.business || !bbsid ) return;
+          const business = root.business;
+          const bbsid = attrs.bookableBbs || attrs.bBbs;
+          const bbsif = attrs.bookableBbsIf || attrs.bBbsIf;
+          if( !business || !bbsid || !bbsif ) return;
 
-          bookable.get(`/app/bbs/${root.business.serviceid}/${bbsid}/data`, {
-            offset: 0,
-            limit: 1
-          }).localcache(3000).exec((err, list) => {
-            !err && list.total > 0 && element.css('display', '');
+          bookable.get(`/app/bbs/${business.serviceid}/${bbsid}`).localcache(3000).exec((err, bbs) => {
+            scope.err = err;
+            scope.bbs = bbs;
+            scope.business = business;
+            scope.dom = element[0];
+            scope.element = element;
+
+            const value = scope.$eval(bbsif);
+            element.css('display', value ? '' : 'none');
           });
         }, 10);
 
