@@ -52,7 +52,7 @@
         <div class="crossbox-image pointer" ng-click="select(roomtype)" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}"></div>
         <div class="crossbox-body">
           <small class="crossbox-category">{{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인</small>
-          <h3 class="crossbox-title">{{roomtype.name}}</h3>
+          <h3 class="crossbox-title"><a href ng-click="select(roomtype)">{{roomtype.name}}</a></h3>
           <div class="crossbox-text">
             <a href ng-click="select(roomtype)">
               <div ng-bind-html="roomtype.desc | tobr | unsafe"></div>
@@ -69,18 +69,18 @@
       <div class="crossbox hidden-xs hidden-sm" ng-repeat="roomtype in accommodation.roomtypes">
         <div class="crossbox-image pointer" ng-click="select(roomtype)" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}"  ng-if="$index % 2 == 0"></div>
         <div class="crossbox-body">
-          <a href ng-click="select(roomtype)">
-            <small class="crossbox-category">{{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인</small>
-            <h3 class="crossbox-title">{{roomtype.name}}</h3>
-            <div class="crossbox-text">
+          <small class="crossbox-category">{{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인</small>
+          <h3 class="crossbox-title"><a href ng-click="select(roomtype)">{{roomtype.name}}</a></h3>
+          <div class="crossbox-text">
+            <a href ng-click="select(roomtype)">
               <div ng-bind-html="roomtype.desc | tobr | unsafe"></div>
               <small class="block mv10">
                 <span>1박 {{roomtype.price | currency:accommodation.currency}} 부터</span>
                 <span ng-if="roomtype.info.size"> / {{roomtype.info.size}}</span>
                 <span ng-if="roomtype.info.structure"> / {{roomtype.info.structure}}</span>
               </small>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
         <div class="crossbox-image pointer" ng-click="select(roomtype)" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}"  ng-if="$index % 2 != 0"></div>
       </div>
