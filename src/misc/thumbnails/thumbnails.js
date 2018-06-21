@@ -31,7 +31,7 @@ export default ['safeApply', '$timeout', 'slideshow', 'evalattr', function(safeA
 
           const slideset = business[slidesetid];
 
-          if( !slideid && slideset ) {
+          if( !slideid && slideset && !('slideid' in attrs) ) {
             scope.slide = slideset;
           } else if( slideid && Array.isArray(slideset) ) {
             slideset.forEach((item) => {
