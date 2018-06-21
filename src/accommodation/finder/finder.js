@@ -25,7 +25,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', funct
             extracharge += exadults * roomrates.extrapersoncharge;
             extracharge += roomrates.children * roomrates.extrachildcharge;
           } else {
-            extracharge += (person - roomrates.capacity) * roomrates.extrachildcharge * roomrates.qty;
+            extracharge += (person - roomrates.capacity) * roomrates.extrachildcharge;
           }
 
           roomrates.extracharge = extracharge;
