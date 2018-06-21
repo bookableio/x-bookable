@@ -48,13 +48,13 @@
       <bookable-accommodation-roomtypes listingtype="media" col="6" colsm="12" onselect="location.href = '/room.html?id=' + event.detail.roomtype.id" border></bookable-accommodation-roomtypes>
     </div>
 
-    <div class="section section-padded" bookable-bbs-if="event">
+    <div class="section section-padded" bookable-bbs-exists="event">
       <h2 class="section-title">이벤트</h2>
 
       <bookable-article-list groupid="event" listingtype="media" col="6" colsm="12" paging="false" pagesize="6" onselect="location.href = '/customer-view.html?gid=' + event.detail.article.groupid + '&id=' + event.detail.article.id" button-label="내용보기" border></bookable-article-list>
     </div>
 
-    <div class="section section-padded" bookable-bbs-if="tourguide">
+    <div class="section section-padded" bookable-bbs-exists="tourguide">
       <h2 class="section-title">여행가이드</h2>
 
       <bookable-article-list groupid="tourguide" listingtype="thumbnail" paging="false" pagesize="6" onselect="location.href = '/tourguide-view.html?id=' + event.detail.article.id"></bookable-article-list>
