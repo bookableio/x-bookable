@@ -17,7 +17,6 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
     restrict: 'E',
     link: (scope, element, attrs) => {
       const error = (error) => {
-        console.error(error);
         scope.error = error;
         safeApply(scope);
       };
@@ -71,11 +70,9 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
         //if( !paymentmethod ) return error(new Error('결제 방법을 선택해주세요.'));
         if( !form ) return error(new Error('프로그램 오류입니다. 다시 시도해주세요.'));
         if( !reservation.rooms.length ) return error(new Error('예약할 객실이 없습니다.'));
-        if( !form.termsofuse ) return xmodal.alert('이용약관에 동의하셔야 합니다.');
+        if( !form.termsofuse ) return error(new Error('이용약관에 동의하셔야 합니다.'));
         if( !form.name ) return error(new Error('예약자명을 입력해주세요.'));
         if( !form.mobile ) return error(new Error('휴대전화번호를 입력해주세요.'));
-        if( form.email && !/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(form.email) )
-          return error(new Error('이메일 주소를 정확하게 입력해주세요.'));
 
         reservation.aid = accommodation.id;
         reservation.name = form.name;
@@ -84,8 +81,6 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
         reservation.request = form.request;
 
         bookable.accommodation(accommodation.id).reservation.validate(reservation).exec((err, reservation) => {
-          console.log('validated', reservation);
-
           if( err ) return error(err);
           if( reservation.errors ) return error(new Error('예약에 오류가 있습니다.'));
 

@@ -10,10 +10,10 @@
   <div class="x-bookable-form">
     <div ng-if="validated.errors.length">
       <div class="alert alert-danger text-center" role="alert" ng-repeat="error in validated.errors">
-        {{error.message}}
+        {{error.message || error}}
       </div>
     </div>
-    <form ng-submit="complete()">
+    <form>
       <div class="row">
         <div class="col-md-{{vertical ? 12 : 6}}">
           <div class="mb25" ng-if="accommodation.paymentmethods.length">
@@ -94,8 +94,14 @@
 
           <div class="dashed"></div>
 
+          <div ng-if="error">
+            <div class="alert alert-danger text-center" role="alert">
+              {{error.message || error}}
+            </div>
+          </div>
+
           <div>
-            <button type="submit" class="btn btn-xl btn-primary btn-block" ng-disabled="!accommodation || !validated || !form.termsofuse || !form.name || !form.mobile">예약완료하기</button>
+            <a href class="btn btn-xl btn-primary btn-block" ng-click="complete()" ng-disabled="!accommodation || !validated || !form.termsofuse || !form.name || !form.mobile">예약완료하기</a>
           </div>
         </div>
       </div>

@@ -92,8 +92,8 @@
 
       <div class="row nogap mt15">
         <div class="col-xs-6">
-          <p class="form-control-static text-light">
-            <b>{{rooms.length}}</b>개의 객실예약
+          <p class="form-control-static text-light" ng-if="dates.length">
+            <b>{{dates.length}}박</b> <b>{{roomqty}}개</b>의 객실예약
           </p>
         </div>
         <div class="col-xs-6 text-right">

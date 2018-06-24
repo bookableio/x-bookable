@@ -45,6 +45,8 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', funct
         const bookable = scope.bookable;
         const selected = scope.selected || [];
         let totalprice = 0;
+        const dates = [];
+        let roomqty = 0;
 
         bookable.rates.forEach((roomrates) => {
           if( !~selected.indexOf(roomrates.id) ) return;
@@ -60,17 +62,24 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', funct
 
           totalprice += calcprice;
 
+          roomqty += (+roomrates.qty || 0);
+
           do {
+            const date = iter.format('YYYYMMDD');
             rooms.push({
               id: roomrates.id,
-              date: iter.format('YYYYMMDD'),
+              date,
               adults: +roomrates.adults || +roomrates.capacity || 1,
               children: +roomrates.children || 0,
               qty: roomrates.qty
             });
+
+            if( !~dates.indexOf(date) ) dates.push(date);
           } while(iter.add(1, 'days').diff(checkout) < 0);
         });
 
+        scope.dates = dates;
+        scope.roomqty = roomqty;
         scope.rooms = rooms;
         scope.totalprice = totalprice;
 
