@@ -65,6 +65,9 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
         const form = scope.form;
         const paymentmethod = scope.selectedpaymentmethod;
 
+        scope.error = null;
+        safeApply(scope);
+
         if( !accommodation ) return error(new Error('서비스가 로드되지 않았습니다.'));
         if( !reservation ) return error(new Error('연결된 예약이 없습니다.'));
         //if( !paymentmethod ) return error(new Error('결제 방법을 선택해주세요.'));
