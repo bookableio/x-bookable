@@ -34,7 +34,9 @@ import common_bbs_exists from './misc/info/bbs-exists';
 import common_copyright from './misc/info/copyright';
 
 import directives from './directives';
+import EventEmitter from './util/eventemitter';
 
+const emitter = new EventEmitter();
 const autoload = meta('bookable.autoload', '').toLowerCase().trim() !== 'false';
 
 autoload && bookable.info().exec();
@@ -75,6 +77,9 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
         loaded = true;
 
         scope.$emit('bookableloaded', business);
+        emitter.fire('load', {
+          business
+        });
 
         safeApply(scope);
       });
@@ -120,3 +125,4 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
 Object.keys(directives).forEach(key => app.directive(key, directives[key]));
 
 export default app;
+export {emitter};

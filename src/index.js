@@ -1,6 +1,6 @@
 import {} from './util/classlist'; // polyfill for ie9
 import connect from 'bookable';
-import app from './app';
+import app, { emitter } from './app';
 import { detect, start, stop } from './detector';
 import {} from './less/index.less';
 
@@ -9,5 +9,6 @@ export {
   start,
   stop,
   connect,
-  app
+  app,
+  emitter
 };

@@ -3,7 +3,8 @@ import {
   start,
   stop,
   connect,
-  app
+  app,
+  emitter
 } from './index';
 
 start();
@@ -13,5 +14,6 @@ export {
   start,
   stop,
   connect,
-  app
+  app,
+  emitter
 };
