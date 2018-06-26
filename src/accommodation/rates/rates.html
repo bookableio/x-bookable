@@ -18,7 +18,7 @@
             <th width="50" class="hidden-xs">인원</th>
             <th width="50" class="hidden-xs">최대</th>
             <th ng-repeat="tpl in accommodation.ratestpls">{{tpl.name}}</th>
-            <th width="50" class="hidden-xs hidden-sm"></th>
+            <th width="50" class="hidden-xs hidden-sm hidden"></th>
           </tr>
         </thead>
         <tbody>
@@ -32,7 +32,7 @@
             <td class="x-bookable-rates-roomtype-capacit hidden-xs">{{roomtype.capacity}}명</td>
             <td class="x-bookable-rates-roomtype-maximum hidden-xs">{{roomtype.maximum}}명</td>
             <td class="x-bookable-rates-roomtype-price" ng-repeat="tpl in accommodation.ratestpls">{{(tpl.rates[roomtype.id].price || roomtype.price) | currency:accommodation.currency}}</td>
-            <td class="x-bookable-rates-roomtype-more hidden-xs hidden-sm">
+            <td class="x-bookable-rates-roomtype-more hidden-xs hidden-sm hidden">
               <a href ng-click="select(roomtype)"><i class="icon-search"></i></a>
             </td>
           </tr>
