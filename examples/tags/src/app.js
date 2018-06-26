@@ -2,7 +2,11 @@ import xworkbench from 'x-workbench';
 import URL from 'url';
 import $ from 'jquery';
 import {} from './style.less';
-import {} from '../../../src/standalone';
+import { emitter } from '../../../src/standalone';
+
+emitter.on('load', (e) => {
+  document.title = 'x-bookable : ' + e.detail.business.name;
+});
 
 const wb = new xworkbench('dashboard');
 
