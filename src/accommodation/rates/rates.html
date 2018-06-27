@@ -13,10 +13,10 @@
         <thead>
           <tr>
             <th class="x-bookable-rates-roomtype-name" width="200">객실</th>
-            <th class="x-bookable-rates-roomtype-structure" width="200" class="hidden-xs hidden-sm" ng-if="exists('structure')">구조</th>
-            <th class="x-bookable-rates-roomtype-size" width="70" class="hidden-xs hidden-sm" ng-if="exists('size')">면적</th>
-            <th class="x-bookable-rates-roomtype-capacity" width="50" class="hidden-xs">인원</th>
-            <th class="x-bookable-rates-roomtype-maximum" width="50" class="hidden-xs">최대</th>
+            <th class="x-bookable-rates-roomtype-structure hidden-xs hidden-sm" width="200" ng-if="exists('structure')">구조</th>
+            <th class="x-bookable-rates-roomtype-size hidden-xs hidden-sm" width="70" ng-if="exists('size')">면적</th>
+            <th class="x-bookable-rates-roomtype-capacity hidden-xs" width="50">인원</th>
+            <th class="x-bookable-rates-roomtype-maximum hidden-xs" width="50">최대</th>
             <th class="x-bookable-rates-roomtype-price" ng-repeat="tpl in accommodation.ratestpls">{{tpl.name}}</th>
             <th width="50" class="hidden-xs hidden-sm hidden"></th>
           </tr>
