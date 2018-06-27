@@ -38,27 +38,28 @@
 
   <div class="contents">
     <!-- 본문 -->
-    <div class="section">
+    <div class="section section-padded">
       <h2 class="section-title">요금안내</h2>
 
       <bookable-accommodation-rates onselect="location.href = '/room.html?id=' + event.detail.roomtype.id"></bookable-accommodation-rates>
 
       <div class="text-right fs-xs mt">
-        (예약하실 날짜와 인원수에 따라 요금이 달라질 수 있습니다. 예약 진행시 정확한 요금이 표시됩니다.)
+        (예약일과 인원수에 따라 요금이 달라질 수 있습니다.)
       </div>
     </div>
 
     <div class="section">
       <h2 class="section-title">예약안내</h2>
 
-      <div class="bordered-contents">
-        <div class="cells">
-          <div class="cell cell-50">
+      <div class="bordered-contents x-bookable">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
             <h3 class="section-title">이용시 유의사항</h3>
 
             <bookable-terms termsid="notice"></bookable-terms>
           </div>
-          <div class="cell cell-50">
+          <div class="col-xs-12 col-sm-6">
+            <div class="spacing visible-xs"></div>
             <h3 class="section-title">입금안내</h3>
 
             <bookable-terms termsid="payment"></bookable-terms>

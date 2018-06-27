@@ -107,7 +107,7 @@ a:hover, a:focus {
 
 .bordered-contents {
   border: 1px dotted #efefef;
-  padding: 30px;
+  padding: 30px 20px;
 }
 
 /* footer */
@@ -332,4 +332,15 @@ dl.address dd {
 }
 .text-right {
   text-align: right;
+}
+
+@media (max-width: 480px) {
+  .bordered-contents {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .contents {
+    margin-bottom: 60px;
+  }
 }
