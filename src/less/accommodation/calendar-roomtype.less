@@ -50,23 +50,36 @@
         transition: background-color 0.2s;
 
         .x-calendar-roomtype-cell-header {
+          position: relative;
           font-size: 12px;
+          padding: 10px 5px;
+          border-bottom: 1px dotted @border-color;
+          margin-bottom: 10px;
 
           .x-calendar-roomtype-cell-label {
             .x-calendar-roomtype-label;
             border: 1px solid @brand-info;
-            margin: 10px 5px;
+            margin: 0;
           }
 
           .x-calendar-roomtype-cell-date {
-            float: right;
-            margin: 10px 5px;
+            position: absolute;
+            top: 1px;
+            right: 0;
+            min-width: 26px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            border-radius: 13px;
+            margin: 5px;
           }
         }
 
         &.x-calendar-roomtype-cell-today {
-          background-color: @contents-bg-light;
-          border: 2px solid fade(@brand-info, 80%);
+          .x-calendar-roomtype-cell-date {
+            background-color: @brand-info;
+            color: white;
+          }
         }
 
         .x-calendar-roomtype-cell-closed {

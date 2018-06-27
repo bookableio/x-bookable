@@ -52,6 +52,10 @@
               'x-calendar-roomtype-cell-sunday': day.dayofweek == 0
             }">
               <div class="x-calendar-roomtype-cell-header">
+                <!-- <span class="x-calendar-roomtype-cell-label" ng-style="{
+                  'color': day.rates.ratestpl.color || 'transparent',
+                  'border-color': day.rates.ratestpl.color || 'transparent'
+                }">{{day.rates.ratestpl.name || 'none'}}</span> -->
                 <span class="x-calendar-roomtype-cell-label" ng-style="{
                   'color': day.rates.promotion.color || 'transparent',
                   'border-color': day.rates.promotion.color || 'transparent'
