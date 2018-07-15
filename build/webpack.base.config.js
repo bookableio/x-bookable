@@ -21,7 +21,8 @@ const postcssoptions = {
       ]
     }),
     require('cssnano')({
-      reduceIdents: false
+      reduceIdents: false,
+      safe: true
     })
   ]
 };
