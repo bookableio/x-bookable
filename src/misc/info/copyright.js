@@ -12,7 +12,7 @@ export default ['$timeout', function($timeout) {
           if( !business ) return;
 
           const info = business.info || {};
-          element.html(info.copyright || '&copy;' + year + ' <span>' + info.registered || business.name + '</span>');
+          element.html(info.copyright || '&copy;' + year + ' <span>' + (info.registered || business.name) + '</span>');
         };
 
         root.$on('bookableloaded', () => {
