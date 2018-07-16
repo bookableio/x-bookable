@@ -29,6 +29,8 @@ $ npm i x-bookable --save
 - [npm 기반으로 개발하기](#npm-기반으로-개발하기)
 - [angular app 으로 개발하기](#angular-app-으로-개발하기)
 
+## 예제 웹사이트
+[예제 웹사이트 소스](./examples/web)
 
 ## 사용방법
 
