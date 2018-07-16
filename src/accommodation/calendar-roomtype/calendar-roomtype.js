@@ -97,7 +97,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
 
       const select = (day, roomtype) => {
         if( !day || !roomtype ) return;
-        if( !day.rates.bookable ) return;
+        if( !day.rates || !day.rates.bookable ) return;
         if( !day.rates.rates[roomtype.id] ) return;
 
         const date = day.date;
