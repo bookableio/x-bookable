@@ -177,7 +177,7 @@ function handlehash() {
 
     if( view || viewalt ) {
       (view || viewalt).select();
-      render('/pages/' + pathname + '.html');
+      render('./pages/' + pathname + '.html');
     }
   }
 }
