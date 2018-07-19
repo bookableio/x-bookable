@@ -1,5 +1,14 @@
 # x-bookable
 
+[![NPM Version][npm-version]][npm-url] [![NPM Downloads][npm-total]][npm-url] [![NPM Downloads][npm-month]][npm-url] [![NPM Downloads][license]][npm-url]
+
+[npm-version]: https://img.shields.io/npm/v/x-bookable.svg
+[npm-url]: https://npmjs.org/package/x-bookable
+[npm-total]: https://img.shields.io/npm/dt/x-bookable.svg
+[npm-month]: https://img.shields.io/npm/dm/x-bookable.svg
+[license]: https://img.shields.io/npm/l/x-bookable.svg
+
+
 > 예약관리 서비스 [`북커블`](https://bookable.io) 의 기능들을 웹사이트를 개발할 때 태그 기반으로 손쉽게 연동할 수 있도록 제작된 태그 라이브러리입니다. 아이프레임/팝업창 방식의 연동과 달리 직접 html 내에서 실행되어 스타일시트를 재정의하거나 좀 더 디자인 친화적으로 웹사이트내에 예약관련 기능을 연동할 수 있습니다. IE9+ 과 대부분의 모던브라우저를 지원합니다.
 
 
