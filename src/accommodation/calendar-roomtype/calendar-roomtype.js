@@ -69,6 +69,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
             scope.weeks = weeks;
             scope.datemap = datemap;
             scope.rates = rates;
+            scope.showrates = accommodation.config.hideratesincalendar === true ? false : scope.showrates;
             scope.ready = true;
 
             rates.rates.forEach((rates) => {

@@ -82,20 +82,20 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-3 control-label">객실</label>
+          <label class="col-sm-3 control-label">{{accommodation.unitname}}</label>
 
           <div class="col-sm-9 pt5">
             <table class="table table-striped table-bordered m0">
               <thead>
                 <tr>
                   <th class="text-center" width="25%">날짜</th>
-                  <th class="text-center">객실명</th>
+                  <th class="text-center">{{accommodation.unitname}}명</th>
                   <th class="text-center" width="25%">요금</th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-if="!reservation.rooms.length">
-                  <td class="text-muted text-center" colspan="7">예약된 객실이 없습니다.</td>
+                  <td class="text-muted text-center" colspan="7">예약된 {{accommodation.unitname}}이 없습니다.</td>
                 </tr>
                 <tr ng-repeat="room in reservation.rooms">
                   <td class="text-center v-middle">{{room.date | moment:'MM.DD (ddd)'}}</td>
@@ -110,7 +110,7 @@
           </div>
           <div class="col-sm-offset-3 col-sm-9 pt5 text-right">
             <p class="form-control-static p5">
-              <span class="bold">총 객실 요금 : </span>
+              <span class="bold">총 {{accommodation.unitname}} 요금 : </span>
               <span class="text-primary bold">{{reservation.bill.roomcharge | currency:accommodation.currency}}</span>
             </p>
           </div>

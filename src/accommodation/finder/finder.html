@@ -6,11 +6,11 @@
 
     <div class="x-bookable-finder-body" ng-if="ready">
       <div class="alert alert-danger" role="alert" ng-if="bookable && !bookable.rates.length">
-        죄송합니다. 해당 조건으로는 예약 가능한 객실이 없습니다.
+        죄송합니다. 해당 조건으로는 예약 가능한 {{accommodation.unitname}}이 없습니다.
       </div>
 
       <div class="alert alert-info" role="alert" ng-if="bookable && bookable.rates.length">
-        <b>{{bookable.checkin | moment:'YYYY년 MM월 DD일 (dd)'}}</b> 부터 <b>{{bookable.days}}박</b>으로 예약 가능한 객실이 <b>{{bookable.rates.length}}</b>개 있습니다.
+        <b>{{bookable.checkin | moment:'YYYY년 MM월 DD일 (dd)'}}</b> 부터 <b>{{bookable.days}}박</b>으로 예약 가능한 {{accommodation.unitname}}이 <b>{{bookable.rates.length}}</b>개 있습니다.
       </div>
 
       <div ng-if="bookable.rates">
@@ -32,10 +32,10 @@
                   <b>{{roomrates.capacity || '-'}}</b>인 기준 <b>{{roomrates.price | currency:bookable.currency}}</b> ~
                 </span>
                 <span ng-if="isselected(roomrates.id) && roomrates.calcprice">
-                    <b>{{roomrates.qty}}</b>개 객실 / <b>{{roomrates.adults + roomrates.children}}</b>인 <b>{{roomrates.calcprice | currency:bookable.currency}}</b>
+                    <b>{{roomrates.qty}}</b>개 {{accommodation.unitname}} / <b>{{roomrates.adults + roomrates.children}}</b>인 <b>{{roomrates.calcprice | currency:bookable.currency}}</b>
                 </span>
               </div>
-              <small>{{roomrates.capacity || '-'}}인 객실 / 최대 {{roomrates.maximum || '-'}}인</small>
+              <small>{{roomrates.capacity || '-'}}인 {{accommodation.unitname}} / 최대 {{roomrates.maximum || '-'}}인</small>
             </div>
           </div>
 
@@ -43,7 +43,7 @@
             <div class="row gap3">
               <div class="col-xs-4 col-sm-offset-3 col-sm-3 col-md-offset-3 col-md-3 pr5">
                 <select class="form-control" ng-model="roomrates.qty" ng-change="updateoptions()">
-                  <option ng-repeat="n in [] | range:1:roomrates.vacancy" ng-value="{{n}}">{{n}}개 객실</option>
+                  <option ng-repeat="n in [] | range:1:roomrates.vacancy" ng-value="{{n}}">{{n}}개 {{accommodation.unitname}}</option>
                 </select>
               </div>
               <div class="col-xs-4 col-sm-3 col-md-3 pr5">
@@ -72,7 +72,7 @@
           <div class="row gap3 visible-xs mt15" ng-if="isselected(roomrates.id)">
             <div class="col-xs-4">
               <select class="form-control" ng-model="roomrates.qty" ng-change="updateoptions()">
-                <option ng-repeat="n in [] | range:1:roomrates.vacancy" ng-value="{{n}}">{{n}}개 객실</option>
+                <option ng-repeat="n in [] | range:1:roomrates.vacancy" ng-value="{{n}}">{{n}}개 {{accommodation.unitname}}</option>
               </select>
             </div>
             <div class="col-xs-4">
@@ -93,12 +93,12 @@
       <div class="row nogap mt15">
         <div class="col-xs-6">
           <p class="form-control-static text-light" ng-if="dates.length">
-            <b>{{dates.length}}박</b> <b>{{roomqty}}개</b>의 객실예약
+            <b>{{dates.length}}박</b> <b>{{roomqty}}개</b>의 {{accommodation.unitname}}예약
           </p>
         </div>
         <div class="col-xs-6 text-right">
           <p class="form-control-static">
-            총 객실요금 : <b>{{totalprice | currency:accommodation.currency}}</b>
+            총 {{accommodation.unitname}}요금 : <b>{{totalprice | currency:accommodation.currency}}</b>
           </p>
         </div>
       </div>

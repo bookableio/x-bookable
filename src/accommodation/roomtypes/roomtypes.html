@@ -36,7 +36,7 @@
             <div class="thumbnail-desc">
               <p class="oneline">1박 <b>{{roomtype.price | currency:accommodation.currency}}</b> 부터</p>
               <p class="oneline">
-                {{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인
+                {{roomtype.capacity || '-'}}인 {{accommodation.unitname}} / 최대 {{roomtype.maximum || '-'}}인
                 <span ng-if="roomtype.info.size"> / {{roomtype.info.size}}</span>
                 <span ng-if="roomtype.info.structure"> / {{roomtype.info.structure}}</span>
               </p>
@@ -51,7 +51,7 @@
       <div class="crossbox visible-xs visible-sm" ng-repeat="roomtype in accommodation.roomtypes">
         <div class="crossbox-image pointer" ng-click="select(roomtype)" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}"></div>
         <div class="crossbox-body">
-          <small class="crossbox-category">{{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인</small>
+          <small class="crossbox-category">{{roomtype.capacity || '-'}}인 {{accommodation.unitname}} / 최대 {{roomtype.maximum || '-'}}인</small>
           <h3 class="crossbox-title"><a href ng-click="select(roomtype)">{{roomtype.name}}</a></h3>
           <div class="crossbox-text">
             <a href ng-click="select(roomtype)">
@@ -69,7 +69,7 @@
       <div class="crossbox hidden-xs hidden-sm" ng-repeat="roomtype in accommodation.roomtypes">
         <div class="crossbox-image pointer" ng-click="select(roomtype)" ng-background="{{roomtype.photo[0].thumbnails['512'].url | cdn}}"  ng-if="$index % 2 == 0"></div>
         <div class="crossbox-body">
-          <small class="crossbox-category">{{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인</small>
+          <small class="crossbox-category">{{roomtype.capacity || '-'}}인 {{accommodation.unitname}} / 최대 {{roomtype.maximum || '-'}}인</small>
           <h3 class="crossbox-title"><a href ng-click="select(roomtype)">{{roomtype.name}}</a></h3>
           <div class="crossbox-text">
             <a href ng-click="select(roomtype)">
@@ -95,7 +95,7 @@
 
             <small class="oneline">1박 <b>{{roomtype.price | currency:accommodation.currency}}</b> 부터</small>
             <small class="oneline">
-              {{roomtype.capacity || '-'}}인 객실 / 최대 {{roomtype.maximum || '-'}}인
+              {{roomtype.capacity || '-'}}인 {{accommodation.unitname}} / 최대 {{roomtype.maximum || '-'}}인
               <span ng-if="roomtype.info.size"> / {{roomtype.info.size}}</span>
               <span ng-if="roomtype.info.structure"> / {{roomtype.info.structure}}</span>
             </small>

@@ -72,7 +72,7 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
         if( !reservation ) return error(new Error('연결된 예약이 없습니다.'));
         //if( !paymentmethod ) return error(new Error('결제 방법을 선택해주세요.'));
         if( !form ) return error(new Error('프로그램 오류입니다. 다시 시도해주세요.'));
-        if( !reservation.rooms.length ) return error(new Error('예약할 객실이 없습니다.'));
+        if( !reservation.rooms.length ) return error(new Error(`예약할 ${accommodation.unitname}이 없습니다.`));
         if( !form.termsofuse ) return error(new Error('이용약관에 동의하셔야 합니다.'));
         if( !form.name ) return error(new Error('예약자명을 입력해주세요.'));
         if( !form.mobile ) return error(new Error('휴대전화번호를 입력해주세요.'));
@@ -89,7 +89,7 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
 
           paymentfn(paymentmethod && {
             type: paymentmethod.type,
-            name : '객실예약',
+            name : `${accommodation.unitname} 예약`,
             price : reservation.price,
             options: paymentmethod.options && {
               pg : paymentmethod.options.pg,

@@ -1,14 +1,14 @@
 <div class="x-bookable">
   <div class="alert alert-warning text-center m0" role="alert" ng-if="!roomtypeid">
-    객실이 선택되지 않았습니다.
+    {{accommodation.unitname}}이 선택되지 않았습니다.
   </div>
 
   <div class="alert alert-info text-center m0" role="alert" ng-if="!loaded && roomtypeid">
-    객실 정보를 로딩중입니다.
+    정보를 로딩중입니다.
   </div>
 
   <div class="alert alert-danger text-center m0" role="alert" ng-if="loaded && !roomtype">
-    객실 정보를 불러올 수 없습니다.
+    정보를 불러올 수 없습니다.
   </div>
 
   <div class="x-accommodation x-bookaroom" ng-if="loaded && roomtype">
@@ -23,7 +23,7 @@
     <div class="mt15" ng-if="selected.length">
       <div class="row mb5">
         <div class="col-xs-6">
-          <p class="form-control-static">{{summary.qty}}개 객실 {{summary.days}}박 <small>({{summary.capacity}}인 기준)</small></p>
+          <p class="form-control-static">{{summary.qty}}개 {{accommodation.unitname}} {{summary.days}}박 <small>({{summary.capacity}}인 기준)</small></p>
         </div>
         <div class="col-xs-6 text-right">
           <ng-incrementer min="1" max="{{summary.vacancy}}" suffix="개" ng-model="summary.qty" ng-change="calc()"></ng-incrementer>
@@ -31,7 +31,7 @@
       </div>
       <div class="row mb5" ng-if="summary.roomcharge">
         <div class="col-xs-6">
-          <p class="form-control-static text-bold">객실요금</p>
+          <p class="form-control-static text-bold">{{accommodation.unitname}}요금</p>
         </div>
         <div class="col-xs-6 text-right">
           <p class="form-control-static text-bold">{{summary.roomcharge | currency:accommodation.currency}}</p>
@@ -77,7 +77,7 @@
         </div>
         <div class="col-xs-7 text-right">
           <p class="form-control-static">
-            {{item.qty}} 개 객실, 성인 {{item.adults}}명 <span ng-if="item.children">아동 {{item.children}}명</span>
+            {{item.qty}} 개 {{accommodation.unitname}}, 성인 {{item.adults}}명 <span ng-if="item.children">아동 {{item.children}}명</span>
           <p>
         </div>
         <div class="col-xs-12 text-right">
@@ -93,8 +93,8 @@
     <div class="mt15" ng-if="selected.length">
       <div class="row mt25">
         <div class="col-xs-12 text-right">
-          <div class="fs12">{{summary.qty}}개 객실, {{summary.days}}박 (성인 {{summary.adults}}명 / 아동 {{summary.children}}명)</div>
-          <div class="mt5">총 객실요금 <b>{{summary.price | currency:accommodation.currency}}</b></div>
+          <div class="fs12">{{summary.qty}}개 {{accommodation.unitname}}, {{summary.days}}박 (성인 {{summary.adults}}명 / 아동 {{summary.children}}명)</div>
+          <div class="mt5">총 {{accommodation.unitname}}요금 <b>{{summary.price | currency:accommodation.currency}}</b></div>
         </div>
       </div>
 

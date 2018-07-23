@@ -12,7 +12,7 @@
       <table class="x-bookable-rates-table table table-bordered">
         <thead>
           <tr>
-            <th class="x-bookable-rates-roomtype-name" width="200">객실</th>
+            <th class="x-bookable-rates-roomtype-name" width="200">{{accommodation.unitname}}</th>
             <th class="x-bookable-rates-roomtype-structure hidden-xs hidden-sm" width="200" ng-if="exists('structure')">구조</th>
             <th class="x-bookable-rates-roomtype-size hidden-xs hidden-sm" width="70" ng-if="exists('size')">면적</th>
             <th class="x-bookable-rates-roomtype-capacity hidden-xs" width="50">인원</th>
@@ -23,7 +23,7 @@
         </thead>
         <tbody>
           <tr ng-if="!accommodation.roomtypes.length">
-            <td class="text-center" colspan="100">표시할 객실이 없습니다.</td>
+            <td class="text-center" colspan="100">표시할 {{accommodation.unitname}} 정보가 없습니다.</td>
           </tr>
           <tr ng-repeat="roomtype in accommodation.roomtypes">
             <td class="x-bookable-rates-roomtype-name"><a href ng-click="select(roomtype)">{{roomtype.name}}</a></td>

@@ -1,20 +1,18 @@
 <div class="x-bookable">
   <div class="alert alert-warning text-center" role="alert" ng-if="accommodation && !roomtype">
-    <span>객실을 찾을 수 없습니다.</span>
+    <span>{{accommodation.unitname}}을 찾을 수 없습니다.</span>
   </div>
 
   <div class="x-accommodation x-roomtype" ng-if="roomtype">
     <div class="pv10">
-      <h4 class="mt0">객실안내</h4>
-
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th class="text-center hidden-xs" width="30%">객실명</th>
+            <th class="text-center hidden-xs" width="30%">{{accommodation.unitname}}명</th>
             <th class="text-center">인원</th>
             <th class="text-center">최대</th>
             <th class="text-center hidden-xs" ng-if="roomtype.info.size">크기</th>
-            <th class="text-center" ng-if="roomtype.info.structure">객실구조</th>
+            <th class="text-center" ng-if="roomtype.info.structure">구조</th>
           </tr>
         </thead>
         <tbody>
@@ -59,7 +57,7 @@
     </div>
 
     <div class="mt20 pv10" ng-if="roomtype.html">
-      <h4 class="mt0">객실소개</h4>
+      <h4 class="mt0">{{accommodation.unitname}}소개</h4>
       <p ng-bind-html="roomtype.html | unsafe"></p>
     </div>
 
