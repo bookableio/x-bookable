@@ -13,7 +13,7 @@
         <h4>연락처</h4>
         <address class="fs13">
           <abbr title="Phone">Tel:</abbr> {{business.tel || '-'}}<br>
-          <a ng-if="business.email" href="mailto:{{business.email}}" class="ng-binding">김홈즈 &lt;{{business.email}}&gt;</a>
+          <a ng-if="business.email" href="mailto:{{business.email}}" class="ng-binding">{{business.name}} &lt;{{business.email}}&gt;</a>
         </address>
       </div>
   </div>
