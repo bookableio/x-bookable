@@ -76,6 +76,8 @@ const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground'
         scope.business = business;
         loaded = true;
 
+        document.title = document.title || business.title || business.name;
+
         scope.$emit('bookableloaded', business);
         emitter.fire('load', {
           business
