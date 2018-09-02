@@ -32,7 +32,7 @@ const plugins = pagenames.map(pagename => {
     inject: 'head',
     filename: path.resolve(dist, pagename),
     template: path.resolve(src, pagename)
-  })
+  });
 });
 
 module.exports = merge(base, {

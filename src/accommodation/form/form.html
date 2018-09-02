@@ -33,9 +33,9 @@
             <div class="border bg-lighter p15" ng-if="selectedpaymentmethod.type == 'banking' || selectedpaymentmethod.message">
               <div ng-if="selectedpaymentmethod.type == 'banking'" class="text-center">
                 <b>{{selectedpaymentmethod.options.account}} {{selectedpaymentmethod.options.bank}} {{selectedpaymentmethod.options.holder}}</b><br>
-                <small class="text-normal block mt10" ng-bind-html="selectedpaymentmethod.message | unsafe"></small>
+                <small class="text-normal block mt10" ng-bind-html="selectedpaymentmethod.message | tobr | unsafe"></small>
               </div>
-              <div ng-if="selectedpaymentmethod.type != 'banking'" ng-bind-html="selectedpaymentmethod.message | unsafe"></div>
+              <div ng-if="selectedpaymentmethod.type != 'banking'" ng-bind-html="selectedpaymentmethod.message | tobr | unsafe"></div>
             </div>
           </div>
 

@@ -77,7 +77,8 @@ export default ['safeApply', 'event', '$timeout', 'evalattr', function(safeApply
 
       function status(status) {
         // ['waiting', 'confirm', 'cancel', 'cancelled', 'remove']
-        if( status === 'waiting' ) return '확인 대기중';
+        if( status === 'prepare' ) return '미완료';
+        if( status === 'waiting' ) return '결제대기중';
         else if( status === 'confirm' ) return '확정';
         else if( status === 'cancel' ) return '취소 요청중';
         else if( status === 'cancelled' ) return '취소됨';

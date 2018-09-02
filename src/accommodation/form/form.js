@@ -1,6 +1,6 @@
 import xmodal from 'x-modal';
 import bookable from 'bookable';
-import paymentfn from '../paymentfn.js';
+import paymenthandler from '../payment';
 import termsmodal from '../../misc/terms-modal/terms-modal';
 
 document.createElement('ng-slick');
@@ -82,44 +82,45 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
         reservation.mobile = form.mobile;
         reservation.email = form.email;
         reservation.request = form.request;
+        reservation.payment = {
+          paymentmethodid: paymentmethod && paymentmethod.id
+        };
 
-        bookable.accommodation(accommodation.id).reservation.validate(reservation).exec((err, reservation) => {
-          if( err ) return error(err);
-          if( reservation.errors ) return error(new Error('예약에 오류가 있습니다.'));
+        console.log('reservation', reservation);
 
-          paymentfn(paymentmethod && {
-            type: paymentmethod.type,
-            name : `${accommodation.unitname} 예약`,
-            price : reservation.price,
-            options: paymentmethod.options && {
-              pg : paymentmethod.options.pg,
-              cid: paymentmethod.options.cid,
-              pay_method : paymentmethod.options.method,
-              merchant_uid : reservation.vid,
-              buyer_name : reservation.name,
-              buyer_email : reservation.email,
-              buyer_tel : reservation.mobile,
-              buyer_addr : reservation.info.address,
-              buyer_postcode : reservation.info.postcode
-            }
-          }, (err, result) => {
+        xmodal.confirm('예약하시겠습니까?', (b) => {
+          if( !b ) return;
+
+          paymenthandler.prepare({
+            reservation,
+            paymentmethod
+          }, (err, options) => {
             if( err ) return error(err);
 
-            if( paymentmethod ) reservation.payment = {
-              paymentmethodid: paymentmethod.id,
-              amount: reservation.price,
-              options: result
-            };
+            reservation.payment.options = options;
 
             bookable.accommodation(accommodation.id).reservation.create(reservation).exec((err, reservation) => {
               if( err ) return error(err);
+              if( reservation.errors ) return error(new Error('예약에 오류가 있습니다.'));
 
-              xmodal.success('예약이 신청되었습니다.', '예약이 확정되면 문자메시지와 이메일로 통보해 드리겠습니다.');
+              paymenthandler.pay(paymentmethod && {
+                paymentmethod,
+                reservation
+              }, (err) => {
+                if( err ) return xmodal.error('결제 실패', '결제가 실패하였습니다. 이유: ' + err.message);
 
-              setTimeout(() => {
-                attrs.ngComplete && scope.$parent.$eval(attrs.ngComplete, {$reservation: reservation});
-                event.fire(element, 'complete', {reservation});
-              }, 250);
+                console.log('r', bookable.accommodation(accommodation.id).reservation);
+                bookable.accommodation(accommodation.id).reservation.settlement(reservation.id).exec((err) => {
+                  if( err ) return xmodal.error('예약 실패', '예약이 실패하였습니다. 이유: ' + err.message);
+
+                  xmodal.success('예약이 신청되었습니다.', '예약이 확정되면 문자메시지와 이메일로 통보해 드리겠습니다.');
+
+                  setTimeout(() => {
+                    attrs.ngComplete && scope.$parent.$eval(attrs.ngComplete, {$reservation: reservation});
+                    event.fire(element, 'complete', {reservation});
+                  }, 250);
+                });
+              });
             });
           });
         });
