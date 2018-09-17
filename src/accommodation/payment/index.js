@@ -5,22 +5,20 @@ const TYPES = {
 };
 
 export default {
-  prepare(options, done) {
-    const paymentmethod = options.paymentmethod;
-    if( !paymentmethod || ~['default', 'banking', 'direct'].indexOf(paymentmethod.type) ) return done();
+  prepare(reservation, paymentmethod, done) {
+    if( !paymentmethod ) return done();
 
-    const type = TYPES[paymentmethod.type];
-    if( !type ) return done(new Error('잘못된 결제방법 (프로그램 오류):' + paymentmethod.type));
+    const provider = TYPES[paymentmethod.provider];
+    if( !provider ) return done();
 
-    type.prepare(options, done);
+    provider.prepare(reservation, paymentmethod, done);
   },
-  pay(options = {}, done) {
-    const paymentmethod = options.paymentmethod;
-    if( !paymentmethod || ~['default', 'banking', 'direct'].indexOf(paymentmethod.type) ) return done();
+  pay(reservation, paymentmethod, done) {
+    if( !paymentmethod ) return done();
 
-    const type = TYPES[paymentmethod.type];
-    if( !type ) return done(new Error('잘못된 결제방법 (프로그램 오류):' + paymentmethod.type));
+    const provider = TYPES[paymentmethod.provider];
+    if( !provider ) return done();
 
-    type.pay(options, done);
+    provider.pay(reservation, paymentmethod, done);
   }
 };

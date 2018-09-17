@@ -1,4 +1,4 @@
-import shortid from 'shortid';
+import bookable from 'bookable';
 
 const loadscript = (done) => {
   if( window.IMP ) return done(null, window.IMP);
@@ -16,19 +16,13 @@ const loadscript = (done) => {
 };
 
 export default {
-  prepare(options, done) {
+  prepare(reservation, paymentmethod, done) {
     done(null, {
-      merchant_uid: `mid-${shortid()}`
+      mid: reservation.id
     });
   },
-  pay(options = {}, done) {
-    console.log('options', options);
-
-    const paymentmethod = options.paymentmethod;
-    const reservation = options.reservation;
+  pay(reservation, paymentmethod, done) {
     const payment = reservation.payment;
-
-    console.log('payment', payment);
 
     loadscript((err, IMP) => {
       if( err ) return done(err);
@@ -39,12 +33,13 @@ export default {
         amount : reservation.price,
         pg : paymentmethod.options.pg,
         pay_method : paymentmethod.options.method,
-        merchant_uid : payment.options.merchant_uid,
+        merchant_uid : payment.options.mid,
         buyer_email : reservation.email,
         buyer_name : reservation.name,
         buyer_tel : reservation.mobile,
         buyer_addr : reservation.info && reservation.info.address,
         buyer_postcode : reservation.info && reservation.info.postcode,
+        m_redirect_url: paymentmethod.options.m_redirect_url
       }, (response) => {
         if ( !response.success ) return done(new Error('결제에 실패하였습니다.' + response.error_msg));
         done(null, response);

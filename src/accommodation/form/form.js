@@ -86,30 +86,21 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
           paymentmethodid: paymentmethod && paymentmethod.id
         };
 
-        console.log('reservation', reservation);
-
         xmodal.confirm('예약하시겠습니까?', (b) => {
           if( !b ) return;
 
-          paymenthandler.prepare({
-            reservation,
-            paymentmethod
-          }, (err, options) => {
+          paymenthandler.prepare(reservation, paymentmethod, (err, options) => {
             if( err ) return error(err);
 
             reservation.payment.options = options;
 
-            bookable.accommodation(accommodation.id).reservation.create(reservation).exec((err, reservation) => {
+            bookable.accommodation(accommodation.id).reservation.prepare(reservation).exec((err, reservation) => {
               if( err ) return error(err);
               if( reservation.errors ) return error(new Error('예약에 오류가 있습니다.'));
 
-              paymenthandler.pay(paymentmethod && {
-                paymentmethod,
-                reservation
-              }, (err) => {
+              paymenthandler.pay(reservation, paymentmethod, (err) => {
                 if( err ) return xmodal.error('결제 실패', '결제가 실패하였습니다. 이유: ' + err.message);
 
-                console.log('r', bookable.accommodation(accommodation.id).reservation);
                 bookable.accommodation(accommodation.id).reservation.settlement(reservation.id).exec((err) => {
                   if( err ) return xmodal.error('예약 실패', '예약이 실패하였습니다. 이유: ' + err.message);
 
