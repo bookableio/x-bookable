@@ -89,7 +89,7 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
         xmodal.confirm('예약하시겠습니까?', (b) => {
           if( !b ) return;
 
-          paymenthandler.prepare(reservation, paymentmethod, (err, options) => {
+          paymenthandler.prepare(accommodation, reservation, paymentmethod, (err, options) => {
             if( err ) return error(err);
 
             reservation.payment.options = options;
@@ -98,7 +98,7 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
               if( err ) return error(err);
               if( reservation.errors ) return error(new Error('예약에 오류가 있습니다.'));
 
-              paymenthandler.pay(reservation, paymentmethod, (err) => {
+              paymenthandler.pay(accommodation, reservation, paymentmethod, (err) => {
                 if( err ) return xmodal.error('결제 실패', '결제가 실패하였습니다. 이유: ' + err.message);
 
                 bookable.accommodation(accommodation.id).reservation.settlement(reservation.id).exec((err) => {

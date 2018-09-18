@@ -16,20 +16,26 @@ const loadscript = (done) => {
 };
 
 export default {
-  prepare(reservation, paymentmethod, done) {
+  prepare(business, reservation, paymentmethod, done) {
     done(null, {
       mid: reservation.id
     });
   },
-  pay(reservation, paymentmethod, done) {
+  pay(business, reservation, paymentmethod, done) {
     const payment = reservation.payment;
 
     loadscript((err, IMP) => {
       if( err ) return done(err);
 
+      const name = business.unitname ? `${business.name} ${business.unitname} 예약` : `${business.name} 예약`;
+
+      let endpoint = bookable.endpoint();
+      if( endpoint.endsWith('/') ) endpoint = endpoint.substring(0, endpoint.length - 1);
+      const m_redirect_url = `${endpoint}/accommodation/${reservation.aid}/reservation/settlement/${reservation.id}?redirect=` + encodeURIComponent(paymentmethod.options.m_redirect_url);
+
       IMP.init(paymentmethod.options.cid);
       IMP.request_pay({
-        name : `${reservation.name}님의 예약결제`,
+        name,
         amount : reservation.price,
         pg : paymentmethod.options.pg,
         pay_method : paymentmethod.options.method,
@@ -39,7 +45,7 @@ export default {
         buyer_tel : reservation.mobile,
         buyer_addr : reservation.info && reservation.info.address,
         buyer_postcode : reservation.info && reservation.info.postcode,
-        m_redirect_url: paymentmethod.options.m_redirect_url
+        m_redirect_url
       }, (response) => {
         if ( !response.success ) return done(new Error('결제에 실패하였습니다.' + response.error_msg));
         done(null, response);

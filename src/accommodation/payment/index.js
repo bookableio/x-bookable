@@ -5,20 +5,20 @@ const TYPES = {
 };
 
 export default {
-  prepare(reservation, paymentmethod, done) {
+  prepare(business, reservation, paymentmethod, done) {
     if( !paymentmethod ) return done();
 
     const provider = TYPES[paymentmethod.provider];
     if( !provider ) return done();
 
-    provider.prepare(reservation, paymentmethod, done);
+    provider.prepare(business, reservation, paymentmethod, done);
   },
-  pay(reservation, paymentmethod, done) {
+  pay(business, reservation, paymentmethod, done) {
     if( !paymentmethod ) return done();
 
     const provider = TYPES[paymentmethod.provider];
     if( !provider ) return done();
 
-    provider.pay(reservation, paymentmethod, done);
+    provider.pay(business, reservation, paymentmethod, done);
   }
 };
