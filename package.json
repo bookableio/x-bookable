@@ -27,7 +27,7 @@
   "dependencies": {
     "async-each-series": "^1.1.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "bookable": "^0.1.4",
+    "bookable": "^0.1.6",
     "bootstrap-theme-attrs": "^0.3.25",
     "google-maps": "^3.2.1",
     "moment": "^2.20.1",
@@ -46,7 +46,7 @@
     "x-modal": "^0.1.13"
   },
   "devDependencies": {
-    "angular": "^1.7.0",
+    "angular": "^1.7.4",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
@@ -63,17 +63,17 @@
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^3.0.6",
     "jquery": "^3.3.1",
-    "less": "^3.0.4",
+    "less": "^3.8.1",
     "less-loader": "^4.0.5",
     "less-plugin-clean-css": "^1.5.1",
     "postcss-import": "^11.1.0",
     "postcss-loader": "^2.1.5",
-    "postcss-preset-env": "^5.1.0",
+    "postcss-preset-env": "^5.3.0",
     "static-server": "^2.2.1",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.11.1",
+    "webpack-dev-server": "^2.11.3",
     "webpack-merge": "^3.0.0",
     "x-workbench": "^0.3.1"
   },
