@@ -50,7 +50,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
 
         form.checkin = moment(date).format('YYYY-MM-DD');
         form.days = 1;
-        form.guests = 1;
+        form.guests = 0;
 
         safeApply(scope);
 
@@ -153,7 +153,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
       });
 
       attrs.$observe('guests', () => {
-        scope.guests = form.guests = +evalattr(attrs.guests) || 1;
+        scope.guests = form.guests = +evalattr(attrs.guests) || 0;
         safeApply(scope);
       });
 

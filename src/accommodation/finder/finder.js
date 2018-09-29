@@ -97,7 +97,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', funct
 
         const checkin = moment(scope.checkin);
         const checkout = scope.checkout ? moment(scope.checkout) : checkin.clone().add(+scope.days || 1, 'days');
-        const guests = +scope.guests || 1;
+        const guests = +scope.guests || 0;
 
         if( !checkin.isValid() ) return console.error('invalid checkin date:' + scope.checkin);
 
@@ -223,7 +223,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', funct
       });
 
       attrs.$observe('guests', () => {
-        scope.guests = +evalattr(attrs.guests) || 1;
+        scope.guests = +evalattr(attrs.guests) || 0;
         refresh();
       });
 

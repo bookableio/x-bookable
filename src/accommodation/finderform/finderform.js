@@ -37,7 +37,7 @@ export default ['safeApply', 'event', '$timeout', function(safeApply, event, $ti
           })() || 1;
           scope.ready = true;
           scope.formdata = {
-            guests: 1,
+            guests: 0,
             days: 1
           };
 
@@ -53,7 +53,7 @@ export default ['safeApply', 'event', '$timeout', function(safeApply, event, $ti
         const days = +scope.formdata.days || 1;
         const checkin = moment(scope.formdata.checkin, 'YYYY-MM-DD');
         const checkout = checkin.clone().add(days, 'days');
-        const guests = +scope.formdata.guests || 1;
+        const guests = +scope.formdata.guests || 0;
 
         if( !checkin.isValid() ) return console.error('invalid checkin');
 

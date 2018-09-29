@@ -17,7 +17,7 @@
         <div class="media media-border" ng-repeat="roomrates in bookable.rates" ng-class="{
             'selected': isselected(roomrates.id)
           }">
-          <div class="media-left media-middle hidden-xs">
+          <div class="media-left media-middle">
             <div class="media-image pointer" ng-background="{{roomrates.id | roompic:accommodation.roomtypes}}" ng-click="openslideshow(roomrates.id)"></div>
           </div>
 
@@ -58,7 +58,7 @@
               </div>
             </div>
           </div>
-          <div class="media-right media-middle">
+          <div class="media-right media-middle hidden-xs hidden-sm">
             <div ng-show="isselected(roomrates.id)">
               <a href class="btn btn-danger" ng-click="deselect(roomrates.id)"><i class="icon-x"></i> 선택취소</a>
             </div>
@@ -69,7 +69,7 @@
           <div class="media-badge media-badge-lg" ng-if="room.recommend">추천</div>
 
           <!-- xs 인원선택 -->
-          <div class="row gap3 visible-xs mt15" ng-if="isselected(roomrates.id)">
+          <div class="row gap3 visible-xs visible-sm mt15" ng-if="isselected(roomrates.id)">
             <div class="col-xs-4">
               <select class="form-control" ng-model="roomrates.qty" ng-change="updateoptions()">
                 <option ng-repeat="n in [] | range:1:roomrates.vacancy" ng-value="{{n}}">{{n}}개 {{accommodation.unitname}}</option>
@@ -87,6 +87,17 @@
             </div>
           </div>
           <!-- // xs 인원선택 -->
+
+          <!-- xs 객실선택/취소 버튼 -->
+          <div class="visible-xs visible-sm mt15">
+            <div ng-show="isselected(roomrates.id)">
+              <a href class="btn btn-danger btn-block pv15" ng-click="deselect(roomrates.id)"><i class="icon-x"></i> 선택취소</a>
+            </div>
+            <div ng-show="!isselected(roomrates.id)">
+              <a href class="btn btn-info btn-block pv15" ng-click="select(roomrates.id)"><i class="icon-plus"></i> 선택하기</a>
+            </div>
+          </div>
+          <!-- // xs 객실선택/취소 버튼 -->
         </div>
       </div>
 

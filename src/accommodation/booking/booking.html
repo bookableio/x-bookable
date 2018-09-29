@@ -58,6 +58,7 @@
                 <label>인원</label>
 
                 <select class="form-control" ng-model="form.guests">
+                  <option ng-value="0">인원</option>
                   <option ng-repeat="n in [] | range:1:maximum" ng-value="{{n}}">{{n}}명</option>
                 </select>
               </div>
@@ -68,7 +69,7 @@
                 <a href class="btn btn-primary btn-block" ng-click="find()" ng-disabled="!form.checkin">검색하기</a>
               </div>
               <div class="form-group visible-xs">
-                <a href class="btn btn-primary btn-block btn-lg" ng-click="find()" ng-disabled="!form.checkin">검색하기</a>
+                <a href class="btn btn-primary btn-block pv15" ng-click="find()" ng-disabled="!form.checkin">검색하기</a>
               </div>
             </div>
           </div>
@@ -87,15 +88,15 @@
 
       <div class="text-center hidden-sm hidden-xs">
         <div class="btn-group">
-          <a href class="btn btn-danger btn-lg" style="padding: 13px 35px;" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="useCart">장바구니</a>
-          <a href class="btn btn-danger btn-lg btn-fill" style="padding: 13px 35px;" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
+          <a href class="btn btn-danger pv15" style="padding: 13px 35px;" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="useCart">장바구니</a>
+          <a href class="btn btn-danger pv15 btn-fill" style="padding: 13px 35px;" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
         </div>
       </div>
 
       <div class="hidden-md hidden-lg">
         <div class="btn-group btn-group-justified">
-          <a href class="btn btn-danger btn-lg" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="useCart">장바구니</a>
-          <a href class="btn btn-danger btn-lg btn-fill" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
+          <a href class="btn btn-danger pv15" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="useCart">장바구니</a>
+          <a href class="btn btn-danger pv15 btn-fill" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
         </div>
       </div>
 
