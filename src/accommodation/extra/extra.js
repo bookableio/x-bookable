@@ -66,11 +66,6 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
       scope.applychanges = applychanges;
       scope.updateoptions = updateoptions;
 
-      attrs.$observe('mini', () => {
-        scope.mini = 'mini' in attrs && evalattr(attrs.mini) !== 'false';
-        safeApply(scope);
-      });
-
       event.regist(element, attrs, 'selectionchange');
 
       $timeout(refresh, 0);

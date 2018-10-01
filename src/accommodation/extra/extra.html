@@ -1,15 +1,15 @@
 <div class="x-bookable" ng-show="accommodation.extras.length">
   <div class="x-bookable-extra">
-      <div class="media media-border" ng-repeat="extra in accommodation.extras" ng-class="{
-        'bg-lighter': isselected(extra.id)
-      }">
-      <div class="media-left media-middle" ng-if="!mini">
+    <div class="media media-border" ng-repeat="extra in accommodation.extras" ng-class="{
+      'bg-lighter': isselected(extra.id)
+    }">
+      <div class="media-left media-middle" ng-if="extra.thumbnail">
         <div class="media-image" ng-background="{{extra.thumbnail | cdn}}"></div>
       </div>
 
-      <div class="media-body media-middle" ng-if="!mini">
+      <div class="media-body media-middle">
         <h4 class="media-heading">
-          {{extra.name}}<small ng-if="!mini">{{extra.name_en}}</small>
+          {{extra.name}}<small>{{extra.name_en}}</small>
         </h4>
         <div class="media-desc">
           <div ng-bind-html="extra.desc | tobr | unsafe"></div>
@@ -17,18 +17,8 @@
         </div>
       </div>
 
-      <div class="media-body media-middle" ng-if="mini">
-        <p>{{extra.name}}</p>
-        <small class="block">최소 {{extra.minimum || '-'}}{{extra.unit}} / 최대 {{extra.maximum || '-'}}{{extra.unit}}</small>
-        <small class="block">{{extra.unit}}당 {{extra.price | currency:accommodation.currency}}</small>
-      </div>
-
-      <div class="media-right media-middle text-right hidden-xs hidden-sm" style="min-width:150px;">
-        <ng-incrementer min="0" max="{{extra.maximum}}" suffix="{{extra.unit}}" ng-model="extra.qty" ng-change="updateoptions()"></ng-incrementer>
-      </div>
-
       <!-- xs 선택/취소 버튼 -->
-      <div class="visible-xs visible-sm mt15 text-right">
+      <div class="mt15 text-right">
         <ng-incrementer min="0" max="{{extra.maximum}}" suffix="{{extra.unit}}" ng-model="extra.qty" ng-change="updateoptions()"></ng-incrementer>
       </div>
       <!-- // xs 선택/취소 버튼 -->
