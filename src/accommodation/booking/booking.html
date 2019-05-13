@@ -3,8 +3,15 @@
     <div ng-if="!accommodation.info.external.popup">
       <iframe class="xw900 center-block border" ng-src="{{accommodation.info.external.booking | unsafeurl}}" width="{{accommodation.info.external.width || '100%'}}" height="{{accommodation.info.external.height || 'auto'}}" frameborder="0"></iframe>
     </div>
-    <div class="xw900 center-block text-center" ng-if="accommodation.info.external.popup">
-      <a href class="btn btn-primary btn-xl" ng-click="openexternal()">예약하기</a>
+
+    <div class="text-center hidden-sm hidden-xs">
+      <div class="xw900 center-block text-center" ng-if="accommodation.info.external.popup">
+        <a href class="btn btn-primary btn-xl" ng-click="openexternal()">예약하기</a>
+      </div>
+    </div>
+
+    <div class="hidden-md hidden-lg">
+      <a href class="btn btn-primary btn-xl block" ng-click="openexternal()">예약하기</a>
     </div>
   </div>
 
