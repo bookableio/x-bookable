@@ -218,6 +218,22 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
         return selected && summary && (!selected.length || !summary.price || !+summary.adults);
       };
 
+      const openexternal = () => {
+        const accommodation = scope.accommodation;
+        const external = accommodation.info && accommodation.info.external;
+
+        if( external && external.use && external.booking ) {
+          const url = external.booking;
+          const width = +external.width || 800;
+          const height = +external.height || 600;
+          const left = Math.abs((window.screen.width - width) / 2);
+          let top = Math.abs((window.screen.height - height) / 2);
+          if( top <= 0 ) top = 0;
+
+          window.open(url, 'exbooking', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left + ', scrollbars=no,resizable=no');
+        }
+      };
+
       scope.initialmessage = attrs.initialMessage;
       scope.roomtypeid = evalattr(attrs.roomtypeid);
 
@@ -231,6 +247,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
       scope.complete = complete;
       scope.setextraoptions = setextraoptions;
       scope.isavailable = isavailable;
+      scope.openexternal = openexternal;
 
       scope.$watch(() => evalattr(attrs.roomtypeid), (value) => {
         if( !value || scope.roomtypeid === value ) return;

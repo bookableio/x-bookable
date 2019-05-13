@@ -1,6 +1,11 @@
 <div class="x-bookable">
   <div ng-if="accommodation.info.external.use">
-    <iframe class="xw900 center-block border" ng-src="{{accommodation.info.external.inquiry | unsafeurl}}" width="{{accommodation.info.external.width || '100%'}}" height="{{accommodation.info.external.height || 'auto'}}" frameborder="0"></iframe>
+    <div ng-if="!accommodation.info.external.popup">
+      <iframe class="xw900 center-block border" ng-src="{{accommodation.info.external.inquiry | unsafeurl}}" width="{{accommodation.info.external.width || '100%'}}" height="{{accommodation.info.external.height || 'auto'}}" frameborder="0"></iframe>
+    </div>
+    <div class="xw900 center-block text-center" ng-if="accommodation.info.external.popup">
+      <a href class="btn btn-primary btn-xl" ng-click="openexternal()">예약 확인하기</a>
+    </div>
   </div>
 
   <div class="x-accommodation x-inquiry" ng-if="!accommodation.info.external.use">

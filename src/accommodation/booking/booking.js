@@ -128,6 +128,22 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
         });
       };
 
+      const openexternal = () => {
+        const accommodation = scope.accommodation;
+        const external = accommodation.info && accommodation.info.external;
+
+        if( external && external.use && external.popup && external.booking ) {
+          const url = external.booking;
+          const width = +external.width || 800;
+          const height = +external.height || 600;
+          const left = Math.abs((window.screen.width - width) / 2);
+          let top = Math.abs((window.screen.height - height) / 2);
+          if( top <= 0 ) top = 0;
+
+          window.open(url, 'exbooking', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left + ', scrollbars=no,resizable=no');
+        }
+      };
+
       event.regist(element, attrs, 'select');
       event.regist(element, attrs, 'complete');
 
@@ -171,7 +187,6 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
         safeApply(scope);
       });
 
-
       scope.refresh = refresh;
       scope.select = select;
       scope.find = find;
@@ -181,6 +196,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
       scope.booknow = booknow;
       scope.complete = complete;
       scope.savetocart = savetocart;
+      scope.openexternal = openexternal;
 
       $timeout(refresh, 0);
     }

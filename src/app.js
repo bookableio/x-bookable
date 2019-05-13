@@ -50,6 +50,7 @@ ngbootstrappagination.defaults({
 
 const app = angular.module('bookable', ['ngApply', 'ngFormatter', 'ngBackground', 'ngBootstrapPagination', 'ngSlick', 'ngIncrementer', 'ngAntiComposition', 'ngFlatpickr'])
   .filter('unsafe', ['$sce', $sce => $sce.trustAsHtml])
+  .filter('unsafeurl', ['$sce', $sce => $sce.trustAsResourceUrl])
   .filter('tobr', () => tobr)
   .filter('range', () => range)
   .filter('cdn', () => cdn)
