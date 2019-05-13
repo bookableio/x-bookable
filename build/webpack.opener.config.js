@@ -24,8 +24,7 @@ module.exports = merge.strategy({
     path: target,
     filename: '[name].js',
     library: 'xbookable',
-    libraryTarget: 'umd',
-    libraryExport: "default"
+    libraryTarget: 'umd'
   },
   externals: {
     'jquery': {
