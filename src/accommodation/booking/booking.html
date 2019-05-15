@@ -1,110 +1,128 @@
 <div class="x-bookable">
-  <div class="alert alert-info text-center" role="alert" ng-if="!loaded && accommodation">
-    예약 정보를 불러오는 중입니다.
-  </div>
-
-  <div class="alert alert-danger text-center" role="alert" ng-if="loaded && !accommodation">
-    예약 정보를 불러올 수 없습니다.
-  </div>
-
-  <div class="x-bookable-booking" ng-if="loaded && accommodation">
-    <div id="xbkb-calendar" ng-show="!checkin">
-      <bookable-accommodation-calendar-roomtype class="hidden-xs" showrates="{{!!showrates}}" ng-select="select($date, $rates, $roomtype)" label-closed="{{labelClosed}}"></bookable-accommodation-calendar-roomtype>
-
-      <bookable-accommodation-calendar class="hidden-sm hidden-md hidden-lg" ng-select="select($date, $rates)"></bookable-accommodation-calendar>
+  <div ng-if="accommodation.info.external.use">
+    <div ng-if="!accommodation.info.external.popup">
+      <iframe class="xw900 center-block border" ng-src="{{accommodation.info.external.booking | unsafeurl}}" width="{{accommodation.info.external.width || '100%'}}" height="{{accommodation.info.external.height || 'auto'}}" frameborder="0"></iframe>
     </div>
 
-    <div id="xbkb-finder" style="margin-top: 60px;" ng-show="checkin">
-      <div class="x-bookable-booking-header row nogap">
-        <div class="col-xs-6 col-sm-4 hidden-xs">
-        </div>
-        <div class="col-xs-6 col-sm-4 hidden-xs text-center">
-          <h2 class="x-bookable-booking-header-title">{{form.checkin | moment:'YYYY년 M월 D일'}}</h2>
-        </div>
-        <div class="col-xs-6 col-sm-4 visible-xs">
-          <h2 class="x-bookable-booking-header-title">{{form.checkin | moment:'YYYY년 M월 D일'}}</h2>
-        </div>
-        <div class="col-xs-6 col-sm-4 text-right">
-          <div class="btn-group" role="group">
-            <a href class="btn btn-header btn-default" ng-click="clear()"><i class="icon-calendar"></i> 달력보기</a>
-          </div>
-        </div>
+    <div class="text-center hidden-sm hidden-xs">
+      <div class="xw900 center-block text-center" ng-if="accommodation.info.external.popup">
+        <a href class="btn btn-primary btn-xl" ng-click="openexternal()">예약하기</a>
+      </div>
+    </div>
+
+    <div class="hidden-md hidden-lg">
+      <a href class="btn btn-primary btn-xl block" ng-click="openexternal()">예약하기</a>
+    </div>
+  </div>
+
+  <div ng-if="!accommodation.info.external.use">
+    <div class="alert alert-info text-center" role="alert" ng-if="!loaded && accommodation">
+        예약 정보를 불러오는 중입니다.
       </div>
 
-      <div class="mv15">
-        <div class="border bg-lighter p15">
-          <div class="row gap5">
-            <div class="col-sm-3 col-xs-12">
-              <div class="form-group">
-                <label>체크인</label>
+      <div class="alert alert-danger text-center" role="alert" ng-if="loaded && !accommodation">
+        예약 정보를 불러올 수 없습니다.
+      </div>
 
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="icon-calendar"></i></span>
-                  <input type="text" ng-flatpickr disable-past-days class="form-control" data-date-format="Y-m-d" placeholder="체크인" ng-model="form.checkin">
+      <div class="x-bookable-booking" ng-if="loaded && accommodation">
+        <div id="xbkb-calendar" ng-show="!checkin">
+          <bookable-accommodation-calendar-roomtype class="hidden-xs" showrates="{{!!showrates}}" ng-select="select($date, $rates, $roomtype)" label-closed="{{labelClosed}}"></bookable-accommodation-calendar-roomtype>
+
+          <bookable-accommodation-calendar class="hidden-sm hidden-md hidden-lg" ng-select="select($date, $rates)"></bookable-accommodation-calendar>
+        </div>
+
+        <div id="xbkb-finder" style="margin-top: 60px;" ng-show="checkin">
+          <div class="x-bookable-booking-header row nogap">
+            <div class="col-xs-6 col-sm-4 hidden-xs">
+            </div>
+            <div class="col-xs-6 col-sm-4 hidden-xs text-center">
+              <h2 class="x-bookable-booking-header-title">{{form.checkin | moment:'YYYY년 M월 D일'}}</h2>
+            </div>
+            <div class="col-xs-6 col-sm-4 visible-xs">
+              <h2 class="x-bookable-booking-header-title">{{form.checkin | moment:'YYYY년 M월 D일'}}</h2>
+            </div>
+            <div class="col-xs-6 col-sm-4 text-right">
+              <div class="btn-group" role="group">
+                <a href class="btn btn-header btn-default" ng-click="clear()"><i class="icon-calendar"></i> 달력보기</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mv15">
+            <div class="border bg-lighter p15">
+              <div class="row gap5">
+                <div class="col-sm-3 col-xs-12">
+                  <div class="form-group">
+                    <label>체크인</label>
+
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                      <input type="text" ng-flatpickr disable-past-days class="form-control" data-date-format="Y-m-d" placeholder="체크인" ng-model="form.checkin">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                  <div class="form-group">
+                    <label>기간</label>
+
+                    <select class="form-control" ng-model="form.days">
+                      <option ng-repeat="n in [] | range:1:15" ng-value="{{n}}">{{n}}박</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                  <div class="form-group">
+                    <label>인원</label>
+
+                    <select class="form-control" ng-model="form.guests">
+                      <option ng-value="0">인원</option>
+                      <option ng-repeat="n in [] | range:1:maximum" ng-value="{{n}}">{{n}}명</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                  <div class="form-group hidden-xs">
+                    <label>&nbsp;</label>
+                    <a href class="btn btn-primary btn-block" ng-click="find()" ng-disabled="!form.checkin">검색하기</a>
+                  </div>
+                  <div class="form-group visible-xs">
+                    <a href class="btn btn-primary btn-block pv15" ng-click="find()" ng-disabled="!form.checkin">검색하기</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-sm-3 col-xs-6">
-              <div class="form-group">
-                <label>기간</label>
+          </div>
 
-                <select class="form-control" ng-model="form.days">
-                  <option ng-repeat="n in [] | range:1:15" ng-value="{{n}}">{{n}}박</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-sm-3 col-xs-6">
-              <div class="form-group">
-                <label>인원</label>
+          <div class="mv15">
+            <bookable-accommodation-finder checkin="{{checkin}}" checkout="{{checkout}}" days="{{days}}" guests="{{guests}}" roomtypeid="{{roomtypeid}}" ng-update="setrooms($rooms)"></bookable-accommodation-finder>
+          </div>
 
-                <select class="form-control" ng-model="form.guests">
-                  <option ng-value="0">인원</option>
-                  <option ng-repeat="n in [] | range:1:maximum" ng-value="{{n}}">{{n}}명</option>
-                </select>
-              </div>
+          <div class="mv15">
+            <bookable-accommodation-extra ng-update="setextraoptions($extraoptions)"></bookable-accommodation-extra>
+          </div>
+
+          <div style="height:60px;"></div>
+
+          <div class="text-center hidden-sm hidden-xs">
+            <div class="btn-group">
+              <a href class="btn btn-danger btn-lg" style="padding: 15px 50px;" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="useCart">장바구니</a>
+              <a href class="btn btn-danger btn-lg btn-fill" style="padding: 15px 50px;" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
             </div>
-            <div class="col-sm-3 col-xs-12">
-              <div class="form-group hidden-xs">
-                <label>&nbsp;</label>
-                <a href class="btn btn-primary btn-block" ng-click="find()" ng-disabled="!form.checkin">검색하기</a>
-              </div>
-              <div class="form-group visible-xs">
-                <a href class="btn btn-primary btn-block pv15" ng-click="find()" ng-disabled="!form.checkin">검색하기</a>
-              </div>
+          </div>
+
+          <div class="hidden-md hidden-lg">
+            <div class="btn-group btn-group-justified">
+              <a href class="btn btn-danger btn-lg" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="useCart">장바구니</a>
+              <a href class="btn btn-danger btn-lg btn-fill" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
             </div>
+          </div>
+
+          <div style="height:80px;"></div>
+
+          <div id="xbkb-form" ng-show="isbooknow && rooms.length">
+            <bookable-accommodation-form ng-rooms="rooms" ng-extra-options="extraoptions" ng-complete="complete($reservation)"></bookable-accommodation-form>
           </div>
         </div>
       </div>
-
-      <div class="mv15">
-        <bookable-accommodation-finder checkin="{{checkin}}" checkout="{{checkout}}" days="{{days}}" guests="{{guests}}" roomtypeid="{{roomtypeid}}" ng-update="setrooms($rooms)"></bookable-accommodation-finder>
-      </div>
-
-      <div class="mv15">
-        <bookable-accommodation-extra ng-update="setextraoptions($extraoptions)"></bookable-accommodation-extra>
-      </div>
-
-      <div style="height:60px;"></div>
-
-      <div class="text-center hidden-sm hidden-xs">
-        <div class="btn-group">
-          <a href class="btn btn-danger btn-lg" style="padding: 15px 50px;" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="useCart">장바구니</a>
-          <a href class="btn btn-danger btn-lg btn-fill" style="padding: 15px 50px;" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
-        </div>
-      </div>
-
-      <div class="hidden-md hidden-lg">
-        <div class="btn-group btn-group-justified">
-          <a href class="btn btn-danger btn-lg" ng-disabled="!rooms.length" ng-click="savetocart()" ng-if="useCart">장바구니</a>
-          <a href class="btn btn-danger btn-lg btn-fill" ng-disabled="!rooms.length" ng-click="booknow()">예약하기</a>
-        </div>
-      </div>
-
-      <div style="height:80px;"></div>
-
-      <div id="xbkb-form" ng-show="isbooknow && rooms.length">
-        <bookable-accommodation-form ng-rooms="rooms" ng-extra-options="extraoptions" ng-complete="complete($reservation)"></bookable-accommodation-form>
-      </div>
-    </div>
   </div>
 </div>

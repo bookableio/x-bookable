@@ -25,21 +25,6 @@ export default ['safeApply', 'event', '$timeout', 'evalattr', function(safeApply
           if( err ) return error(err);
           if( !accommodation ) return error(new Error('서비스를 찾을 수 없습니다.'));
 
-          // 만약 외부시스템을 사용하고 팝업이라면 라우팅을 중지하고 팝업창을 띄운다.
-          const external = accommodation.info && accommodation.info.external;
-          if( external && external.use && external.popup && external.inquiry ) {
-            const url = external.inquiry;
-            const width = +external.width || 800;
-            const height = +external.height || 600;
-            const left = Math.abs((window.screen.width - width) / 2);
-            let top = Math.abs((window.screen.height - height) / 2);
-            if( top <= 0 ) top = 0;
-
-            window.open(url, 'booking', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left + ', scrollbars=no,resizable=no');
-            //res.writestate = false;
-            return;
-          }
-
           scope.accommodation = accommodation;
           safeApply(scope);
 
@@ -120,10 +105,27 @@ export default ['safeApply', 'event', '$timeout', 'evalattr', function(safeApply
         });
       }
 
+      function openexternal() {
+        const accommodation = scope.accommodation;
+        const external = accommodation.info && accommodation.info.external;
+
+        if( external && external.use && external.popup && external.inquiry ) {
+          const url = external.inquiry;
+          const width = +external.width || 800;
+          const height = +external.height || 600;
+          const left = Math.abs((window.screen.width - width) / 2);
+          let top = Math.abs((window.screen.height - height) / 2);
+          if( top <= 0 ) top = 0;
+
+          window.open(url, 'exbooking', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left + ', scrollbars=no,resizable=no');
+        }
+      }
+
       scope.form = {};
       scope.inquiry = inquiry;
       scope.status = status;
       scope.cancel = cancel;
+      scope.openexternal = openexternal;
 
       attrs.$observe('cn', () => {
         scope.form.cn = evalattr(attrs.cn);
