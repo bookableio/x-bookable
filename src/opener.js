@@ -1,5 +1,3 @@
-import connect from 'bookable';
-
 let loaded;
 const load = (done) => {
   if( loaded ) {
@@ -9,11 +7,11 @@ const load = (done) => {
     return;
   }
 
-  connect.info().exec((err, business) => {
+  /*connect.info().exec((err, business) => {
     if( err ) console.info('[bookable] ' + err.message);
     loaded = business;
     done(business);
-  });
+  });*/
 };
 
 const opener = {
