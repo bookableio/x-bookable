@@ -2,6 +2,7 @@ import xmodal from 'x-modal';
 import bookable from 'bookable';
 import paymenthandler from '../payment';
 import termsmodal from '../../misc/terms-modal/terms-modal';
+import privacymodal from '../../misc/privacy-modal/privacy-modal';
 
 document.createElement('ng-slick');
 
@@ -32,6 +33,11 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
           scope.loaded = true;
           scope.accommodation = accommodation;
           scope.selectedpaymentmethod = accommodation.paymentmethods && accommodation.paymentmethods[0];
+
+          if( accommodation.paymentmethods.length === 2 ) scope.paymentmethodgrid = 6;
+          else if( accommodation.paymentmethods.length === 3 ) scope.paymentmethodgrid = 4;
+          else scope.paymentmethodgrid = 12;
+
           safeApply(scope);
         });
       };
@@ -64,6 +70,7 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
         const reservation = scope.validated;
         const form = scope.form;
         const paymentmethod = scope.selectedpaymentmethod;
+        const terms = accommodation.terms || {};
 
         scope.error = null;
         safeApply(scope);
@@ -74,6 +81,7 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
         if( !form ) return error(new Error('프로그램 오류입니다. 다시 시도해주세요.'));
         if( !reservation.rooms.length ) return error(new Error(`예약할 ${accommodation.unitname}이 없습니다.`));
         if( !form.termsofuse ) return error(new Error('이용약관에 동의하셔야 합니다.'));
+        if( terms.privacy && !form.privacy ) return error(new Error('개인정보처리방침에 동의하셔야 합니다.'));
         if( !form.name ) return error(new Error('예약자명을 입력해주세요.'));
         if( !form.mobile ) return error(new Error('휴대전화번호를 입력해주세요.'));
 
@@ -121,6 +129,10 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
         termsmodal.open(scope.accommodation.id);
       };
 
+      const viewprivacy = () => {
+        privacymodal.open(scope.accommodation.id);
+      };
+
       const clear = () => {
         delete scope.validated;
         scope.form = {};
@@ -133,6 +145,7 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
       scope.selectpaymentmethod = selectpaymentmethod;
       scope.complete = complete;
       scope.viewterms = viewterms;
+      scope.viewprivacy = viewprivacy;
       scope.validate = validate;
       scope.clear = clear;
 

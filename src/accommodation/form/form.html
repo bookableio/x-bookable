@@ -20,7 +20,7 @@
             <h4>결제방법</h4>
 
             <div class="row mt20">
-              <div class="col-xs-{{(12 / accommodation.paymentmethods.length) || 12}}" ng-repeat="paymentmethod in accommodation.paymentmethods">
+              <div class="col-xs-{{vertical ? 12 : paymentmethodgrid}}" ng-repeat="paymentmethod in accommodation.paymentmethods">
                 <div class="mediabox" ng-click="selectpaymentmethod(paymentmethod)" ng-class="{active:paymentmethod==selectedpaymentmethod}">
                   <div class="mediabox-title text-center">
                     <div class="text-muted">결제방법</div>
@@ -62,6 +62,14 @@
                 <input type="checkbox" id="termsofuse-{{uid}}" ng-model="form.termsofuse">
                 <label for="termsofuse-{{uid}}">이용약관 및 환불규정에 동의합니다.</label>
                 <a href ng-click="viewterms()">[내용]</a>
+              </div>
+            </div>
+
+            <div class="mt20" ng-if="accommodation.terms.privacy">
+              <div class="checkbox-agreement">
+                <input type="checkbox" id="privacy-{{uid}}" ng-model="form.privacy">
+                <label for="privacy-{{uid}}">개인정보처리방침에 동의합니다.</label>
+                <a href ng-click="viewprivacy()">[내용]</a>
               </div>
             </div>
           </div>
