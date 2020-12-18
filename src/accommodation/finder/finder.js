@@ -45,10 +45,11 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', funct
         const bookable = scope.bookable;
         const selected = scope.selected || [];
         let totalprice = 0;
+        let totaldiscount = 0;
         const dates = [];
         let roomqty = 0;
 
-        bookable.rates.forEach((roomrates) => {
+        bookable.rates.filter((roomrates) => roomrates.vacancy > 0).forEach((roomrates) => {
           if( !~selected.indexOf(roomrates.id) ) return;
           if( !roomrates.checkin ) return console.error('missing checkin in roomrates', roomrates);
           if( !roomrates.checkout ) return console.error('missing checkout in roomrates', roomrates);
@@ -61,6 +62,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', funct
           const calcprice = calc(roomrates);
 
           totalprice += calcprice;
+          totaldiscount += roomrates.discount * roomrates.qty;
 
           roomqty += (+roomrates.qty || 0);
 
@@ -82,6 +84,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', funct
         scope.roomqty = roomqty;
         scope.rooms = rooms;
         scope.totalprice = totalprice;
+        scope.totaldiscount = totaldiscount;
 
         event.fire(element, 'update', {
           rooms,
@@ -121,6 +124,8 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'slideshow', funct
             scope.loaded = true;
             scope.accommodation = accommodation;
             scope.bookable = bookable;
+
+            bookable.rates = bookable.rates.filter((roomrates) => roomrates.vacancy > 0);
 
             bookable.rates.forEach((roomrates) => {
               roomrates.adults = +scope.guests || +roomrates.capacity || 1;

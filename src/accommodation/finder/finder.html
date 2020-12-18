@@ -29,10 +29,14 @@
               <div>
                 <b>{{roomrates.checkin | moment:'M월 D일(ddd)'}}</b> / <b>{{bookable.days}}</b>박 /
                 <span ng-if="!isselected(roomrates.id) || !roomrates.calcprice">
-                  <b>{{roomrates.capacity || '-'}}</b>인 기준 <b>{{roomrates.price | currency:bookable.currency}}</b> ~
+                  <b>{{roomrates.capacity || '-'}}</b>인 기준 
+                  <span class="text-strike text-muted" ng-if="roomrates.listprice !== roomrates.price">{{roomrates.listprice | currency:bookable.currency}}</span>
+                  <b>{{roomrates.price | currency:bookable.currency}}</b> ~
                 </span>
                 <span ng-if="isselected(roomrates.id) && roomrates.calcprice">
-                    <b>{{roomrates.qty}}</b>개 {{accommodation.unitname}} / <b>{{roomrates.adults + roomrates.children}}</b>인 <b>{{roomrates.calcprice | currency:bookable.currency}}</b>
+                    <b>{{roomrates.qty}}</b>개 {{accommodation.unitname}} / <b>{{roomrates.adults + roomrates.children}}</b>인 
+                    <span class="text-strike text-muted" ng-if="(roomrates.calcprice + roomrates.discount) !== roomrates.calcprice">{{roomrates.calcprice + (roomrates.discount * roomrates.qty) | currency:bookable.currency}}</span>
+                    <span class="text-bold">{{roomrates.calcprice | currency:bookable.currency}}</span>
                 </span>
               </div>
               <small>{{roomrates.capacity || '-'}}인 {{accommodation.unitname}} / 최대 {{roomrates.maximum || '-'}}인</small>
@@ -109,7 +113,9 @@
         </div>
         <div class="col-xs-6 text-right">
           <p class="form-control-static">
-            총 {{accommodation.unitname}}요금 : <b>{{totalprice | currency:accommodation.currency}}</b>
+            총 {{accommodation.unitname}}요금 : 
+            <span class="text-strike text-muted" ng-if="totaldiscount > 0">{{totalprice + totaldiscount | currency:bookable.currency}}</span>
+            <span class="text-bold">{{totalprice | currency:accommodation.currency}}</span>
           </p>
         </div>
       </div>

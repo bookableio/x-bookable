@@ -102,7 +102,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
 
       const select = (day) => {
         if( scope.disabled ) return;
-        if( !day.rates.bookable ) return;
+        if( !day.rates || !day.rates.bookable ) return;
 
         const roomtype = scope.roomtype;
         const date = day.date;
@@ -178,7 +178,6 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
         dates = dates || '';
         dates = dates.split(',').map((date) => date && date.trim()).filter((date) => !!date && moment(date).isValid());
 
-        console.log('dates', dates);
         scope.selected = dates;
       });
 
