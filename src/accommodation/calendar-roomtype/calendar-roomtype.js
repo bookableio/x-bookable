@@ -124,7 +124,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
       scope.currentmonth = currentmonth;
       scope.select = select;
       scope.statuslabel = statuslabel;
-      scope.labelClosed = evalattr(attrs.labelClosed) || '예약마감';
+      scope.labelClosed = evalattr(attrs.labelClosed) || '예약완료';
 
       attrs.$observe('serviceid', () => {
         refresh();
@@ -136,7 +136,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
       });
 
       attrs.$observe('labelClosed', () => {
-        scope.labelClosed = evalattr(attrs.labelClosed) || '예약마감';
+        scope.labelClosed = evalattr(attrs.labelClosed) || '예약완료';
       });
 
       $timeout(refresh, 0);

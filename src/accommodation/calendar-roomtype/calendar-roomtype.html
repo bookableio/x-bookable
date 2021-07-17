@@ -63,13 +63,14 @@
               </div>
 
               <div class="x-calendar-roomtype-cell-closed" ng-if="day.pastdate">
-                {{labelClosed}}
+                예약마감
               </div>
               <div class="x-calendar-roomtype-roominfo" ng-if="!day.pastdate" ng-repeat="roomtype in accommodation.roomtypes" ng-click="select(day, roomtype)">
                 <div class="x-calendar-roomtype-roominfo-label">
                   <span class="x-calendar-roomtype-roominfo-status" ng-class="{
                     'x-calendar-roomtype-roominfo-status-bookable': day.rates.rates[roomtype.id].bookable,
-                    'x-calendar-roomtype-roominfo-status-closed': !day.rates.rates[roomtype.id].bookable
+                    'x-calendar-roomtype-roominfo-status-complete': !day.rates.rates[roomtype.id].bookable,
+                    'x-calendar-roomtype-roominfo-status-closed': !day.rates.rates || (day.rates.custom[roomtype.id].enable === false || day.rates.custom[roomtype.id].qty === 0)
                   }"></span>
                   <span ng-class="{
                     'text-muted': !day.rates.rates[roomtype.id].bookable
@@ -79,8 +80,15 @@
                   <span class="text-strike text-muted" ng-if="day.rates.rates[roomtype.id].discount">{{day.rates.rates[roomtype.id].listprice | currency:rates.currency }}</span>
                   <span>{{day.rates.rates[roomtype.id].price | currency:rates.currency }}</span>
                 </div>
+                
                 <div class="x-calendar-roomtype-roominfo-price text-muted" ng-if="showrates && !day.rates.rates[roomtype.id].bookable">
-                  {{labelClosed}}
+                  <span ng-show="!day.rates.rates">예약불가</span>
+                  <span ng-show="day.rates.rates && day.rates.custom[roomtype.id].enable === false || day.rates.custom[roomtype.id].qty === 0">
+                    예약불가
+                  </span>
+                  <span ng-show="day.rates.rates && !(day.rates.custom[roomtype.id].enable === false || day.rates.custom[roomtype.id].qty === 0)">
+                    예약완료
+                  </span>
                 </div>
               </dl>
             </td>
