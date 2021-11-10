@@ -3,7 +3,7 @@ import moment from 'moment';
 import xmodal from 'x-modal';
 import cart from '../cart';
 
-export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', function(safeApply, $timeout, event, evalattr, scrollto) {
+export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', function (safeApply, $timeout, event, evalattr, scrollto) {
   return {
     template: require('./booking.html'),
     replace: true,
@@ -20,9 +20,12 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
         delete scope.loaded;
         delete scope.error;
 
-        bookable.info().exec((err, accommodation) => {
-          if( err ) return error(err);
-          if( !accommodation ) return error(new Error('서비스를 찾을 수 없습니다.'));
+        bookable.info({
+          id: evalattr(attrs.aid),
+          serviceid: evalattr(attrs.serviceid)
+        }).exec((err, accommodation) => {
+          if (err) return error(err);
+          if (!accommodation) return error(new Error('서비스를 찾을 수 없습니다.'));
 
           scope.accommodation = accommodation;
           scope.loaded = true;
@@ -30,7 +33,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
           scope.maximum = (() => {
             let max = 0;
             (accommodation.roomtypes || []).forEach(roomtype => {
-              if( roomtype.maximum > max ) max = roomtype.maximum;
+              if (roomtype.maximum > max) max = roomtype.maximum;
             });
             return max;
           })() || 1;
@@ -42,8 +45,8 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
       const form = scope.form = {};
 
       const select = (date, rates, roomtype) => {
-        if( !date || !rates ) return;
-        if( !rates.bookable ) return;
+        if (!date || !rates) return;
+        if (!rates.bookable) return;
 
         scope.checkin = date;
         scope.roomtypeid = roomtype && roomtype.id;
@@ -98,31 +101,31 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
 
       const complete = (reservation) => {
         clear();
-        event.fire(element, 'complete', {reservation});
+        event.fire(element, 'complete', { reservation });
       };
 
       const savetocart = () => {
-        if( !scope.selected.length )
+        if (!scope.selected.length)
           return xmodal.error('예약할 날짜를 선택해주세요.');
-        if( scope.summary.adults <= 0 )
+        if (scope.summary.adults <= 0)
           return xmodal.error('인원수를 입력해주세요.');
 
         const rooms = scope.rooms;
 
         xmodal.confirm('장바구니에 추가하시겠습니까?', (b) => {
-          if( !b ) return;
+          if (!b) return;
 
           cart.merge(rooms);
           cart.save();
 
           safeApply(scope);
-          event.fire(element, 'cart', {rooms});
+          event.fire(element, 'cart', { rooms });
 
           const carthref = attrs.cartHref;
-          if( !carthref ) return xmodal.success('장바구니에 추가되었습니다.');
+          if (!carthref) return xmodal.success('장바구니에 추가되었습니다.');
 
           xmodal.confirm('장바구니를 확인하시겠습니까?', (b) => {
-            if( b ) location.href = carthref;
+            if (b) location.href = carthref;
             clear();
           });
         });
@@ -132,13 +135,13 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
         const accommodation = scope.accommodation;
         const external = accommodation.info && accommodation.info.external;
 
-        if( external && external.use && external.popup && external.booking ) {
+        if (external && external.use && external.popup && external.booking) {
           const url = external.booking;
           const width = +external.width || 800;
           const height = +external.height || 600;
           const left = Math.abs((window.screen.width - width) / 2);
           let top = Math.abs((window.screen.height - height) / 2);
-          if( top <= 0 ) top = 0;
+          if (top <= 0) top = 0;
 
           window.open(url, 'exbooking', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left + ', scrollbars=no,resizable=no');
         }
@@ -154,7 +157,7 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', 'scrollto', functi
 
       attrs.$observe('checkin', () => {
         scope.checkin = form.checkin = evalattr(attrs.checkin);
-        if( scope.checkin ) form.checkin = moment(scope.checkin).format('YYYY-MM-DD');
+        if (scope.checkin) form.checkin = moment(scope.checkin).format('YYYY-MM-DD');
         safeApply(scope);
       });
 

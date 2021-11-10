@@ -70,9 +70,8 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
 
       const refresh = () => {
         bookable.info({
-          id: attrs.aid,
-          serviceid: attrs.serviceid,
-          host: location.hostname
+          id: evalattr(attrs.aid),
+          serviceid: evalattr(attrs.serviceid)
         }).exec((err, accommodation) => {
           if( err ) return error(err);
           if( !accommodation ) return error(new Error('accommodation not found'));

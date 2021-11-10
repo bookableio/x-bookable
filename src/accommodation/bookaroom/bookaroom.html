@@ -16,7 +16,7 @@
     </div>
 
     <div class="x-accommodation x-bookaroom" ng-if="loaded && roomtype">
-      <bookable-accommodation-calendar class="x-bookaroom-calendar" roomtypeid="{{roomtypeid}}" multiple ng-select="select($rates)" ng-deselect="deselect($date)"></bookable-accommodation-calendar>
+      <bookable-accommodation-calendar aid="{{accommodation.id}}" class="x-bookaroom-calendar" roomtypeid="{{roomtypeid}}" multiple ng-select="select($rates)" ng-deselect="deselect($date)"></bookable-accommodation-calendar>
 
       <div class="dashed"></div>
 
@@ -103,7 +103,7 @@
         </div>
 
         <div class="mv15">
-          <bookable-accommodation-extra ng-update="setextraoptions($extraoptions)"></bookable-accommodation-extra>
+          <bookable-accommodation-extra aid="{{accommodation.id}}" ng-update="setextraoptions($extraoptions)"></bookable-accommodation-extra>
         </div>
       </div>
 
@@ -123,7 +123,7 @@
       </div>
 
       <div class="mt25" ng-show="isbooknow && selected.length && summary.price">
-        <bookable-accommodation-form class="x-bookaroom-form" ng-rooms="rooms" ng-extra-options="extraoptions" vertical ng-complete="complete($reservation)"></bookable-accommodation-form>
+        <bookable-accommodation-form aid="{{accommodation.id}}" class="x-bookaroom-form" ng-rooms="rooms" ng-extra-options="extraoptions" vertical ng-complete="complete($reservation)"></bookable-accommodation-form>
       </div>
     </div>
   </div>

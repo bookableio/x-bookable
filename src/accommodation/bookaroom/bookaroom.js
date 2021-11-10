@@ -106,8 +106,8 @@ export default ['safeApply', '$timeout', 'event', 'evalattr', function(safeApply
         scope.selected = [];
 
         bookable.info({
-          id: attrs.aid,
-          serviceid: attrs.serviceid
+          id: evalattr(attrs.aid),
+          serviceid: evalattr(attrs.serviceid)
         }).exec((err, accommodation) => {
           if( err ) return error(err);
           if( !accommodation ) return error(new Error('서비스를 찾을 수 없습니다.'));

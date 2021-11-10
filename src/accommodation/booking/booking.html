@@ -26,9 +26,9 @@
 
       <div class="x-bookable-booking" ng-if="loaded && accommodation">
         <div id="xbkb-calendar" ng-show="!checkin">
-          <bookable-accommodation-calendar-roomtype class="hidden-xs" showrates="{{!!showrates}}" ng-select="select($date, $rates, $roomtype)" label-closed="{{labelClosed}}"></bookable-accommodation-calendar-roomtype>
+          <bookable-accommodation-calendar-roomtype aid="{{accommodation.id}}" class="hidden-xs" showrates="{{!!showrates}}" ng-select="select($date, $rates, $roomtype)" label-closed="{{labelClosed}}"></bookable-accommodation-calendar-roomtype>
 
-          <bookable-accommodation-calendar class="hidden-sm hidden-md hidden-lg" ng-select="select($date, $rates)"></bookable-accommodation-calendar>
+          <bookable-accommodation-calendar aid="{{accommodation.id}}" class="hidden-sm hidden-md hidden-lg" ng-select="select($date, $rates)"></bookable-accommodation-calendar>
         </div>
 
         <div id="xbkb-finder" style="margin-top: 60px;" ng-show="checkin">
@@ -94,11 +94,11 @@
           </div>
 
           <div class="mv15">
-            <bookable-accommodation-finder checkin="{{checkin}}" checkout="{{checkout}}" days="{{days}}" guests="{{guests}}" roomtypeid="{{roomtypeid}}" ng-update="setrooms($rooms)"></bookable-accommodation-finder>
+            <bookable-accommodation-finder aid="{{accommodation.id}}" checkin="{{checkin}}" checkout="{{checkout}}" days="{{days}}" guests="{{guests}}" roomtypeid="{{roomtypeid}}" ng-update="setrooms($rooms)"></bookable-accommodation-finder>
           </div>
 
           <div class="mv15">
-            <bookable-accommodation-extra ng-update="setextraoptions($extraoptions)"></bookable-accommodation-extra>
+            <bookable-accommodation-extra aid="{{accommodation.id}}" ng-update="setextraoptions($extraoptions)"></bookable-accommodation-extra>
           </div>
 
           <div style="height:60px;"></div>
@@ -120,7 +120,7 @@
           <div style="height:80px;"></div>
 
           <div id="xbkb-form" ng-show="isbooknow && rooms.length">
-            <bookable-accommodation-form ng-rooms="rooms" ng-extra-options="extraoptions" ng-complete="complete($reservation)"></bookable-accommodation-form>
+            <bookable-accommodation-form aid="{{accommodation.id}}" ng-rooms="rooms" ng-extra-options="extraoptions" ng-complete="complete($reservation)"></bookable-accommodation-form>
           </div>
         </div>
       </div>

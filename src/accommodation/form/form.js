@@ -6,7 +6,7 @@ import privacymodal from '../../misc/privacy-modal/privacy-modal';
 
 document.createElement('ng-slick');
 
-export default ['safeApply', 'event', '$timeout', 'threshold', function(safeApply, event, $timeout, threshold) {
+export default ['safeApply', 'event', '$timeout', 'threshold', 'evalattr', function(safeApply, event, $timeout, threshold, evalattr) {
   return {
     require: '?ngModel',
     template: require('./form.html'),
@@ -24,9 +24,8 @@ export default ['safeApply', 'event', '$timeout', 'threshold', function(safeAppl
 
       const load = () => {
         bookable.info({
-          id: attrs.aid,
-          serviceid: attrs.serviceid,
-          host: location.hostname
+          id: evalattr(attrs.aid),
+          serviceid: evalattr(attrs.serviceid)
         }).exec((err, accommodation) => {
           if( err ) return error(err);
 

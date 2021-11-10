@@ -2,7 +2,7 @@ import moment from 'moment';
 import angular from 'angular';
 import bookable from 'bookable';
 
-export default ['safeApply', 'event', '$timeout', function(safeApply, event, $timeout) {
+export default ['safeApply', 'event', '$timeout', 'evalattr', function(safeApply, event, $timeout, evalattr) {
   return {
     require: '?ngModel',
     template: require('./finderform.html'),
@@ -20,9 +20,8 @@ export default ['safeApply', 'event', '$timeout', function(safeApply, event, $ti
 
       const refresh = () => {
         bookable.info({
-          id: attrs.aid,
-          serviceid: attrs.serviceid,
-          host: location.hostname
+          id: evalattr(attrs.aid),
+          serviceid: evalattr(attrs.serviceid)
         }).exec((err, accommodation) => {
           if( err ) return error(err);
           if( !accommodation ) return error(new Error('서비스를 찾을 수 없습니다.'));
